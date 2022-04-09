@@ -17,7 +17,7 @@ module.exports = {
     extensions: [".webpack.js", ".web.js", ".ts", ".tsx", ".js"],
     alias: {
       utils: path.resolve(__dirname, "src/utils/"),
-      // octo: path.resolve(__dirname, "src/octo/"),
+      telegram: path.resolve(__dirname, "src/telegram/"),
       types: path.resolve(__dirname, "src/types/"),
       api: path.resolve(__dirname, "src/api/"),
     }

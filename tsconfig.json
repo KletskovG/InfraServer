@@ -14,11 +14,12 @@
           "*",
           "src/*"
         ],
-        "@utils/*": ["./src/utils/*"],
-        "@models/*": ["./src/models/*"],
-        "@interfaces/*": ["./src/Interfaces/*"],
-        "@types/*": ["./src/types/*"],
-        "@api.*": ["./src/api/*"],
+        "utils/*": ["./src/utils/*"],
+        "models/*": ["./src/models/*"],
+        "interfaces/*": ["./src/Interfaces/*"],
+        "types/*": ["./src/types/*"],
+        "telegram/*": ["./src/telegram/*"],
+        "api.*": ["./src/api/*"],
       },
       "typeRoots": ["node_modules/@types", "./src/typings"],
       "types": [
