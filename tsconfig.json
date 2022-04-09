@@ -1,0 +1,35 @@
+{
+    "compilerOptions": {
+      "alwaysStrict": true,
+      "target": "es6",
+      "module": "commonjs",
+      "moduleResolution": "node",
+      "sourceMap": true,
+      "noUnusedLocals": true,
+      "noUnusedParameters": true,
+      "esModuleInterop": true,
+      "baseUrl": ".",
+      "paths": {
+        "*": [
+          "*",
+          "src/*"
+        ],
+        "@utils/*": ["./src/utils/*"],
+        "@models/*": ["./src/models/*"],
+        "@interfaces/*": ["./src/Interfaces/*"],
+        "@types/*": ["./src/types/*"],
+        "@api.*": ["./src/api/*"],
+      },
+      "typeRoots": ["node_modules/@types", "./src/typings"],
+      "types": [
+        "node",
+        "express",
+        "mongoose",
+        "md5",
+        "jsonwebtoken",
+      ]
+    },
+    "include": [
+      "src/*"
+    ]
+}
