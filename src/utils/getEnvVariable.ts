@@ -3,7 +3,12 @@ import * as fs from "fs";
 import { EEnvVariable } from "types/EEnvVariable";
 
 export const getEnvVariable = (envVariable: EEnvVariable): string => {
-  return process.env[envVariable] ?? readEnvVariable(envVariable);
+  if (process.env[envVariable]) {
+    return process.env[envVariable];
+  }
+
+  return readEnvVariable(envVariable);
+  // return process.env[envVariable] ?? 
 };
 
 function readEnvVariable(envVariable: EEnvVariable) {
