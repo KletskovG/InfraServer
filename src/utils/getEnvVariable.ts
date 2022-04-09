@@ -8,7 +8,6 @@ export const getEnvVariable = (envVariable: EEnvVariable): string => {
   }
 
   return readEnvVariable(envVariable);
-  // return process.env[envVariable] ?? 
 };
 
 function readEnvVariable(envVariable: EEnvVariable) {
@@ -18,7 +17,7 @@ function readEnvVariable(envVariable: EEnvVariable) {
     const envVariables = envFile.split("====").map(str => str.split("="));
     result = envVariables.find((variable) => {
       return variable[0].replace(/\n/g, "") === envVariable;
-    });
+    })[1];    
   } catch (error) {
     result = `EMTY_ENV_VARIABLE ${envVariable}`;
     console.info(result);
