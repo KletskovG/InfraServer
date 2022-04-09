@@ -6,7 +6,7 @@
   "scripts": {
     "clean": "rm -rf ./dist",
     "build": "npm run clean && mkdir dist && cp .env dist/.env && webpack",
-    "build:ci": "touch .env && npm run build",
+    "build:ci": "touch .env && npm run build && rm dist/.env",
     "start": "npm run build && node dist/index.js",
     "lint": "eslint -c .eslintrc.json --ext .ts src"
   },

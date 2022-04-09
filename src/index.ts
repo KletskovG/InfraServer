@@ -11,7 +11,6 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(router);
 
-
 app.listen(getEnvVariable("PORT"), () => {
   console.log(`App is up and running on port number ${getEnvVariable("PORT")}`);
 });

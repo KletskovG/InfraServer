@@ -4,7 +4,7 @@ import { getEnvVariable } from "utils/getEnvVariable";
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
 const CHAT_NUMBER = getEnvVariable("CHAT_NUMBER");
 
-const bot = new Telegraf(BOT_TOKEN);
+const bot = new Telegraf(BOT_TOKEN).catch(console.info);
 bot.launch();
 
 export function sendNotification(message: string) {
