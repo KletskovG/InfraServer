@@ -7,10 +7,17 @@ export const getEnvVariable = (envVariable: EEnvVariable): string => {
 };
 
 function readEnvVariable(envVariable: EEnvVariable) {
-  const envFile = fs.readFileSync(path.join(__dirname, ".env"), "utf-8");
-  const envVariables = envFile.split("====").map(str => str.split("="));
-  const result = envVariables.find((variable) => {
-    return variable[0].replace(/\n/g, "") === envVariable;
-  });
-  return result[1] ?? null;
+  let result;
+  try {
+    const envFile = fs.readFileSync(path.join(__dirname, ".env"), "utf-8");
+    const envVariables = envFile.split("====").map(str => str.split("="));
+    result = envVariables.find((variable) => {
+      return variable[0].replace(/\n/g, "") === envVariable;
+    });
+  } catch (error) {
+    result = `EMTY_ENV_VARIABLE ${envVariable}`;
+    console.info(result);
+  }
+  
+  return result;
 }
