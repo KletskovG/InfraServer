@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "cp .env dist/.env && webpack",
+    "build:ci": "touch .env && npm run build",
     "start": "npm run build && node dist/index.js",
     "lint": "eslint -c .eslintrc.json --ext .ts src"
   },
