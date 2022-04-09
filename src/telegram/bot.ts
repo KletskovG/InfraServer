@@ -7,8 +7,6 @@ const CHAT_NUMBER = getEnvVariable("CHAT_NUMBER");
 const bot = new Telegraf(BOT_TOKEN);
 bot.launch();
 
-// const bot = null;
-
 export function sendNotification(message: string) {
   bot.telegram.sendMessage(CHAT_NUMBER, message);
 }

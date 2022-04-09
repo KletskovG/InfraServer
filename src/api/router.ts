@@ -3,6 +3,9 @@ import { ERoute, EHTTPMEthod } from "types";
 import {
   homeHandler,
   cdHandler,
+  doneHandler,
+  doneMessageHandler,
+  failHandler,
 } from "api";
 
 const router = Router();
@@ -13,6 +16,9 @@ function registerHandler(route: ERoute, method: EHTTPMEthod, handler: RequestHan
 
 registerHandler("/", "get", homeHandler);
 registerHandler("/cd", "get", cdHandler);
-registerHandler("/done", "get", cdHandler);
+registerHandler("/done", "get", doneHandler);
+registerHandler("/done/:text", "get", doneMessageHandler);
+registerHandler("/fail", "get", failHandler);
+
 
 export default router;
