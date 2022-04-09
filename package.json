@@ -4,8 +4,9 @@
   "description": "Automatic Check for project which i can review",
   "main": "index.js",
   "scripts": {
-    "build": "cp .env dist/.env && webpack",
-    "build:ci": "touch .env && ls -la && npm run build",
+    "clean": "rm -rf ./dist",
+    "build": "npm run clean && mkdir dist && cp .env dist/.env && webpack",
+    "build:ci": "touch .env && npm run build",
     "start": "npm run build && node dist/index.js",
     "lint": "eslint -c .eslintrc.json --ext .ts src"
   },
