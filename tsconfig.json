@@ -19,7 +19,8 @@
         "interfaces/*": ["./src/Interfaces/*"],
         "types/*": ["./src/types/*"],
         "telegram/*": ["./src/telegram/*"],
-        "api.*": ["./src/api/*"],
+        "academy/*": ["./src/academy/*"],
+        "api/": ["./src/api/*"],
       },
       "typeRoots": ["node_modules/@types", "./src/typings"],
       "types": [

@@ -5,4 +5,6 @@ export type ERoute =
     "/done/:text" | 
     "/fail" | 
     "/ping" | 
-    "/academy"
+    "/academy" | 
+    "/academy/logs"
+    
