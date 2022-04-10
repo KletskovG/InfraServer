@@ -37,7 +37,9 @@ jobs:
       with:
         version: ${{matrix.node_version}}
     - name: Build project
-      run: echo "Checkout "
+      run: |
+        npm i 
+        npm run build:ci
     - name: Publish project to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
