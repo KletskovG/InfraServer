@@ -31,15 +31,13 @@ jobs:
     env:
       LOGIN: ${{secrets.DOCKER_LOGIN}}
     steps:
-#     - uses: actions/checkout@v2
-#     - name: Use Node.js ${{matrix.node_version}}
-#       uses: actions/setup-node@v1
-#       with:
-#         version: ${{matrix.node_version}}
-#     - name: Build project
-#       run: |
-#         npm i
-#         npm run build:ci
+    - uses: actions/checkout@v2
+    - name: Use Node.js ${{matrix.node_version}}
+      uses: actions/setup-node@v1
+      with:
+        version: ${{matrix.node_version}}
+    - name: Build project
+      run: echo "Checkout "
     - name: Publish project to Registry
       uses: elgohr/Publish-Docker-Github-Action@master
       with:
