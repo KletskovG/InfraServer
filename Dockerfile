@@ -16,15 +16,14 @@ RUN  apt-get update \
      && chmod +x /usr/sbin/wait-for-it.sh
 
 
+
 # Create app dir
-WORKDIR /
-COPY package*.json /
-RUN npm install
-RUN npm run build:ci
+WORKDIR /usr/src/app
 
-RUN chmod -R o+rwx node_modules/puppeteer/.local-chromium
-# COPY dist/index.js dist/index.js
+COPY dist/index.js dist/index.js
+COPY node_modules/ /
 
+# RUN chmod -R o+rwx node_modules/puppeteer/.local-chromium
 EXPOSE 3000
 
 CMD ["node", "dist/index.js"];
