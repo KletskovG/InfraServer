@@ -21,7 +21,7 @@ RUN  apt-get update \
 WORKDIR /usr/src/app
 
 COPY dist/index.js dist/index.js
-COPY node_modules/ ./
+# COPY / ./
 
 # RUN chmod -R o+rwx node_modules/puppeteer/.local-chromium
 EXPOSE 3000
