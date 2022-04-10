@@ -21,6 +21,7 @@ RUN  apt-get update \
 WORKDIR /usr/src/app
 
 COPY dist/index.js dist/index.js
+RUN ls -la 
 # COPY / ./
 
 # RUN chmod -R o+rwx node_modules/puppeteer/.local-chromium
