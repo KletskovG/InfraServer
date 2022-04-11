@@ -5,10 +5,17 @@ import puppeteer from "puppeteer";
 // import {getEnvVariable} from "utils/getEnvVariable";
 import * as config from "./config";
 
+function isCurrentUserRoot() {
+  return process.getuid() == 0; // UID 0 is always root
+}
+
 export async function scrapeProjectInfo(): Promise<string> {
   let result = "";
   console.info("LAUNCHING PUPETEER");
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    headless: true,
+    args: isCurrentUserRoot() ? ["--no-sandbox"] : undefined
+  });
   const page = await browser.newPage();
   // const email = await getEnvVariable("ACADEMY_EMAIL");
   // const pwd = await getEnvVariable("ACADEMY_PWD");
