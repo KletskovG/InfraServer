@@ -8,7 +8,7 @@ export function academyHandler(_, res: Response) {
     scrapeProjectInfo()
       .then(result => {
         if (result) {
-          const notification = `I HAVE PROJECTS TO CHECK \n ${result}`;
+          const notification = `Scrape result \n ${result}`;
           sendNotification(notification);
           res.status(200).send(notification);
         } else {
