@@ -42,7 +42,7 @@ export async function scrapeProjectInfo(): Promise<string> {
 
   await page.screenshot({path: "auth-start.png"});
   await page.type("#login-email", process.env.ACADEMY_EMAIL);
-  await page.type("#login-password", process.env.PWD);
+  await page.type("#login-password", process.env.ACADEMY_PWD);
   await page.screenshot({path: "before-click.png"});
   await page.click("input.button");
   await page.waitForNavigation();
