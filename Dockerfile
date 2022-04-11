@@ -34,6 +34,8 @@ WORKDIR /usr/src/app
 
 COPY dist/index.js dist/index.js
 
+COPY node_modules/ /
+
 EXPOSE 3000
 
 CMD ["node", "dist/index.js"];
