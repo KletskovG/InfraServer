@@ -34,7 +34,7 @@ WORKDIR /usr/src/app
 
 COPY dist/index.js dist/index.js
 
-COPY node_modules/ ./
+COPY node_modules/ ./node_modules
 
 RUN ls -la
 
