@@ -55,6 +55,7 @@ export async function scrapeProjectInfo(): Promise<string> {
   });
       
   if (isAuthFail) {
+    await page.screenshot({ path: "dist/auth-error.png" });
     throw new Error("Academy scrape: AUTH ERROR");
   } else {
     const isProjectsPresented = await page.evaluate(() => {

@@ -1,6 +1,7 @@
 import { scrapeProjectInfo } from "academy";
 import { Response } from "express";
 import { sendNotification } from "telegram/bot";
+import {getImgSrc} from "utils/getImgSrc";
 
 export function academyHandler(_, res: Response) {
   try {
@@ -13,6 +14,13 @@ export function academyHandler(_, res: Response) {
         } else {
           res.status(200).end();
         }
+      })
+      .catch(() => {
+        const src = getImgSrc("auth-error.png");
+        res.status(500).send(src);
+        sendNotification("ERROR WHILE SCRAPE");
+        console.error("ERROR WHILE SCRAPE");
+        console.error(src);
       });
   } catch (error) {
     sendNotification(error);
