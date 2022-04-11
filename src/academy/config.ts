@@ -9,5 +9,6 @@ export const PROJECTS_PRESENTED_SELECTOR = ".up-info--check .button--green";
 
 export const scrapeConfig: AcademyScrapeConfig = {
   REACT: "https://up.htmlacademy.ru/react/9/check/projects",
-  JS1: "https://up.htmlacademy.ru/nodejs-api/1/check/projects",
+  JS1: "https://up.htmlacademy.ru/javascript/25/check/projects",
 };
+  
