@@ -3,7 +3,7 @@ import { getEnvVariable } from "utils/getEnvVariable";
 import { scrapeProjectInfo } from "academy";
 
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
-const CHAT_NUMBER = getEnvVariable("CHAT_NUMBER");
+const CHAT_NUMBER = getEnvVariable("ACADEMY_CHAT");
 
 const bot = new Telegraf(BOT_TOKEN);
 bot.launch();
