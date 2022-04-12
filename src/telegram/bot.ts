@@ -8,11 +8,11 @@ const CHAT_NUMBER = getEnvVariable("ACADEMY_CHAT");
 const bot = new Telegraf(BOT_TOKEN);
 bot.launch();
 
-bot.on("message", (ctx) => {
-  ctx.reply(`Your Chat ID ${ctx.chat.id}`);
-});
+// bot.on("message", (ctx) => {
+//   ctx.reply(`Your Chat ID ${ctx.chat.id}`);
+// });
 
-bot.command("academy", async (ctx) => {
+bot.hears("academy", async (ctx) => {
   try {
     scrapeProjectInfo()
       .then(result => {
@@ -21,7 +21,7 @@ bot.command("academy", async (ctx) => {
           ctx.reply(notification);
         } else {
           ctx.reply("SMTH WENT WRONG");
-        }
+        } 
       })
       .catch(() => {
         ctx.reply("ERROR WHILE SCRAPE");
