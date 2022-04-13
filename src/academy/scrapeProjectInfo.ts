@@ -67,13 +67,13 @@ export async function scrapeProjectInfo(): Promise<string> {
 
     if (isProjectsPresented) {
       result += `
-      #${course.name}
+    *${course.name}*
 
-      Link
-      ${course.link}
-      
-      **Guides**
-      ${course.guides}
+    Link
+    ${course.link}
+    
+    *Guides*
+    ${course.guides}
       `;
     }
   }
