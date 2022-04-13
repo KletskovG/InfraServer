@@ -1,6 +1,7 @@
 import { Telegraf } from "telegraf";
 import { getEnvVariable } from "utils/getEnvVariable";
 import { scrapeProjectInfo } from "academy";
+import { ExtraEditMessage } from "telegraf/typings/telegram-types";
 
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
 const ACADEMY_CHAT = getEnvVariable("ACADEMY_CHAT");
@@ -35,7 +36,12 @@ export function sendAcademyNotification(message: string) {
 }
 
 export function sendNotification(message: string) {
-  bot.telegram.sendMessage(CHAT_NUMBER, message);
+  const messageSettings: ExtraEditMessage = {
+    parse_mode: "Markdown",
+    disable_web_page_preview: true,
+  };
+  
+  bot.telegram.sendMessage(CHAT_NUMBER, message, messageSettings);
 }
 
 export default bot;
