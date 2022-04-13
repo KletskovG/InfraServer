@@ -60,6 +60,8 @@ export async function scrapeProjectInfo(): Promise<string> {
     Guides
     ${course.guides}
       `;
+    } else {
+      result += `${course.name} \n No projects`;
     }
   }
 
