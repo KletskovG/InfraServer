@@ -1,4 +1,9 @@
-type AcademyScrapeConfig = Record<string, string>;
+type Course = {
+  name: string,
+  link: string,
+  guides: string,
+}
+type AcademyScrapeConfig = Array<Course>;
 
 export const PAGE_TIMEOUT = 5000;
 
@@ -7,7 +12,11 @@ export const PWD_INPUT_SELECTOR = "#login-password";
 export const SUBMIT_BUTTON_SELECTOR = "input.button";
 export const PROJECTS_PRESENTED_SELECTOR = ".up-info--check .button--green";
 
-export const scrapeConfig: AcademyScrapeConfig = {
-  JS1: "https://up.htmlacademy.ru/javascript/25/check/projects",
-};
-  
+
+export const scrapeConfig: AcademyScrapeConfig = [
+  {
+    name: "JS1",
+    link: "https://up.htmlacademy.ru/javascript/25/check/projects",
+    guides: "https://github.com/KletskovG/academy_storage/tree/main/js1",
+  }
+];

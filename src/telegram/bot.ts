@@ -3,14 +3,13 @@ import { getEnvVariable } from "utils/getEnvVariable";
 import { scrapeProjectInfo } from "academy";
 
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
-const CHAT_NUMBER = getEnvVariable("ACADEMY_CHAT");
+const ACADEMY_CHAT = getEnvVariable("ACADEMY_CHAT");
+const CHAT_NUMBER = getEnvVariable("CHAT_NUMBER");
 
 const bot = new Telegraf(BOT_TOKEN);
 bot.launch();
 
-// bot.on("message", (ctx) => {
-//   ctx.reply(`Your Chat ID ${ctx.chat.id}`);
-// });
+bot.hears("chatid", (ctx) => ctx.reply(`Chat ID ${ctx.chat.id}`));
 
 bot.hears("academy", async (ctx) => {
   try {
@@ -30,6 +29,10 @@ bot.hears("academy", async (ctx) => {
     sendNotification(error);
   }
 });
+
+export function sendAcademyNotification(message: string) {
+  bot.telegram.sendMessage(ACADEMY_CHAT, message);
+}
 
 export function sendNotification(message: string) {
   bot.telegram.sendMessage(CHAT_NUMBER, message);

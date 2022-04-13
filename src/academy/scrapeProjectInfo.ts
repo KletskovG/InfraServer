@@ -47,17 +47,33 @@ export async function scrapeProjectInfo(): Promise<string> {
   let result = "";
   
 
-  const courses = Object.keys(config.scrapeConfig);
+  // const courses = Object.keys(config.scrapeConfig);
 
-  for (let i = 0; i < courses.length; i++) {
-    const courseName = courses[i];
-    const courseLink = config.scrapeConfig[courses[i]];
-    const isProjectsPresented = await scrapeCourse(courseLink);
+  // for (let i = 0; i < courses.length; i++) {
+  //   const course = courses[i];
+  //   // const courseLink = config.scrapeConfig[courses[i]];
+  //   const courseLink = course.
+  //   const isProjectsPresented = await scrapeCourse(courseLink);
+
+  //   if (isProjectsPresented) {
+  //     result += `\n\n ${courseName} \n ${courseLink}`;
+  //   } else {
+  //     result += `\n\n ${courseName} \n No projects`
+  //   }
+  // }
+  for (let i = 0; i < config.scrapeConfig.length; i++) {
+    const course = config.scrapeConfig[i];
+    const isProjectsPresented = await scrapeCourse(course.link);
 
     if (isProjectsPresented) {
-      result += `\n\n ${courseName} \n ${courseLink}`;
-    } else {
-      result += `\n\n ${courseName} \n No projects`
+      result += `
+        ${course.name}
+
+        Link
+        ${course.link}
+        Guides
+        ${course.guides}
+      `;
     }
   }
 
