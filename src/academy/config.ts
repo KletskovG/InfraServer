@@ -15,8 +15,8 @@ export const PROJECTS_PRESENTED_SELECTOR = ".up-info--check .button--green";
 
 export const scrapeConfig: AcademyScrapeConfig = [
   {
-    name: "JS1",
-    link: "https://up.htmlacademy.ru/javascript/25/check/projects",
-    guides: "https://github.com/KletskovG/academy_storage/tree/main/js1",
+    name: "Async Node.js",
+    link: "https://up.htmlacademy.ru/nodejs/3/check/projects",
+    guides: "Guides in Progress",
   }
 ];
