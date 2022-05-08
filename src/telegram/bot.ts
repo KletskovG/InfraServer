@@ -1,7 +1,10 @@
 import { Telegraf } from "telegraf";
 import { getEnvVariable } from "utils/getEnvVariable";
 import { scrapeProjectInfo } from "academy";
+import { toggleTagMode } from "./airtagLocation";
 import { ExtraEditMessage } from "telegraf/typings/telegram-types";
+import { EBotCommands } from "types";
+import { TelegrafContext } from "telegraf/typings/context";
 
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
 const ACADEMY_CHAT = getEnvVariable("ACADEMY_CHAT");
@@ -10,9 +13,14 @@ const CHAT_NUMBER = getEnvVariable("CHAT_NUMBER");
 const bot = new Telegraf(BOT_TOKEN);
 bot.launch();
 
-bot.hears("chatid", (ctx) => ctx.reply(`Chat ID ${ctx.chat.id}`));
+export function registerCommandHanlder(
+  command: EBotCommands, handler: (ctx: TelegrafContext) => void
+) {
+  bot.hears(command, handler);
+}
 
-bot.hears("academy", async (ctx) => {
+registerCommandHanlder("chatid", (ctx) => ctx.reply(`Chat ID ${ctx.chat.id}`));
+registerCommandHanlder("academy", async (ctx) => {
   try {
     scrapeProjectInfo()
       .then(result => {
@@ -21,7 +29,7 @@ bot.hears("academy", async (ctx) => {
           ctx.reply(notification);
         } else {
           ctx.reply("SMTH WENT WRONG");
-        } 
+        }
       })
       .catch(() => {
         ctx.reply("ERROR WHILE SCRAPE");
@@ -30,6 +38,7 @@ bot.hears("academy", async (ctx) => {
     sendNotification(error);
   }
 });
+registerCommandHanlder("tag", toggleTagMode);
 
 export function sendAcademyNotification(message: string) {
   bot.telegram.sendMessage(ACADEMY_CHAT, message);
@@ -40,7 +49,7 @@ export function sendNotification(message: string) {
     parse_mode: "Markdown",
     disable_web_page_preview: true,
   };
-  
+
   bot.telegram.sendMessage(CHAT_NUMBER, message, messageSettings);
 }
 
