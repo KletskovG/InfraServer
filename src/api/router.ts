@@ -7,6 +7,7 @@ import {
   doneMessageHandler,
   failHandler,
   academyHandler,
+  cashHandler,
 } from "api";
 
 const router = Router();
@@ -21,6 +22,7 @@ registerHandler("/done", "get", doneHandler);
 registerHandler("/done/:text", "get", doneMessageHandler);
 registerHandler("/fail", "get", failHandler);
 registerHandler("/academy", "get", academyHandler);
+registerHandler("/cash", "get", cashHandler);
 
 
 export default router;
