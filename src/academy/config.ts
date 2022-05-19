@@ -18,5 +18,10 @@ export const scrapeConfig: AcademyScrapeConfig = [
     name: "Async Node.js",
     link: "https://up.htmlacademy.ru/nodejs/3/check/projects",
     guides: "Guides in Progress",
+  },
+  {
+    name: "Current Node.js",
+    link: "https://up.htmlacademy.ru/nodejs-api/1/check/projects",
+    guides: "Guides in Progess",
   }
 ];

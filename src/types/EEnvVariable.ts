@@ -4,4 +4,5 @@ export type EEnvVariable =
     "PORT" | 
     "ACADEMY_EMAIL" | 
     "ACADEMY_PWD" |
-    "ACADEMY_CHAT"
+    "ACADEMY_CHAT" | 
+    "ACADEMY_SECOND"
