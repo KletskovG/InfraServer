@@ -55,7 +55,7 @@ export async function scrapeProjectInfo(): Promise<string> {
   for (let i = 0; i < config.scrapeConfig.length; i++) {
     const course = config.scrapeConfig[i];
     const courseInfo = await scrapeCourse(course.link);
-    result += `${course.name}`;
+    result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;
 
     if (amountOfProjects > 0) {
