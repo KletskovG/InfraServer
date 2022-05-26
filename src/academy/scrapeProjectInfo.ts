@@ -50,7 +50,7 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
 }
 
 export async function scrapeProjectInfo(): Promise<string> {
-  let result = "";
+  let result = "Scrape result \n";
 
   for (let i = 0; i < config.scrapeConfig.length; i++) {
     const course = config.scrapeConfig[i];
@@ -71,6 +71,8 @@ export async function scrapeProjectInfo(): Promise<string> {
 
       Guides
       ${course.guides}`;
+
+      result = `!!! ${result}`;
     }
   }
 
