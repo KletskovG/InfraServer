@@ -7,4 +7,5 @@ export type ERoute =
     "/ping" |
     "/academy" |
     "/academy/logs" |
-    "/cash"
+    "/cash" |
+    "/budget/:category/:column"
