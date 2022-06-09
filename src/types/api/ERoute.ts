@@ -8,4 +8,4 @@ export type ERoute =
     "/academy" |
     "/academy/logs" |
     "/cash" |
-    "/budget/:category/:column/:start/:end/:course"
+    "/budget/:category/:column/:start/:end/:course/:ruble"
