@@ -24,7 +24,7 @@ registerHandler("/done/:text", "get", doneMessageHandler);
 registerHandler("/fail", "get", failHandler);
 registerHandler("/academy", "get", academyHandler);
 registerHandler("/cash", "get", cashHandler);
-registerHandler("/budget/:category/:column", "get", budgetHandler);
+registerHandler("/budget/:category/:column/:start/:end/:course", "get", budgetHandler);
 
 
 export default router;

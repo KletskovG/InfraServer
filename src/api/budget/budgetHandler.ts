@@ -1,15 +1,12 @@
 import { Request, Response } from "express";
 
 export function budgetHandler(req: Request, res: Response) {
-  const { category, column } = req.params;
+  const { category, column, start, end, course } = req.params;
 
-  const startCell = 2;
-  const endCell = 32;
-  const courseColumn = "L";
   let sum = "SUM(\n";
 
-  for (let i = startCell; i < endCell; i++) {
-    sum += `(${column}${i}*${courseColumn}${i});\n`;
+  for (let i = Number(start); i < Number(end); i++) {
+    sum += `\t\t\t\t\t\t(${column}${i}*${course}${i});\n`;
   }
 
   sum += ")";
@@ -21,5 +18,5 @@ export function budgetHandler(req: Request, res: Response) {
         )
     `;
 
-  res.status(200).send(result);
+  res.status(200).send(`<pre>${result}</pre>`);
 }
