@@ -3,7 +3,7 @@ import * as config from "./config";
 import { IScrapeResult } from "types";
 
 function isCurrentUserRoot() {
-  return process.getuid() == 0; // UID 0 is always root
+  return process.getuid() === 0; // UID 0 is always root
 }
 
 async function scrapeCourse(link: string): Promise<IScrapeResult> {

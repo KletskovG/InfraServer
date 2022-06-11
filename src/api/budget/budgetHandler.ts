@@ -5,7 +5,7 @@ export function budgetHandler(req: Request, res: Response) {
 
   let sum = "SUM(\n";
 
-  for (let i = Number(start); i < Number(end); i++) {
+  for (let i = Number(start); i <= Number(end); i++) {
     sum += `\t\t\t\t\t\t(${column}${i}*${course}${i});\n`;
   }
 
