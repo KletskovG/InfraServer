@@ -25,7 +25,7 @@ registerHandler("/done/:text", "get", doneMessageHandler);
 registerHandler("/fail", "get", failHandler);
 registerHandler("/academy", "get", academyHandler);
 registerHandler("/cash", "get", cashHandler);
-registerHandler("/budget/currency/:currency", "get", currencyHandler);
+registerHandler("/budget/currency/:currency/:month/:year", "get", currencyHandler);
 registerHandler("/budget/:category/:column/:start/:end/:course/:ruble", "get", budgetHandler);
 
 

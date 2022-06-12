@@ -10,24 +10,24 @@ type TCurrencyResult = {
 }
 
 export async function currencyHandler(req: Request, res: Response): Promise<TCurrencyResult[]> {
-  const { currency } = req.params;
+  const { currency, month, year } = req.params;
   const date = new Date();
   const result: TCurrencyResult[] = [];
 
   for (let i = 1; i <= date.getDate(); i++) {
     let day = `${i}`;
-    let month = `${date.getMonth()}`;
+    let requestMonth = `${month}`;
 
     if (i < 10) {
       day = `0${day}`;
     }
 
-    if (Number(month) < 10) {
+    if (Number(requestMonth) < 10) {
 
-      month = `0${month}`;
+      requestMonth = `0${requestMonth}`;
     }
 
-    const requestDate = `${day}/${month}/${date.getFullYear()}`;
+    const requestDate = `${day}/${requestMonth}/${year}`;
     const link = `${cbrCourseUrl}${requestDate}`;
     console.log(`Fetching currency for ${link}`);
 
