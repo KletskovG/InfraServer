@@ -40,6 +40,9 @@ registerCommandHanlder("academy", async (ctx) => {
   }
 });
 registerCommandHanlder("tag", toggleTagMode);
+registerCommandHanlder("wake", (ctx) => {
+  ctx.reply("Run wake shortcut \n https://telegram.kletskovg.tech/shortcut/wake");
+});
 
 export function sendAcademyNotification(message: string) {
   bot.telegram.sendMessage(ACADEMY_CHAT, message);

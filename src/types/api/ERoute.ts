@@ -7,6 +7,7 @@ export type ERoute =
     "/ping" |
     "/academy" |
     "/academy/logs" |
-    "/cash" |
+    "/shortcut/cash" |
+    "/shortcut/wake" |
     "/budget/currency/:currency/:month/:year" |
     "/budget/:category/:column/:start/:end/:course/:ruble"
