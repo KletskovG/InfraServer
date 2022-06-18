@@ -11,6 +11,7 @@ import {
   budgetHandler,
   currencyHandler,
   wakeHandler,
+  wakeIpadHandler
 } from "api";
 
 const router = Router();
@@ -26,7 +27,8 @@ registerHandler("/done/:text", "get", doneMessageHandler);
 registerHandler("/fail", "get", failHandler);
 registerHandler("/academy", "get", academyHandler);
 registerHandler("/shortcut/cash", "get", cashHandler);
-registerHandler("/shortcut/wake", "get", wakeHandler)
+registerHandler("/shortcut/wake", "get", wakeHandler);
+registerHandler("/shortcut/wake/ipad", "get", wakeIpadHandler);
 registerHandler("/budget/currency/:currency/:month/:year", "get", currencyHandler);
 registerHandler("/budget/:category/:column/:start/:end/:course/:ruble", "get", budgetHandler);
 

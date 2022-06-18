@@ -9,5 +9,6 @@ export type ERoute =
     "/academy/logs" |
     "/shortcut/cash" |
     "/shortcut/wake" |
+    "/shortcut/wake/ipad" |
     "/budget/currency/:currency/:month/:year" |
     "/budget/:category/:column/:start/:end/:course/:ruble"
