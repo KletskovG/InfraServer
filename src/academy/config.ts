@@ -24,9 +24,4 @@ export const scrapeConfig: AcademyScrapeConfig = [
     link: "https://up.htmlacademy.ru/nodejs-api/1/check/projects",
     guides: "Guides in Progess",
   },
-  {
-    name: "Current JS2",
-    link: "https://up.htmlacademy.ru/ecmascript/17/check/projects",
-    guides: "https://github.com/KletskovG/academy_storage/tree/main/js2",
-  }
 ];
