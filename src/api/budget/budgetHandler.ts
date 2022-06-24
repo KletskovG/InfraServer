@@ -1,7 +1,14 @@
 import { Request, Response } from "express";
 
 export function budgetHandler(req: Request, res: Response) {
-  const { category, column, start, end, course, ruble } = req.params;
+  const {
+    category,
+    column,
+    start,
+    end,
+    course,
+    ruble
+  } = req.params;
 
   let sum = "SUM(\n";
 

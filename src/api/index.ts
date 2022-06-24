@@ -8,3 +8,4 @@ export { budgetHandler } from "./budget/budgetHandler";
 export { currencyHandler } from "./budget/currencyHandler";
 export { wakeHandler } from "./shortcuts/wake/wakeHandler";
 export { wakeIpadHandler } from "./shortcuts/wake/wakeIpadHandler";
+export { budgetDatesHandler } from "./budget/budgetDatesHandler";
