@@ -32,7 +32,8 @@ registerCommandHanlder("academy", async (ctx) => {
           ctx.reply("SMTH WENT WRONG");
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
         ctx.reply("ERROR WHILE SCRAPE");
       });
   } catch (error) {
