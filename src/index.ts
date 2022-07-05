@@ -12,5 +12,8 @@ app.use(bodyParser.urlencoded({
 app.use(router);
 
 app.listen(getEnvVariable("PORT"), () => {
-  console.log(`Infra server is up and running on port number ${getEnvVariable("PORT")}`);
+  console.log(
+    `Infra server is up and running
+      http://localhost:${getEnvVariable("PORT")}`
+  );
 });

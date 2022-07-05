@@ -8,7 +8,8 @@
     "build": "npm run clean && mkdir dist && cp .env dist/.env && webpack",
     "build:ci": "touch .env && npm run build && rm dist/.env",
     "start": "npm run build && node dist/index.js",
-    "lint": "eslint -c .eslintrc.json --ext .ts src"
+    "lint": "eslint -c .eslintrc.json --ext .ts src",
+    "view": "open https://github.com/kletskovg/infraserver"
   },
   "repository": {
     "type": "git",
@@ -49,8 +50,10 @@
   },
   "dependencies": {
     "express": "^4.17.3",
+    "got": "11.0.0",
     "puppeteer": "^13.5.2",
     "puppeteer-core": "^13.5.2",
-    "telegraf": "3.38.0"
+    "telegraf": "3.38.0",
+    "xml2js": "^0.4.23"
   }
 }

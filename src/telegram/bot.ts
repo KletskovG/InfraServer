@@ -32,7 +32,8 @@ registerCommandHanlder("academy", async (ctx) => {
           ctx.reply("SMTH WENT WRONG");
         }
       })
-      .catch(() => {
+      .catch((err) => {
+        console.error(err);
         ctx.reply("ERROR WHILE SCRAPE");
       });
   } catch (error) {
@@ -40,6 +41,9 @@ registerCommandHanlder("academy", async (ctx) => {
   }
 });
 registerCommandHanlder("tag", toggleTagMode);
+registerCommandHanlder("wake", (ctx) => {
+  ctx.reply("Run wake shortcut \n https://telegram.kletskovg.tech/shortcut/wake");
+});
 
 export function sendAcademyNotification(message: string) {
   bot.telegram.sendMessage(ACADEMY_CHAT, message);

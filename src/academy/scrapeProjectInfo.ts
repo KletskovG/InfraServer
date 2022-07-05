@@ -3,7 +3,7 @@ import * as config from "./config";
 import { IScrapeResult } from "types";
 
 function isCurrentUserRoot() {
-  return process.getuid() == 0; // UID 0 is always root
+  return process.getuid() === 0; // UID 0 is always root
 }
 
 async function scrapeCourse(link: string): Promise<IScrapeResult> {
@@ -18,8 +18,8 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
   await page.goto(link);
   await page.waitForTimeout(5000);
   console.log("CHECK FOR AUTH");
-  await page.type("#login-email", "kletskovhtmlacademy@gmail.com");
-  await page.type("#login-password", "8463fb7");
+  await page.type("#login-email", process.env.ACADEMY_EMAIL);
+  await page.type("#login-password", process.env.ACADEMY_PWD);
   await page.click("input.button");
   await page.waitForNavigation();
 
@@ -29,6 +29,7 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
 
   if (isAuthFail) {
     await page.screenshot({ path: "dist/auth-error.png" });
+    await browser.close();
     throw new Error("Academy scrape: AUTH ERROR");
   } else {
     const scrapeResult = await page.evaluate(() => {
@@ -58,11 +59,9 @@ export async function scrapeProjectInfo(): Promise<string> {
     result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;
 
-    if (amountOfProjects > 0) {
-      result += `\nAmount of available projects - ${amountOfProjects}`;
-    } else {
-      result += "\n No projects";
-    }
+    result += amountOfProjects > 0
+      ? `\nAmount of available projects - ${amountOfProjects}`
+      : "\n No projects";
 
     if (courseInfo.isCheckAvailable) {
       result += `

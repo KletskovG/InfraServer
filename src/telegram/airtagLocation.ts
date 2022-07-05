@@ -6,7 +6,7 @@ const checkTagInterval = 1000 * 60 * 10; // 10 minutes
 
 const intervalCallback = () => {
   if (isActive) {
-    sendNotification("Check airtaglocation \n https://telegram.kletskovg.tech/cash");
+    sendNotification("Check airtaglocation \n https://telegram.kletskovg.tech/shortcut/cash");
   }
 };
 
