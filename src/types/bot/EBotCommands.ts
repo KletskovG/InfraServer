@@ -1,5 +1,5 @@
 export type EBotCommands =
-  "chatid" |
-  "academy" |
-  "tag" |
-  "wake"
+  "/chatid" |
+  "/academy" |
+  "/tag" |
+  "/wake"

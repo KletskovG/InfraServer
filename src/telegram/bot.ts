@@ -20,17 +20,13 @@ export function registerCommandHanlder(
   bot.hears(command, handler);
 }
 
-registerCommandHanlder("chatid", (ctx) => ctx.reply(`Chat ID ${ctx.chat.id}`));
-registerCommandHanlder("academy", async (ctx) => {
+registerCommandHanlder("/chatid", (ctx) => ctx.reply(`Chat ID ${ctx.chat.id}`));
+registerCommandHanlder("/academy", async (ctx) => {
   try {
     scrapeProjectInfo()
       .then(result => {
-        if (result) {
-          const notification = `Scrape result \n ${result}`;
-          ctx.reply(notification);
-        } else {
-          ctx.reply("SMTH WENT WRONG");
-        }
+        const notification = result ? `Scrape result \n ${result}` : "";
+        ctx.reply(notification);
       })
       .catch((err) => {
         console.error(err);
@@ -40,8 +36,8 @@ registerCommandHanlder("academy", async (ctx) => {
     sendNotification(error);
   }
 });
-registerCommandHanlder("tag", toggleTagMode);
-registerCommandHanlder("wake", (ctx) => {
+registerCommandHanlder("/tag", toggleTagMode);
+registerCommandHanlder("/wake", (ctx) => {
   ctx.reply("Run wake shortcut \n https://telegram.kletskovg.tech/shortcut/wake");
 });
 

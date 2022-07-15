@@ -14,7 +14,9 @@ export async function currencyHandler(req: Request, res: Response): Promise<TCur
   const date = new Date();
   const result: TCurrencyResult[] = [];
 
-  for (let i = 1; i <= date.getDate(); i++) {
+  const fetchLinks: string[] = [];
+
+  for (let i = 1; i <= date.getDate(); i ++) {
     let day = `${i}`;
     let requestMonth = `${month}`;
 
@@ -29,19 +31,25 @@ export async function currencyHandler(req: Request, res: Response): Promise<TCur
 
     const requestDate = `${day}/${requestMonth}/${year}`;
     const link = `${cbrCourseUrl}${requestDate}`;
-    console.log(`Fetching currency for ${link}`);
-
-    const data = await got(`${cbrCourseUrl}${requestDate}`);
-    const currencyValue = getCurrencyValue(data.body, currency.toUpperCase());
-
-    result.push({
-      currencyName: currency.toUpperCase(),
-      date: requestDate,
-      value: currencyValue,
-    });
+    fetchLinks.push(link);
   }
 
-  res.status(200).send(JSON.stringify(result));
+  const data: TCurrencyResult[] | [] = await Promise.all(
+    fetchLinks.map(link => {
+      console.log(`FETCHING ${link}`);
+      return got(link);
+    }),
+  )
+    .then(responses => {
+      return responses.map<TCurrencyResult>((data, index) => ({
+        currencyName: currency.toUpperCase(),
+        date: `${index + 1}/${month}/${year}`,
+        value: getCurrencyValue(data.body, currency),
+      }));
+    })
+    .catch(() => []);
+
+  res.status(200).send(JSON.stringify(data));
   return result;
 }
 
