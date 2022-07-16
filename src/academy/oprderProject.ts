@@ -44,6 +44,7 @@ export async function orderProject(courseName: string): Promise<string> {
       await page.click(".up-info--check .button--green");
       await page.waitForNavigation();
       const orderedLink = page.url();
+      await browser.close();
       return orderedLink;
     }
 

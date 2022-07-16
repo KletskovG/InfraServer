@@ -8,7 +8,7 @@ export function orderProjectHandler(req: Request, res: Response) {
     orderProject(course)
       .then(result => {
         res.status(200).send(result);
-        sendAcademyNotification(`Project ordered: ${result}`);
+        sendAcademyNotification(`Project order result: \n ${result}`);
       })
       .catch((errorMessage) => {
         res.status(404).send(errorMessage);
