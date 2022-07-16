@@ -1,5 +1,5 @@
 import { Request, Response } from "express";
-import { orderProject } from "src/academy";
+import { orderProject } from "academy";
 import { sendAcademyNotification } from "telegram/bot";
 
 export function orderProjectHandler(req: Request, res: Response) {
