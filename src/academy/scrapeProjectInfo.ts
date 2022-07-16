@@ -1,10 +1,8 @@
 import puppeteer from "puppeteer";
 import * as config from "./config";
+import { HOSTNAME } from "const";
+import { isCurrentUserRoot } from "utils/isCurrentUserRoot";
 import { IScrapeResult } from "types";
-
-function isCurrentUserRoot() {
-  return process.getuid() === 0; // UID 0 is always root
-}
 
 async function scrapeCourse(link: string): Promise<IScrapeResult> {
   console.info("LAUNCHING PUPETEER");
@@ -67,6 +65,9 @@ export async function scrapeProjectInfo(): Promise<string> {
       result += `
       Link
       ${course.link}
+
+      Order
+      ${HOSTNAME}/academy/order/${course.name}
 
       Guides
       ${course.guides}`;

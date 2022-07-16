@@ -13,6 +13,7 @@ import {
   wakeHandler,
   wakeIpadHandler,
   budgetDatesHandler,
+  orderProjectHandler,
 } from "api";
 
 const router = Router();
@@ -27,6 +28,7 @@ registerHandler("/done", "get", doneHandler);
 registerHandler("/done/:text", "get", doneMessageHandler);
 registerHandler("/fail", "get", failHandler);
 registerHandler("/academy", "get", academyHandler);
+registerHandler("/academy/order/:course", "get", orderProjectHandler);
 registerHandler("/shortcut/cash", "get", cashHandler);
 registerHandler("/shortcut/wake", "get", wakeHandler);
 registerHandler("/shortcut/wake/ipad", "get", wakeIpadHandler);

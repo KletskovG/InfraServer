@@ -21,6 +21,7 @@
         "telegram/*": ["./src/telegram/*"],
         "academy/*": ["./src/academy/*"],
         "api/": ["./src/api/*"],
+        "const/": ["./src/const/*"],
       },
       "typeRoots": ["node_modules/@types", "./src/typings"],
       "types": [

@@ -23,6 +23,7 @@ module.exports = {
       telegram: path.resolve(__dirname, "src/telegram/"),
       types: path.resolve(__dirname, "src/types/"),
       api: path.resolve(__dirname, "src/api/"),
+      const: path.resolve(__dirname, "src/const/"),
     }
   },
   module: {

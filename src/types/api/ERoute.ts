@@ -6,6 +6,7 @@ export type ERoute =
     "/fail" |
     "/ping" |
     "/academy" |
+    "/academy/order/:course" |
     "/academy/logs" |
     "/shortcut/cash" |
     "/shortcut/wake" |
