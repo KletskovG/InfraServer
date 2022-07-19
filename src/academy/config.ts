@@ -13,10 +13,4 @@ export const SUBMIT_BUTTON_SELECTOR = "input.button";
 export const PROJECTS_PRESENTED_SELECTOR = ".up-info--check .button--green";
 
 
-export const scrapeConfig: AcademyScrapeConfig = [
-  {
-    name: "JS1",
-    link: "https://up.htmlacademy.ru/javascript/26/check/projects",
-    guides: "https://github.com/KletskovG/academy_storage/tree/main/js1",
-  }
-];
+export const scrapeConfig: AcademyScrapeConfig = [];
