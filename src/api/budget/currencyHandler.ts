@@ -9,14 +9,32 @@ type TCurrencyResult = {
   value: string;
 }
 
-export async function currencyHandler(req: Request, res: Response): Promise<TCurrencyResult[]> {
+type CurrencyRequestParams = {
+  currency: string;
+  month: string;
+  year: string;
+}
+
+type CurrencyRequestQuery = {
+  date?: string;
+}
+
+type CurrencyRequest = Request<CurrencyRequestParams, any, any, CurrencyRequestQuery>;
+
+export async function currencyHandler(req: CurrencyRequest, res: Response): Promise<TCurrencyResult[]> {
   const { currency, month, year } = req.params;
-  const date = new Date();
+  const { date } = req.query;
+
+  const currentDate = new Date();
   const result: TCurrencyResult[] = [];
 
   const fetchLinks: string[] = [];
 
-  for (let i = 1; i <= date.getDate(); i ++) {
+  const START_OF_MONTH = 1;
+
+  const endDate = date ? Number(date) : currentDate.getDate();
+
+  for (let i = START_OF_MONTH; i <= endDate; i ++) {
     let day = `${i}`;
     let requestMonth = `${month}`;
 
