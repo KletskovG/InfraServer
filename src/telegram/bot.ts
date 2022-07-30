@@ -6,6 +6,8 @@ import { ExtraEditMessage } from "telegraf/typings/telegram-types";
 import { EBotCommands } from "types";
 import { TelegrafContext } from "telegraf/typings/context";
 
+import { getMIRCurrencyCourse } from "scrapper/MIR";
+
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
 const ACADEMY_CHAT = getEnvVariable("ACADEMY_CHAT");
 const ACADEMY_SECOND = getEnvVariable("ACADEMY_SECOND");
@@ -25,7 +27,7 @@ registerCommandHanlder("/academy", async (ctx) => {
   try {
     scrapeProjectInfo()
       .then(result => {
-        const notification = result ? `Scrape result \n ${result}` : "";
+        const notification = result ? `Scrape result \n ${result}` : "Empty Result";
         ctx.reply(notification);
       })
       .catch((err) => {
@@ -33,12 +35,25 @@ registerCommandHanlder("/academy", async (ctx) => {
         ctx.reply("ERROR WHILE SCRAPE");
       });
   } catch (error) {
-    sendNotification(error);
+    ctx.reply(error);
   }
 });
 registerCommandHanlder("/tag", toggleTagMode);
 registerCommandHanlder("/wake", (ctx) => {
   ctx.reply("Run wake shortcut \n https://telegram.kletskovg.tech/shortcut/wake");
+});
+
+registerCommandHanlder("/mir", async (ctx) => {
+  try {
+    getMIRCurrencyCourse()
+      .then(result => {
+        const notification = result ? `MIR COURSE: \n ${result}` : "MIR TRY COURSE WAS NOT FOUND";
+        ctx.reply(notification);
+      })
+      .catch(err => ctx.reply(err));
+  } catch (error) {
+    ctx.reply(error);
+  }
 });
 
 export function sendAcademyNotification(message: string) {

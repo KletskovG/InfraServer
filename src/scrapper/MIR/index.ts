@@ -1,0 +1,1 @@
+export { getMIRCurrencyCourse } from "./getMIRCurrencyCourse";

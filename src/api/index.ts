@@ -10,3 +10,4 @@ export { currencyHandler } from "./budget/currencyHandler";
 export { wakeHandler } from "./shortcuts/wake/wakeHandler";
 export { wakeIpadHandler } from "./shortcuts/wake/wakeIpadHandler";
 export { budgetDatesHandler } from "./budget/budgetDatesHandler";
+export { getMIRCurrencyHandler } from "./budget/getMIRCurrencyHandler";
