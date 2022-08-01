@@ -35,7 +35,7 @@ async function scrapeCourse(link: string, collectHomeworks = false): Promise<ISc
 
       return {
         isCheckAvailable: Boolean(document.querySelector(".up-info--check .button--green")),
-        amountOfProjects: Number(amountElement.textContent.split("").filter(Number).join("")),
+        amountOfProjects: amountElement && Number(amountElement.textContent.split("").filter(Number).join("")),
         homeworks: collectHomeworks && Boolean(document.querySelector(ESelector.HOMEWORK)),
       };
     });
