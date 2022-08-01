@@ -1,6 +1,5 @@
 import puppeteer from "puppeteer";
-import { scrapeConfig } from "./config";
-import { HOSTNAME } from "const";
+import { homeworkConfig } from "./config";
 import { isCurrentUserRoot } from "utils/isCurrentUserRoot";
 import { IScrapeResult } from "types";
 
@@ -31,11 +30,11 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
     throw new Error("Academy scrape: AUTH ERROR");
   } else {
     const scrapeResult = await page.evaluate(() => {
-      const amountElement = document.querySelector(".up-info__columns p");
+      const amountElement = document.querySelectorAll(".card__item--new");
 
       return {
-        isCheckAvailable: Boolean(document.querySelector(".up-info--check .button--green")),
-        amountOfProjects: Number(amountElement.textContent.split("").filter(Number).join("")),
+        isCheckAvailable: Boolean(amountElement),
+        amountOfProjects: amountElement && amountElement.length,
       };
     });
 
@@ -48,31 +47,26 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
   }
 }
 
-export async function scrapeProjectInfo(): Promise<string> {
+export async function scrapeHomeworks(): Promise<string> {
   let result = "Scrape result \n";
 
-  for (let i = 0; i < scrapeConfig.length; i++) {
-    const course = scrapeConfig[i];
+  for (let i = 0; i < homeworkConfig.length; i++) {
+    const course = homeworkConfig[i];
     const courseInfo = await scrapeCourse(course.link);
     result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;
 
     result += amountOfProjects > 0
-      ? `\nAmount of available projects - ${amountOfProjects}`
-      : "\n No projects";
+      ? `\nAmount of available homeworks - ${amountOfProjects}`
+      : "\n No homeworks";
 
     if (courseInfo.isCheckAvailable) {
       result += `
       Link
       ${course.link}
+      `;
 
-      Order
-      ${HOSTNAME}/academy/order/${course.name}
-
-      Guides
-      ${course.guides}`;
-
-      result = `!!! ${result}`;
+      result = `••• ${result}`;
     }
   }
 

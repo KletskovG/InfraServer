@@ -1,15 +1,15 @@
-import { scrapeProjectInfo } from "scrapper/academy";
+import { scrapeHomeworks } from "scrapper/academy";
 import { Response } from "express";
-import { sendAcademyNotification } from "telegram/bot";
+import { sendNotification } from "telegram/bot";
 import {getImgSrc} from "utils/getImgSrc";
 
-export function academyHandler(_, res: Response) {
+export function homeworksHandler(_, res: Response) {
 
   try {
-    scrapeProjectInfo()
+    scrapeHomeworks()
       .then(result => {
         if (result) {
-          sendAcademyNotification(result);
+          sendNotification(result);
           res.status(200).send(result);
         } else {
           res.status(200).end();
@@ -18,12 +18,12 @@ export function academyHandler(_, res: Response) {
       .catch(() => {
         const src = getImgSrc("auth-error.png");
         res.status(500).send(src);
-        sendAcademyNotification("ERROR WHILE SCRAPE");
+        sendNotification("ERROR WHILE SCRAPE");
         console.error("ERROR WHILE SCRAPE");
         console.error(src);
       });
   } catch (error) {
-    sendAcademyNotification(error);
+    sendNotification(error);
     res.status(500).send(error);
   }
 }

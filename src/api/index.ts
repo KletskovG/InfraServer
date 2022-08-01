@@ -11,3 +11,4 @@ export { wakeHandler } from "./shortcuts/wake/wakeHandler";
 export { wakeIpadHandler } from "./shortcuts/wake/wakeIpadHandler";
 export { budgetDatesHandler } from "./budget/budgetDatesHandler";
 export { getMIRCurrencyHandler } from "./budget/getMIRCurrencyHandler";
+export { homeworksHandler } from "./academy/homeworksHandler";

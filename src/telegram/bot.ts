@@ -24,8 +24,8 @@ export function registerCommandHanlder(
 }
 
 registerCommandHanlder("/chatid", chatid);
-registerCommandHanlder("/academy", academy(false));
-registerCommandHanlder("/homeworks", academy(true));
+registerCommandHanlder("/academy", academy());
+registerCommandHanlder("/homeworks", academy());
 registerCommandHanlder("/tag", tag);
 registerCommandHanlder("/mir", mir);
 

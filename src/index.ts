@@ -12,10 +12,11 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(router);
 
-app.listen(getEnvVariable("PORT"), () => {
+const PORT = getEnvVariable("PORT");
+app.listen(PORT, () => {
   console.log(
     `Infra server is up and running
-      http://localhost:${getEnvVariable("PORT")}`
+      http://localhost:${PORT}`
   );
   sendNotification("Infra server is booted");
 });

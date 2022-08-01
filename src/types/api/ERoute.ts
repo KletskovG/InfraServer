@@ -7,7 +7,7 @@ export type ERoute =
     "/ping" |
     "/academy" |
     "/academy/order/:course" |
-    "/academy/logs" |
+    "/academy/homeworks" |
     "/shortcut/cash" |
     "/shortcut/wake" |
     "/shortcut/wake/ipad" |

@@ -7,6 +7,7 @@ import {
   doneMessageHandler,
   failHandler,
   academyHandler,
+  homeworksHandler,
   cashHandler,
   budgetHandler,
   currencyHandler,
@@ -29,6 +30,7 @@ registerHandler("/done", "get", doneHandler);
 registerHandler("/done/:text", "get", doneMessageHandler);
 registerHandler("/fail", "get", failHandler);
 registerHandler("/academy", "get", academyHandler);
+registerHandler("/academy/homeworks", "get", homeworksHandler);
 registerHandler("/academy/order/:course", "get", orderProjectHandler);
 registerHandler("/shortcut/cash", "get", cashHandler);
 registerHandler("/shortcut/wake", "get", wakeHandler);
