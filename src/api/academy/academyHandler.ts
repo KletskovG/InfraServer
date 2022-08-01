@@ -1,4 +1,4 @@
-import { scrapeProjectInfo } from "academy";
+import { scrapeProjectInfo } from "scrapper/academy";
 import { Response } from "express";
 import { sendAcademyNotification } from "telegram/bot";
 import {getImgSrc} from "utils/getImgSrc";

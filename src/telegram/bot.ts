@@ -1,6 +1,6 @@
 import { Telegraf } from "telegraf";
 import { getEnvVariable } from "utils/getEnvVariable";
-import { scrapeProjectInfo } from "academy";
+import { scrapeProjectInfo } from "scrapper/academy";
 import { toggleTagMode } from "./airtagLocation";
 import { ExtraEditMessage } from "telegraf/typings/telegram-types";
 import { EBotCommands } from "types";

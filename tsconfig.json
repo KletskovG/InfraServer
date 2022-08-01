@@ -15,8 +15,6 @@
           "src/*"
         ],
         "utils/*": ["./src/utils/*"],
-        "models/*": ["./src/models/*"],
-        "interfaces/*": ["./src/Interfaces/*"],
         "types/*": ["./src/types/*"],
         "telegram/*": ["./src/telegram/*"],
         "academy/*": ["./src/academy/*"],
@@ -28,9 +26,6 @@
       "types": [
         "node",
         "express",
-        "mongoose",
-        "md5",
-        "jsonwebtoken",
       ]
     },
     "include": [

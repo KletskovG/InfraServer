@@ -1,2 +1,0 @@
-alias haopen="mv $(ls | grep .zip) ha-check.zip && unzip ha-check.zip -d ha-check && cd ha-check && cd $(ls | grep project) && cd project && npm i && code . && npm start"
-alias haclear="rm -rf react-* && rm -rf js-*"

@@ -1,6 +1,6 @@
 import puppeteer from "puppeteer";
 import { isCurrentUserRoot } from "utils/isCurrentUserRoot";
-import * as config from "academy/config";
+import * as config from "scrapper/academy/config";
 
 export async function orderProject(courseName: string): Promise<string> {
   const course = config.scrapeConfig.find(({ name }) => name === courseName);
