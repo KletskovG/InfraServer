@@ -19,7 +19,7 @@ type CurrencyRequestQuery = {
   date?: string;
 }
 
-type CurrencyRequest = Request<CurrencyRequestParams, any, any, CurrencyRequestQuery>;
+type CurrencyRequest = Request<CurrencyRequestParams, unknown, unknown, CurrencyRequestQuery>;
 
 export async function currencyHandler(req: CurrencyRequest, res: Response): Promise<TCurrencyResult[]> {
   const { currency, month, year } = req.params;

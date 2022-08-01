@@ -11,7 +11,7 @@ const intervalCallback = () => {
 };
 
 setInterval(intervalCallback, checkTagInterval);
-export function toggleTagMode() {
+export function tag() {
   if (isActive) {
     isActive = false;
     sendNotification("Airtag tracking is off. Dont forget to switch off mobile internet");

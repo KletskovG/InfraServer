@@ -1,11 +1,17 @@
 import { scrapeProjectInfo } from "scrapper/academy";
-import { Response } from "express";
+import { Request, Response } from "express";
 import { sendAcademyNotification } from "telegram/bot";
 import {getImgSrc} from "utils/getImgSrc";
 
-export function academyHandler(_, res: Response) {
+type AcademyRequest = Request<unknown, unknown, unknown, {collectHomework?: boolean}>;
+
+export function academyHandler(req: AcademyRequest, res: Response) {
+  const {
+    collectHomework = false
+  } = req.query;
+
   try {
-    scrapeProjectInfo()
+    scrapeProjectInfo(collectHomework)
       .then(result => {
         if (result) {
           sendAcademyNotification(result);

@@ -1,6 +1,6 @@
 export type EBotCommands =
   "/chatid" |
   "/academy" |
+  "/homeworks" |
   "/tag" |
-  "/wake" |
   "/mir"

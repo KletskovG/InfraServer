@@ -1,10 +1,10 @@
 import puppeteer from "puppeteer";
-import * as config from "./config";
+import { ESelector, scrapeConfig } from "./config";
 import { HOSTNAME } from "const";
 import { isCurrentUserRoot } from "utils/isCurrentUserRoot";
 import { IScrapeResult } from "types";
 
-async function scrapeCourse(link: string): Promise<IScrapeResult> {
+async function scrapeCourse(link: string, collectHomeworks = false): Promise<IScrapeResult> {
   console.info("LAUNCHING PUPETEER");
   const browser = await puppeteer.launch({
     headless: true,
@@ -36,10 +36,11 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
       return {
         isCheckAvailable: Boolean(document.querySelector(".up-info--check .button--green")),
         amountOfProjects: Number(amountElement.textContent.split("").filter(Number).join("")),
+        homeworks: collectHomeworks && Boolean(document.querySelector(ESelector.HOMEWORK)),
       };
     });
 
-    if (scrapeResult.isCheckAvailable) {
+    if (scrapeResult.isCheckAvailable || scrapeResult.homeworks) {
       await browser.close();
       return scrapeResult;
     }
@@ -48,18 +49,20 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
   }
 }
 
-export async function scrapeProjectInfo(): Promise<string> {
+export async function scrapeProjectInfo(collectHomework = false): Promise<string> {
   let result = "Scrape result \n";
 
-  for (let i = 0; i < config.scrapeConfig.length; i++) {
-    const course = config.scrapeConfig[i];
-    const courseInfo = await scrapeCourse(course.link);
+  for (let i = 0; i < scrapeConfig.length; i++) {
+    const course = scrapeConfig[i];
+    const courseInfo = await scrapeCourse(course.link, collectHomework);
     result += `\n ${course.name}`;
-    const { amountOfProjects } = courseInfo;
+    const { amountOfProjects, homeworks } = courseInfo;
 
     result += amountOfProjects > 0
       ? `\nAmount of available projects - ${amountOfProjects}`
       : "\n No projects";
+
+    result += `Homeworks: ${homeworks ? "available" : "not available"}`;
 
     if (courseInfo.isCheckAvailable) {
       result += `
@@ -73,6 +76,10 @@ export async function scrapeProjectInfo(): Promise<string> {
       ${course.guides}`;
 
       result = `!!! ${result}`;
+    }
+
+    if (courseInfo.homeworks) {
+      result = `••• ${result}`;
     }
   }
 

@@ -7,11 +7,15 @@ type AcademyScrapeConfig = Array<Course>;
 
 export const PAGE_TIMEOUT = 5000;
 
-export const EMAIL_INPUT_SELECTOR = "#login-email";
-export const PWD_INPUT_SELECTOR = "#login-password";
-export const SUBMIT_BUTTON_SELECTOR = "input.button";
-export const PROJECTS_PRESENTED_SELECTOR = ".up-info--check .button--green";
+export enum ESelector {
+  HOMEWORK = ".card__item--new",
+  STUDENTS_COL = ".up-interface__right-col",
 
+  EMAIL_INPUT = "#login-email",
+  PWD_INPUT = "#login-password",
+  SUBMIT_BUTTON = ".button--full-width",
+  PROJECTS_PRESENTED = ".up-info--check .button--green"
+}
 
 export const scrapeConfig: AcademyScrapeConfig = [
   {
@@ -19,4 +23,12 @@ export const scrapeConfig: AcademyScrapeConfig = [
     link: "https://up.htmlacademy.ru/react/10/check/projects",
     guides: "Testing",
   }
+];
+
+export const homeworkConfig: AcademyScrapeConfig = [
+  {
+    name: "react",
+    link: "https://up.htmlacademy.ru/react/10",
+    guides: "",
+  },
 ];
