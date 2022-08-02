@@ -7,6 +7,7 @@ import {
   mir,
   tag,
   academy,
+  homeworks,
 } from "telegram/commands";
 
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
@@ -25,7 +26,7 @@ export function registerCommandHanlder(
 
 registerCommandHanlder("/chatid", chatid);
 registerCommandHanlder("/academy", academy());
-registerCommandHanlder("/homeworks", academy());
+registerCommandHanlder("/homeworks", homeworks);
 registerCommandHanlder("/tag", tag);
 registerCommandHanlder("/mir", mir);
 
