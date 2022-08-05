@@ -1,7 +1,7 @@
 import { Request, Response } from "express";
 import got from "got";
-
-const cbrCourseUrl = "http://www.cbr.ru/scripts/XML_daily.asp?date_req=";
+import { getCurrencyValue } from "lib";
+import { CBR_COURSE_URL } from "const";
 
 type TCurrencyResult = {
   currencyName: string;
@@ -43,12 +43,11 @@ export async function currencyHandler(req: CurrencyRequest, res: Response): Prom
     }
 
     if (Number(requestMonth) < 10) {
-
       requestMonth = `0${requestMonth}`;
     }
 
     const requestDate = `${day}/${requestMonth}/${year}`;
-    const link = `${cbrCourseUrl}${requestDate}`;
+    const link = `${CBR_COURSE_URL}${requestDate}`;
     fetchLinks.push(link);
   }
 
@@ -71,20 +70,3 @@ export async function currencyHandler(req: CurrencyRequest, res: Response): Prom
   return result;
 }
 
-function getCurrencyValue(serverCtx: string, currencyName: string): string {
-  const currencyIndex = serverCtx.indexOf(currencyName);
-
-  if (currencyIndex === -1) {
-    return "0";
-  }
-
-  const currencyString = serverCtx.slice(currencyIndex);
-  const valueStart = currencyString.indexOf("<Value>");
-  const valueEnd = currencyString.indexOf("</Value>");
-
-  if (valueStart === -1 || valueEnd === -1) {
-    return "0";
-  }
-
-  return currencyString.slice(valueStart + 7, valueEnd);
-}

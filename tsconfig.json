@@ -21,6 +21,7 @@
         "api/": ["./src/api/*"],
         "const/": ["./src/const/*"],
         "scrapper/": ["./src/scrapper/*"],
+        "lib/": ["./src/lib/*"],
       },
       "typeRoots": ["node_modules/@types", "./src/typings"],
       "types": [

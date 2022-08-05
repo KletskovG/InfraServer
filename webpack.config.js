@@ -26,6 +26,7 @@ module.exports = {
       api: path.resolve(__dirname, "src/api/"),
       const: path.resolve(__dirname, "src/const/"),
       scrapper: path.resolve(__dirname, "src/scrapper/"),
+      lib: path.resolve(__dirname, "src/lib/"),
     }
   },
   module: {
