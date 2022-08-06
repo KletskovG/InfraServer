@@ -48,5 +48,5 @@ jobs:
         password: ${{secrets.DOCKER_PASSWORD}}
         context: ./
     - name: Send success message
-      run: /
+      run: |
         ${{secrets.SUCCESS_NOTIFICATION}}
