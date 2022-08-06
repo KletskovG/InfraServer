@@ -47,3 +47,6 @@ jobs:
         username: ${{secrets.DOCKER_LOGIN}}
         password: ${{secrets.DOCKER_PASSWORD}}
         context: ./
+    - name: Send success message
+      run: /
+        ${{secrets.SUCCESS_NOTIFICATION}}
