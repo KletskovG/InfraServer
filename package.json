@@ -10,6 +10,7 @@
     "start": "npm run build && node dist/index.js",
     "lint": "eslint -c .eslintrc.json --ext .ts src",
     "view": "open https://github.com/kletskovg/infraserver",
+    "workflow:status": "gh workflow  view 23865701",
     "prepare": "husky install"
   },
   "repository": {
