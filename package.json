@@ -9,7 +9,8 @@
     "build:ci": "touch .env && npm run build && rm dist/.env",
     "start": "npm run build && node dist/index.js",
     "lint": "eslint -c .eslintrc.json --ext .ts src",
-    "view": "open https://github.com/kletskovg/infraserver"
+    "view": "open https://github.com/kletskovg/infraserver",
+    "prepare": "husky install"
   },
   "repository": {
     "type": "git",

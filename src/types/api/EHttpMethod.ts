@@ -1,1 +1,1 @@
-export type EHTTPMEthod = "get" | "post" | "put" | "delete";
+export type EHTTPMethod = "get" | "post" | "put" | "delete";
