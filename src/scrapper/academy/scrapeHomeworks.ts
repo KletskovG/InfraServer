@@ -1,15 +1,9 @@
-import puppeteer from "puppeteer";
 import { homeworkConfig } from "./config";
-import { isCurrentUserRoot } from "utils/isCurrentUserRoot";
+import { createPuppeteerInstance } from "scrapper/createPuppeteerInstance";
 import { IScrapeResult } from "types";
 
 async function scrapeCourse(link: string): Promise<IScrapeResult> {
-  console.info("LAUNCHING PUPETEER");
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: isCurrentUserRoot() ? ["--no-sandbox"] : undefined
-  });
-  console.info("LAUNCHED PUPETEER");
+  const browser = await createPuppeteerInstance();
   const page = await browser.newPage();
 
   await page.goto(link);
@@ -70,5 +64,6 @@ export async function scrapeHomeworks(): Promise<string> {
     }
   }
 
+  console.log("RETURNING RESULT");
   return result;
 }

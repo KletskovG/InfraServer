@@ -2,6 +2,7 @@ export type ERoute =
     EGeneralRoute |
     EAcademyRoute |
     EBudgetRoute |
+    EHexletRoute |
     "/shortcut/cash"
 
 type EAcademyRoute =
@@ -22,3 +23,6 @@ type EGeneralRoute =
   "/done/:text" |
   "/fail" |
   "/ping"
+
+type EHexletRoute =
+  "/hexlet"
