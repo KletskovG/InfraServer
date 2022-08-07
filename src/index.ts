@@ -1,6 +1,6 @@
 import bodyParser from "body-parser";
 import express from "express";
-import router from "api/router";
+import { buildRouter } from "api/router";
 import { getEnvVariable } from "utils/getEnvVariable";
 import { sendNotification } from "telegram";
 
@@ -10,7 +10,8 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-app.use(router);
+
+app.use(buildRouter());
 
 const PORT = getEnvVariable("PORT");
 app.listen(PORT, () => {

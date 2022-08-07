@@ -6,102 +6,57 @@ import {
   doneHandler,
   doneMessageHandler,
   failHandler,
-  academyHandler,
-  homeworksHandler,
   cashHandler,
-  budgetHandler,
-  currencyHandler,
-  budgetDatesHandler,
-  orderProjectHandler,
-  getMIRCurrencyHandler,
-  cryptoHandler,
 } from "api";
 
-const router = Router();
+import budgetRouter from "api/budget/budgetRouter";
+import cryptoRouter from "api/crypto/cryptoRouter";
+import academyRouter from "api/academy/academyRouter";
 
-registerHandler(
-  router,
-  "/",
-  "get",
-  homeHandler
-);
-registerHandler(
-  router,
-  "/cd",
-  "get",
-  cdHandler
-);
-registerHandler(
-  router,
-  "/done",
-  "get",
-  doneHandler
-);
-registerHandler(
-  router,
-  "/done/:text",
-  "get",
-  doneMessageHandler
-);
-registerHandler(
-  router,
-  "/fail",
-  "get",
-  failHandler
-);
-registerHandler(
-  router,
-  "/academy",
-  "get",
-  academyHandler
-);
-registerHandler(
-  router,
-  "/academy/homeworks",
-  "get",
-  homeworksHandler
-);
-registerHandler(
-  router,
-  "/academy/order/:course",
-  "get",
-  orderProjectHandler
-);
-registerHandler(
-  router,
-  "/shortcut/cash",
-  "get",
-  cashHandler
-);
-registerHandler(
-  router,
-  "/budget/currency/:currency/:month/:year",
-  "get",
-  currencyHandler
-);
-registerHandler(
-  router,
-  "/budget/mir/currency",
-  "get",
-  getMIRCurrencyHandler
-);
-registerHandler(
-  router,
-  "/budget/:category/:column/:start/:end/:course/:ruble",
-  "get",
-  budgetHandler,
-);
-registerHandler(
-  router,
-  "/budget/dates/:month/:year",
-  "get",
-  budgetDatesHandler,
-);
-registerHandler(
-  router,
-  "/crypto",
-  "get",
-  cryptoHandler,
-);
 
-export default router;
+export function buildRouter(): Router {
+  const router = Router();
+
+  router.use(budgetRouter);
+  router.use(cryptoRouter);
+  router.use(academyRouter);
+
+  registerHandler(
+    router,
+    "/",
+    "get",
+    homeHandler
+  );
+  registerHandler(
+    router,
+    "/cd",
+    "get",
+    cdHandler
+  );
+  registerHandler(
+    router,
+    "/done",
+    "get",
+    doneHandler
+  );
+  registerHandler(
+    router,
+    "/done/:text",
+    "get",
+    doneMessageHandler
+  );
+  registerHandler(
+    router,
+    "/fail",
+    "get",
+    failHandler
+  );
+  registerHandler(
+    router,
+    "/shortcut/cash",
+    "get",
+    cashHandler
+  );
+
+  return router;
+}
