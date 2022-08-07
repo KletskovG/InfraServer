@@ -40,6 +40,7 @@ academyScrapeConfig.forEach(course => {
 
 
 
+// TODO: refactor
 export function sendAcademyNotification(message: string) {
   bot.telegram.sendMessage(ACADEMY_CHAT, message);
   bot.telegram.sendMessage(ACADEMY_SECOND, message);

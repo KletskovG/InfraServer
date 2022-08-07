@@ -9,6 +9,7 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
   await page.goto(link);
   await page.waitForTimeout(5000);
   console.log("CHECK FOR AUTH");
+  // TODO: use getEnvVariable()
   await page.type("#login-email", process.env.ACADEMY_EMAIL);
   await page.type("#login-password", process.env.ACADEMY_PWD);
   await page.click("input.button");

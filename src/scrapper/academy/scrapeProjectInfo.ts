@@ -2,6 +2,10 @@ import { academyScrapeConfig } from "types";
 import { HOSTNAME } from "const";
 import { IScrapeResult } from "types";
 import { createPuppeteerInstance } from "scrapper/createPuppeteerInstance";
+import { getEnvVariable } from "utils/getEnvVariable";
+
+const ACADEMY_EMAIL = getEnvVariable("ACADEMY_EMAIL");
+const ACADEMY_PWD = getEnvVariable("ACADEMY_PWD");
 
 async function scrapeCourse(link: string): Promise<IScrapeResult> {
   const browser = await createPuppeteerInstance();
@@ -10,8 +14,8 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
   await page.goto(link);
   await page.waitForTimeout(5000);
   console.log("CHECK FOR AUTH");
-  await page.type("#login-email", process.env.ACADEMY_EMAIL);
-  await page.type("#login-password", process.env.ACADEMY_PWD);
+  await page.type("#login-email", ACADEMY_EMAIL);
+  await page.type("#login-password", ACADEMY_PWD);
   await page.click("input.button");
   await page.waitForNavigation();
 
@@ -46,8 +50,13 @@ export async function scrapeProjectInfo(): Promise<string> {
   let result = "Scrape result \n";
 
   for (let i = 0; i < academyScrapeConfig.length; i++) {
+    if (!academyScrapeConfig[i].active) {
+      console.log(academyScrapeConfig[i].name);
+      break;
+    }
+
     const course = academyScrapeConfig[i];
-    const courseInfo = await scrapeCourse(course.link);
+    const courseInfo = await scrapeCourse(course.additional.projects);
     result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;
 
