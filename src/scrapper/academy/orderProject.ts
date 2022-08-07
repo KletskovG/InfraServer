@@ -1,8 +1,11 @@
 import { createPuppeteerInstance } from "scrapper/createPuppeteerInstance";
-import * as config from "scrapper/academy/config";
+import { getEnvVariable } from "utils/getEnvVariable";
+import { openedCoursesNames, academyScrapeConfig } from "types";
 
-export async function orderProject(courseName: string): Promise<string> {
-  const course = config.scrapeConfig.find(({ name }) => name === courseName);
+const academyEmail = getEnvVariable("ACADEMY_EMAIL");
+const academyPwd = getEnvVariable("ACADEMY_PWD");
+export async function orderProject(courseName: openedCoursesNames): Promise<string> {
+  const course = academyScrapeConfig.find(({ name }) => name === courseName);
 
   if (!course) {
     return Promise.reject("Course not found in config");
@@ -14,10 +17,10 @@ export async function orderProject(courseName: string): Promise<string> {
   await page.goto(course.link);
   await page.waitForTimeout(5000);
   console.log("CHECK FOR AUTH");
-  await page.type("#login-email", process.env.ACADEMY_EMAIL);
-  await page.type("#login-password", process.env.ACADEMY_PWD);
+  await page.type("#login-email", academyEmail);
+  await page.type("#login-password", academyPwd);
   await page.click("input.button");
-  await page.waitForNavigation();
+  await page.waitForTimeout(5000);
 
   const isAuthFail = await page.evaluate(() => {
     return Boolean(document.querySelector("#login-email"));

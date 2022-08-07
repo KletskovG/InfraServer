@@ -1,8 +1,12 @@
-import { Request, Response } from "express";
+import { Response } from "express";
 import { orderProject } from "scrapper/academy";
 import { sendAcademyNotification } from "telegram/bot";
+import {IRequest, openedCoursesNames} from "types";
 
-export function orderProjectHandler(req: Request, res: Response) {
+type OrderProjectRequest = IRequest<
+  {course: openedCoursesNames}
+>;
+export function orderProjectHandler(req: OrderProjectRequest, res: Response) {
   const { course } = req.params;
   try {
     orderProject(course)

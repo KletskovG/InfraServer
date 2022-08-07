@@ -1,4 +1,4 @@
-import { scrapeConfig } from "./config";
+import { academyScrapeConfig } from "types";
 import { HOSTNAME } from "const";
 import { IScrapeResult } from "types";
 import { createPuppeteerInstance } from "scrapper/createPuppeteerInstance";
@@ -45,8 +45,8 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
 export async function scrapeProjectInfo(): Promise<string> {
   let result = "Scrape result \n";
 
-  for (let i = 0; i < scrapeConfig.length; i++) {
-    const course = scrapeConfig[i];
+  for (let i = 0; i < academyScrapeConfig.length; i++) {
+    const course = academyScrapeConfig[i];
     const courseInfo = await scrapeCourse(course.link);
     result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;
@@ -56,15 +56,17 @@ export async function scrapeProjectInfo(): Promise<string> {
       : "\n No projects";
 
     if (courseInfo.isCheckAvailable) {
+      const orderLink = course.additional.order || `${HOSTNAME}/academy/order/${course.name}`;
+
       result += `
       Link
       ${course.link}
 
       Order
-      ${HOSTNAME}/academy/order/${course.name}
+      ${orderLink}
 
       Guides
-      ${course.guides}`;
+      ${course.additional.guides || "In progress"}`;
 
       result = `!!! ${result}`;
     }

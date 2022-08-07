@@ -1,4 +1,4 @@
-import { homeworkConfig } from "./config";
+import { academyScrapeConfig } from "types/academy/IAcademyConfig";
 import { createPuppeteerInstance } from "scrapper/createPuppeteerInstance";
 import { IScrapeResult } from "types";
 
@@ -44,8 +44,8 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
 export async function scrapeHomeworks(): Promise<string> {
   let result = "Scrape result \n";
 
-  for (let i = 0; i < homeworkConfig.length; i++) {
-    const course = homeworkConfig[i];
+  for (let i = 0; i < academyScrapeConfig.length; i++) {
+    const course = academyScrapeConfig[i];
     const courseInfo = await scrapeCourse(course.link);
     result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;
