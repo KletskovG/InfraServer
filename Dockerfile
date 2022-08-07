@@ -25,8 +25,6 @@ COPY dist/index.js dist/index.js
 
 COPY node_modules/ ./node_modules
 
-RUN ls -la
-
 EXPOSE 3000
 
 CMD ["node", "dist/index.js"];

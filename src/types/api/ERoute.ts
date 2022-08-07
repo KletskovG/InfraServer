@@ -2,7 +2,7 @@ export type ERoute =
     EGeneralRoute |
     EAcademyRoute |
     EBudgetRoute |
-    EHexletRoute |
+    EcryptoRoute |
     "/shortcut/cash"
 
 type EAcademyRoute =
@@ -24,5 +24,5 @@ type EGeneralRoute =
   "/fail" |
   "/ping"
 
-type EHexletRoute =
-  "/hexlet"
+type EcryptoRoute =
+  "/crypto"

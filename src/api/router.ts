@@ -14,6 +14,7 @@ import {
   budgetDatesHandler,
   orderProjectHandler,
   getMIRCurrencyHandler,
+  cryptoHandler,
 } from "api";
 
 const router = Router();
@@ -96,6 +97,11 @@ registerHandler(
   "get",
   budgetDatesHandler,
 );
-
+registerHandler(
+  router,
+  "/crypto",
+  "get",
+  cryptoHandler,
+);
 
 export default router;

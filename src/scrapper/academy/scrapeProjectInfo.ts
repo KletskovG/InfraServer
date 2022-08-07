@@ -1,16 +1,10 @@
-import puppeteer from "puppeteer";
 import { scrapeConfig } from "./config";
 import { HOSTNAME } from "const";
-import { isCurrentUserRoot } from "utils/isCurrentUserRoot";
 import { IScrapeResult } from "types";
+import { createPuppeteerInstance } from "scrapper/createPuppeteerInstance";
 
 async function scrapeCourse(link: string): Promise<IScrapeResult> {
-  console.info("LAUNCHING PUPETEER");
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: isCurrentUserRoot() ? ["--no-sandbox"] : undefined
-  });
-  console.info("LAUNCHED PUPETEER");
+  const browser = await createPuppeteerInstance();
   const page = await browser.newPage();
 
   await page.goto(link);

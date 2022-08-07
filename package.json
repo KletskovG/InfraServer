@@ -7,6 +7,7 @@
     "clean": "rm -rf ./dist",
     "build": "npm run clean && mkdir dist && cp .env dist/.env && webpack",
     "build:ci": "touch .env && npm run build && rm dist/.env",
+    "dev": "./scripts/start_local.sh",
     "start": "npm run build && node dist/index.js",
     "lint": "eslint -c .eslintrc.json --ext .ts src",
     "view": "open https://github.com/kletskovg/infraserver",

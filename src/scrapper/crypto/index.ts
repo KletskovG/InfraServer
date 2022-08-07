@@ -1,0 +1,1 @@
+export { scrapeCrypto } from "./scrapeCrypto";

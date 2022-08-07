@@ -1,14 +1,8 @@
-import puppeteer from "puppeteer";
 import { config } from "./config";
-import { isCurrentUserRoot } from "utils/isCurrentUserRoot";
+import { createPuppeteerInstance } from "scrapper/createPuppeteerInstance";
 
 export async function getMIRCurrencyCourse(): Promise<string | undefined> {
-  console.info("LAUNCHING PUPETEER");
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: isCurrentUserRoot() ? ["--no-sandbox"] : undefined
-  });
-  console.info("LAUNCHED PUPETEER");
+  const browser = await createPuppeteerInstance();
   const page = await browser.newPage();
 
   await page.goto(config.MIRCurrencyLink);

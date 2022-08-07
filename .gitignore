@@ -109,3 +109,4 @@ dist
 *.png
 
 idea
+start_local.sh

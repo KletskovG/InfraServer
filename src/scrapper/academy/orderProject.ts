@@ -1,5 +1,4 @@
-import puppeteer from "puppeteer";
-import { isCurrentUserRoot } from "utils/isCurrentUserRoot";
+import { createPuppeteerInstance } from "scrapper/createPuppeteerInstance";
 import * as config from "scrapper/academy/config";
 
 export async function orderProject(courseName: string): Promise<string> {
@@ -9,12 +8,7 @@ export async function orderProject(courseName: string): Promise<string> {
     return Promise.reject("Course not found in config");
   }
 
-  console.info("LAUNCHING PUPETEER");
-  const browser = await puppeteer.launch({
-    headless: true,
-    args: isCurrentUserRoot() ? ["--no-sandbox"] : undefined
-  });
-  console.info("LAUNCHED PUPETEER");
+  const browser = await createPuppeteerInstance();
   const page = await browser.newPage();
 
   await page.goto(course.link);
