@@ -50,7 +50,7 @@ export async function scrapeProjectInfo(): Promise<string> {
   let result = "Scrape result \n";
 
   for (let i = 0; i < academyScrapeConfig.length; i++) {
-    if (!academyScrapeConfig[i].active) {
+    if (!academyScrapeConfig[i].protectActive) {
       console.log(academyScrapeConfig[i].name);
       break;
     }

@@ -5,7 +5,7 @@ export type openedCoursesNames = "react" | "js1" | "js2";
 type CourseConfig<name extends openedCoursesNames, url extends string> = {
   name: name,
   link: url;
-  active: boolean;
+  protectActive: boolean;
   additional: {
     order?: `${orderBotCommand}_${name}`;
     projects: `${url}/check/projects`;
@@ -20,7 +20,7 @@ type Course<name extends openedCoursesNames, url extends string>  = {
 const currentReact: Course<"react", "https://up.htmlacademy.ru/react/10"> = {
   name: "react",
   link: "https://up.htmlacademy.ru/react/10",
-  active: true,
+  protectActive: false,
   additional: {
     order: "/order_react",
     projects: "https://up.htmlacademy.ru/react/10/check/projects",
@@ -30,7 +30,7 @@ const currentReact: Course<"react", "https://up.htmlacademy.ru/react/10"> = {
 const currentJS2: Course<"js2", "https://up.htmlacademy.ru/ecmascript/18"> = {
   name: "js2",
   link: "https://up.htmlacademy.ru/ecmascript/18",
-  active: false,
+  protectActive: false,
   additional: {
     order: "/order_js2",
     projects: "https://up.htmlacademy.ru/ecmascript/18/check/projects",
