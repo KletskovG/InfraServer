@@ -14,7 +14,7 @@ export async function orderProject(courseName: openedCoursesNames): Promise<stri
   const browser = await createPuppeteerInstance();
   const page = await browser.newPage();
 
-  await page.goto(course.link);
+  await page.goto(`${course.link}/check/projects`);
   await page.waitForTimeout(5000);
   console.log("CHECK FOR AUTH");
   await page.type("#login-email", academyEmail);
