@@ -46,8 +46,12 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
   }
 }
 
-export async function scrapeProjectInfo(): Promise<string> {
+export async function scrapeProjectInfo(): Promise<string | null> {
   let result = "Scrape result \n";
+
+  if (!academyScrapeConfig.some(course => course.protectActive)) {
+    return null;
+  }
 
   for (let i = 0; i < academyScrapeConfig.length; i++) {
     if (!academyScrapeConfig[i].protectActive) {

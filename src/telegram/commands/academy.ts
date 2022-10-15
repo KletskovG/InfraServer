@@ -6,6 +6,10 @@ export function academy() {
     try {
       scrapeProjectInfo()
         .then(result => {
+          if (!result) {
+            return;
+          }
+
           const notification = result ? `Scrape result \n ${result}` : "Empty Result";
           ctx.reply(notification);
         })
