@@ -7,6 +7,7 @@ export function academy() {
       scrapeProjectInfo()
         .then(result => {
           if (!result) {
+            ctx.reply("No courses with active protect for now");
             return;
           }
 
