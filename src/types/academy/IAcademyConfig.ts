@@ -20,7 +20,7 @@ type Course<name extends openedCoursesNames, url extends string>  = {
 const currentJS1: Course<"js1", "https://up.htmlacademy.ru/javascript/27"> = {
   name: "js1",
   link: "https://up.htmlacademy.ru/javascript/27",
-  protectActive: false,
+  protectActive: true,
   additional: {
     order: "/order_js1",
     projects: "https://up.htmlacademy.ru/javascript/27/check/projects",
