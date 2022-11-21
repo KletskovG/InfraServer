@@ -1,4 +1,3 @@
-// TODO: rename
 export type orderBotCommand = "/order";
 export type openedCoursesNames = "react" | "js1" | "js2";
 

@@ -7,6 +7,7 @@ import {
   doneMessageHandler,
   failHandler,
   cashHandler,
+  monitorHandler,
 } from "api";
 
 import budgetRouter from "api/budget/budgetRouter";
@@ -56,6 +57,12 @@ export function buildRouter(): Router {
     "/shortcut/cash",
     "get",
     cashHandler
+  );
+  registerHandler(
+    router,
+    "/monitor",
+    "get",
+    monitorHandler,
   );
 
   return router;

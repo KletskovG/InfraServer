@@ -12,3 +12,4 @@ export { getMIRCurrencyHandler } from "./budget/getMIRCurrencyHandler";
 export { homeworksHandler } from "./academy/homeworksHandler";
 export { registerHandler } from "./registerHandler";
 export { cryptoHandler } from "./crypto/cryptoHandler";
+export { monitorHandler } from "./ecom/monitorHandler";

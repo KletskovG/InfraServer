@@ -14,6 +14,7 @@ app.use(bodyParser.urlencoded({
 app.use(buildRouter());
 
 const PORT = getEnvVariable("PORT");
+console.log(PORT);
 app.listen(PORT, () => {
   console.log(
     `Infra server is up and running
