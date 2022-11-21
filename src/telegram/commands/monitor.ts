@@ -1,7 +1,7 @@
 import TelegrafContext from "telegraf/typings/context";
 import { scrapeStoreAvailability } from "scrapper/ecom";
 
-export function academy() {
+export function monitor() {
   return async (ctx: TelegrafContext) => {
     try {
       scrapeStoreAvailability()
