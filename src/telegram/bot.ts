@@ -12,6 +12,7 @@ import {
   academy,
   homeworks,
   order,
+
 } from "telegram/commands";
 
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
