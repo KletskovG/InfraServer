@@ -2,7 +2,7 @@ import bodyParser from "body-parser";
 import express from "express";
 import { buildRouter } from "api/router";
 import { getEnvVariable } from "utils/getEnvVariable";
-import { sendNotification } from "telegram";
+// import { sendNotification } from "telegram";
 
 const app = express();
 
@@ -20,5 +20,5 @@ app.listen(PORT, () => {
     `Infra server is up and running
       http://localhost:${PORT}`
   );
-  sendNotification("Infra server is booted");
+  // sendNotification("Infra server is booted");
 });

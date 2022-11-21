@@ -1,6 +1,6 @@
 import  { Response } from "express";
 import { scrapeStoreAvailability } from "scrapper/ecom";
-import { sendNotification } from "telegram";
+// import { sendNotification } from "telegram";
 
 export function monitorHandler(_, res: Response) {
   try {
@@ -22,13 +22,16 @@ export function monitorHandler(_, res: Response) {
             `;
             });
 
+          console.log("RESULT");
+          console.log(result);
+
           const message = `
             Link: https://ux.mediamarkt.com.tr/stok-takip/index.html?id=1218695
 
             ${antalyaStores.join()}
           `;
 
-          sendNotification(message);
+          // sendNotification(message);
           res.status(200).send(message);
           return;
         }
