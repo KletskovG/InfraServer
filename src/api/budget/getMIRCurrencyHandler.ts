@@ -1,5 +1,4 @@
 import { Request, Response } from "express";
-import { getMIRCurrencyCourse } from "scrapper/MIR";
 import { sendNotification } from "telegram";
 import { getCurrentDate } from "utils/getCurrentDate";
 import { getCurrencyValue } from "lib";
@@ -10,18 +9,13 @@ export async function getMIRCurrencyHandler(_: Request, res: Response) {
   const requestDate = getCurrentDate();
   Promise.all([
     got(`${CBR_COURSE_URL}${requestDate}`),
-    getMIRCurrencyCourse(),
   ])
     .then(values => {
       const CB = getCurrencyValue(values[0].body, "TRY");
-      return [CB, values[1]];
+      return [CB];
     })
     .then(rates => {
-      console.log(rates[0]);
       const notification = `
-        MIR RATE
-        ${rates[1]}
-
         CB RATE
         ${parseInt(rates[0], 10) / 10}
       `;
