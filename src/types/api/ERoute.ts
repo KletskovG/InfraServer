@@ -3,8 +3,7 @@ export type ERoute =
     EAcademyRoute |
     EBudgetRoute |
     EcryptoRoute |
-    "/shortcut/cash" |
-    "/monitor"
+    "/shortcut/cash"
 
 type EAcademyRoute =
   "/academy" |

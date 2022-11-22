@@ -7,5 +7,4 @@ export type EBotCommands =
   "/tag" |
   "/mir" |
   `${orderBotCommand}_${openedCoursesNames}` |
-  "/order_react" |
-  "/monitor"
+  "/order_react"

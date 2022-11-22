@@ -12,7 +12,6 @@ import {
   academy,
   homeworks,
   order,
-  monitor,
 } from "telegram/commands";
 
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
@@ -34,7 +33,6 @@ registerCommandHanlder("/academy", academy());
 registerCommandHanlder("/homeworks", homeworks);
 registerCommandHanlder("/tag", tag);
 registerCommandHanlder("/mir", mir);
-registerCommandHanlder("/monitor", monitor);
 
 academyScrapeConfig.forEach(course => {
   registerCommandHanlder(course.additional.order, order(course.name));
