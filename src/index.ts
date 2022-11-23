@@ -20,5 +20,5 @@ app.listen(PORT, () => {
     `Infra server is up and running
       http://localhost:${PORT}`
   );
-  sendNotification("Infra server is booted");
+  sendNotification("Infra server is booted and updated");
 });

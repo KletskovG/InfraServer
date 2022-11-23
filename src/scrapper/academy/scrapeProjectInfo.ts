@@ -37,10 +37,10 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
       };
     });
 
-    if (scrapeResult.isCheckAvailable) {
-      await browser.close();
-      return scrapeResult;
-    }
+    // if (scrapeResult.isCheckAvailable) {
+    //   await browser.close();
+    //   return scrapeResult;
+    // }
     await browser.close();
     return scrapeResult;
   }
