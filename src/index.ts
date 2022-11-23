@@ -17,7 +17,7 @@ const PORT = getEnvVariable("PORT");
 console.log(PORT);
 app.listen(PORT, () => {
   console.log(
-    `Infra server is up and running
+    `Infra server is up and running // UPDATED
       http://localhost:${PORT}`
   );
   sendNotification("Infra server is booted and updated");
