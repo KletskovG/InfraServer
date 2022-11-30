@@ -16,7 +16,7 @@ import {
 
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
 const ACADEMY_CHAT = getEnvVariable("ACADEMY_CHAT");
-const ACADEMY_SECOND = getEnvVariable("ACADEMY_SECOND");
+// const ACADEMY_SECOND = getEnvVariable("ACADEMY_SECOND");
 const CHAT_NUMBER = getEnvVariable("CHAT_NUMBER");
 
 const bot = new Telegraf(BOT_TOKEN);
@@ -43,7 +43,7 @@ academyScrapeConfig.forEach(course => {
 // TODO: refactor
 export function sendAcademyNotification(message: string) {
   bot.telegram.sendMessage(ACADEMY_CHAT, message);
-  bot.telegram.sendMessage(ACADEMY_SECOND, message);
+  // bot.telegram.sendMessage(ACADEMY_SECOND, message);
 }
 
 export function sendNotification(message: string) {
