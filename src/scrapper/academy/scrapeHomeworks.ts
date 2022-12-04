@@ -30,6 +30,7 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
       return {
         isCheckAvailable: Boolean(amountElement),
         amountOfProjects: amountElement && amountElement.length,
+        protectActiveText: "",
       };
     });
 

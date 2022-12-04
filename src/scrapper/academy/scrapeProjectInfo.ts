@@ -30,17 +30,20 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
   } else {
     const scrapeResult = await page.evaluate(() => {
       const amountElement = document.querySelector(".up-info__columns p");
+      const protectActiveElement = document.querySelector(".up-protect .project__status");
+      let protectText = "";
+
+      if (protectActiveElement) {
+        protectText = protectActiveElement.textContent;
+      }
 
       return {
         isCheckAvailable: Boolean(document.querySelector(".up-info--check .button--green")),
+        protectActiveText: protectText,
         amountOfProjects: Number(amountElement.textContent.split("").filter(Number).join("")),
       };
     });
 
-    // if (scrapeResult.isCheckAvailable) {
-    //   await browser.close();
-    //   return scrapeResult;
-    // }
     await browser.close();
     return scrapeResult;
   }
@@ -82,6 +85,8 @@ export async function scrapeProjectInfo(): Promise<string | null> {
       ${course.additional.guides || "In progress"}`;
 
       result = `!!! ${result}`;
+    } else if (courseInfo.protectActiveText.length) {
+      result += `??? ${courseInfo.protectActiveText}`;
     }
   }
 
