@@ -86,7 +86,7 @@ export async function scrapeProjectInfo(): Promise<string | null> {
 
       result = `!!! ${result}`;
     } else if (courseInfo.protectActiveText.length) {
-      result += `??? ${courseInfo.protectActiveText}`;
+      result = `??? ${result} ${courseInfo.protectActiveText}`;
     }
   }
 
