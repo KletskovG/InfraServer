@@ -4,12 +4,8 @@ const {exec} = require("child_process");
 const server = http.createServer((req, res) => {
   console.log(req.url);
   if (req.url === "/update") {
-    exec("~/swarm/update.sh", (error, stdout) => {
-      if (error) {
-        res.end(error);
-      }
-      res.end(stdout);
-    });
+    exec("bash ~/swarm/update.sh");
+    res.end("WAIT FOR MESSAGE")
   }
 
   if (req.url === "/check") {
