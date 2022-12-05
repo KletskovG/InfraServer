@@ -30,12 +30,16 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
   } else {
     const scrapeResult = await page.evaluate(() => {
       const amountElement = document.querySelector(".up-info__columns p");
-      const protectActiveElement = document.querySelector(".up-protect .project__status");
+      const isActiveProtect = document.querySelector(".badge--yellow");
       let protectText = "";
+      if (Boolean(isActiveProtect)) {
+        const protectActiveElement = document.querySelector(".up-protect .project__status");
 
-      if (protectActiveElement) {
-        protectText = protectActiveElement.textContent;
+        if (protectActiveElement) {
+          protectText = protectActiveElement.textContent;
+        }
       }
+
 
       return {
         isCheckAvailable: Boolean(document.querySelector(".up-info--check .button--green")),
