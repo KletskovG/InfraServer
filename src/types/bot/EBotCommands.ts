@@ -6,6 +6,5 @@ export type EBotCommands =
   "/homeworks" |
   "/tag" |
   "/mir" |
-  `${orderBotCommand}_${openedCoursesNames}` |
-  "/deploy"
+  `${orderBotCommand}_${openedCoursesNames}`
   // "/order_react"

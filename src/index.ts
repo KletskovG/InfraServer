@@ -20,5 +20,5 @@ app.listen(PORT, () => {
     `Infra server is up and running // UPDATED
       http://localhost:${PORT}`
   );
-  sendNotification("Infra server is booted with ssh");
+  sendNotification("Infra server is booted with ssh and automator");
 });

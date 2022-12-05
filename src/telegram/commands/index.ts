@@ -4,4 +4,3 @@ export { tag } from "./tag";
 export { academy } from "./academy";
 export { homeworks } from "./homeworks";
 export { order } from "./order";
-export { deploy } from "./deploy";
