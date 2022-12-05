@@ -11,6 +11,10 @@ const server = http.createServer((req, res) => {
       res.end(stdout);
     });
   }
+
+  if (req.url === "/check") {
+    res.end("OK");
+  }
 });
 
 server.listen(8091, () => {
