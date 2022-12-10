@@ -15,7 +15,7 @@ import {
 } from "telegram/commands";
 
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
-const ACADEMY_CHAT = getEnvVariable("ACADEMY_CHAT");
+// const ACADEMY_CHAT = getEnvVariable("ACADEMY_CHAT");
 // const ACADEMY_SECOND = getEnvVariable("ACADEMY_SECOND");
 const CHAT_NUMBER = getEnvVariable("CHAT_NUMBER");
 
@@ -39,15 +39,8 @@ academyScrapeConfig.forEach(course => {
 });
 
 
-
-// TODO: refactor
-export function sendAcademyNotification(message: string) {
-  bot.telegram.sendMessage(ACADEMY_CHAT, message);
-  // bot.telegram.sendMessage(ACADEMY_SECOND, message);
-}
-
-export function sendNotification(message: string) {
-  bot.telegram.sendMessage(CHAT_NUMBER, message);
+export function sendNotification(message: string, chaitId = CHAT_NUMBER) {
+  bot.telegram.sendMessage(chaitId, message);
 }
 
 export default bot;

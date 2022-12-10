@@ -6,11 +6,9 @@ import {
   doneHandler,
   doneMessageHandler,
   failHandler,
-  cashHandler,
 } from "api";
 
 import budgetRouter from "api/budget/budgetRouter";
-import cryptoRouter from "api/crypto/cryptoRouter";
 import academyRouter from "api/academy/academyRouter";
 
 
@@ -18,7 +16,6 @@ export function buildRouter(): Router {
   const router = Router();
 
   router.use(budgetRouter);
-  router.use(cryptoRouter);
   router.use(academyRouter);
 
   registerHandler(
@@ -50,12 +47,6 @@ export function buildRouter(): Router {
     "/fail",
     "get",
     failHandler
-  );
-  registerHandler(
-    router,
-    "/shortcut/cash",
-    "get",
-    cashHandler
   );
 
   return router;
