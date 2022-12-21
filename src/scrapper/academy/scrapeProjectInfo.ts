@@ -56,6 +56,7 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
 export async function scrapeProjectInfo(): Promise<string | null> {
   let result = "Scrape result \n";
 
+
   if (!academyScrapeConfig.some(course => course.protectActive)) {
     return null;
   }
@@ -63,7 +64,7 @@ export async function scrapeProjectInfo(): Promise<string | null> {
   for (let i = 0; i < academyScrapeConfig.length; i++) {
     if (!academyScrapeConfig[i].protectActive) {
       console.log(academyScrapeConfig[i].name);
-      break;
+      continue;
     }
 
     const course = academyScrapeConfig[i];
