@@ -12,7 +12,11 @@ export function xmrSyncHandler(req: IRequest<DoneMessageParams>, res: Response) 
     status = "Status unknown",
     container = "Container uknown"
   } = req.query;
-  const message = `XMR SYNC \n Node ${name} \n Container ${container}  \n Status: ${decodeURI(status)} `;
-  sendNotification(message);
+  try {
+    const message = `XMR SYNC \n Node ${name} \n Container ${container}  \n Status: ${decodeURI(status)} `;
+    sendNotification(message);
+  } catch (error) {
+    sendNotification(`ERROR: \n Node ${name} \n Contaienr ${container} \n Error while decoding log \n ${status}`);
+  }
   res.status(200).send("OK");
 }
