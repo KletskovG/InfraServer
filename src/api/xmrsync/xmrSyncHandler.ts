@@ -11,7 +11,7 @@ export function xmrSyncHandler(req: IRequest<DoneMessageParams>, res: Response) 
     name = "Name not set",
     status = "Status unknown",
   } = req.query;
-  const message = `XMR SYNC \n Node ${name} \n Status: ${status}`;
+  const message = `XMR SYNC \n Node ${name} \n Status: ${decodeURI(status)}`;
   sendNotification(message);
   res.status(200).send("OK");
 }
