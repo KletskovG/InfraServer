@@ -40,7 +40,7 @@ export function buildRouter(): Router {
   registerHandler(
     router,
     "/xmrsync",
-    "post",
+    "get",
     xmrSyncHandler,
   );
   registerHandler(
