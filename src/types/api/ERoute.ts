@@ -20,5 +20,6 @@ type EGeneralRoute =
   "/done" |
   "/done/:text" |
   "/fail" |
-  "/ping"
+  "/ping" |
+  "/xmrsync"
 

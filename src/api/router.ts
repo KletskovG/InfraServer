@@ -5,6 +5,7 @@ import {
   cdHandler,
   doneHandler,
   doneMessageHandler,
+  xmrSyncHandler,
   failHandler,
 } from "api";
 
@@ -35,6 +36,12 @@ export function buildRouter(): Router {
     "/done",
     "get",
     doneHandler
+  );
+  registerHandler(
+    router,
+    "/xmrsync",
+    "post",
+    xmrSyncHandler,
   );
   registerHandler(
     router,
