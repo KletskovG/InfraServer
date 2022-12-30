@@ -5,12 +5,12 @@ import {
   cdHandler,
   doneHandler,
   doneMessageHandler,
-  xmrSyncHandler,
   failHandler,
 } from "api";
 
 import budgetRouter from "api/budget/budgetRouter";
 import academyRouter from "api/academy/academyRouter";
+import xmrRouter from "api/xmr/xmrRouter";
 
 
 export function buildRouter(): Router {
@@ -18,6 +18,7 @@ export function buildRouter(): Router {
 
   router.use(budgetRouter);
   router.use(academyRouter);
+  router.use(xmrRouter);
 
   registerHandler(
     router,
@@ -36,12 +37,6 @@ export function buildRouter(): Router {
     "/done",
     "get",
     doneHandler
-  );
-  registerHandler(
-    router,
-    "/xmrsync",
-    "get",
-    xmrSyncHandler,
   );
   registerHandler(
     router,

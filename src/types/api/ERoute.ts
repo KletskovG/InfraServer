@@ -1,7 +1,8 @@
 export type ERoute =
     EGeneralRoute |
     EAcademyRoute |
-    EBudgetRoute
+    EBudgetRoute |
+    EXMRRoute
 
 type EAcademyRoute =
   "/academy" |
@@ -14,12 +15,14 @@ type EBudgetRoute =
   "/budget/mir/currency" |
   "/budget/:category/:column/:start/:end/:course/:ruble"
 
+type EXMRRoute =
+  "/xmr/sync" |
+  "/xmr/share"
+
 type EGeneralRoute =
   "/" |
   "/cd" |
   "/done" |
   "/done/:text" |
   "/fail" |
-  "/ping" |
-  "/xmrsync"
-
+  "/ping"
