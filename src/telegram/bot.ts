@@ -27,7 +27,7 @@ export function registerCommandHanlder(
 ) {
   bot.hears(command, (ctx) => {
     if (isProtected && ctx.chat.id !== CHAT_NUMBER) {
-      ctx.reply("PERMISSION DENIED");
+      ctx.reply(`PERMISSION DENIED ${ctx.chat.id} ${CHAT_NUMBER}`);
       return;
     }
 
