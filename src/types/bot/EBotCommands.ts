@@ -6,5 +6,5 @@ export type EBotCommands =
   "/homeworks" |
   "/tag" |
   "/mir" |
+  "/kraken_stop" |
   `${orderBotCommand}_${openedCoursesNames}`
-  // "/order_react"

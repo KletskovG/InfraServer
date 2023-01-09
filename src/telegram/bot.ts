@@ -21,9 +21,18 @@ const bot = new Telegraf(BOT_TOKEN);
 bot.launch();
 
 export function registerCommandHanlder(
-  command: EBotCommands, handler: (ctx: TelegrafContext) => void
+  command: EBotCommands,
+  handler: (ctx: TelegrafContext) => void,
+  isProtected = false,
 ) {
-  bot.hears(command, handler);
+  bot.hears(command, (ctx) => {
+    if (isProtected && ctx.chat.id !== CHAT_NUMBER) {
+      ctx.reply("PERMISSION DENIED");
+      return;
+    }
+
+    handler(ctx);
+  });
 }
 
 registerCommandHanlder("/chatid", chatid);
@@ -31,6 +40,9 @@ registerCommandHanlder("/academy", academy());
 registerCommandHanlder("/homeworks", homeworks);
 registerCommandHanlder("/tag", tag);
 registerCommandHanlder("/mir", mir);
+registerCommandHanlder("/kraken_stop", (ctx) => {
+  ctx.reply("SHOULD STOP KRAKEN");
+}, true);
 
 academyScrapeConfig.forEach(course => {
   registerCommandHanlder(course.additional.order, order(course.name));
