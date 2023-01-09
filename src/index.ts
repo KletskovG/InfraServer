@@ -16,9 +16,9 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+app.use(cors());
 
 app.use(buildRouter());
-app.use(cors());
 
 const PORT = getEnvVariable("PORT") || 3000;
 console.log(PORT);
