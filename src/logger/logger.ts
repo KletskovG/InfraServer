@@ -1,6 +1,6 @@
 import { getEnvVariable } from "utils/getEnvVariable";
 import fs from "fs/promises";
-import { createReadStream, existsSync, createWriteStream } from "fs";
+import { createReadStream, existsSync, createWriteStream, mkdirSync } from "fs";
 import { sendNotification } from "telegram";
 
 type TLogLevel = "Error" | "Info" | "Important";
@@ -9,6 +9,10 @@ const LOGFILE_DIR = getEnvVariable("LOGFILE_PATH");
 export function log (level: TLogLevel, message: string, skipLogFile = false) {
   const currentTime = new Date().toISOString();
   const logMessage = `\n[${currentTime}] |\t [${level}] | \t ${message}`;
+
+  if (!existsSync(LOGFILE_DIR)) {
+    mkdirSync(LOGFILE_DIR, {recursive: true});
+  }
 
   if (LOGFILE_DIR && !skipLogFile) {
     const logFilePath = `${LOGFILE_DIR}/logs.log`;
