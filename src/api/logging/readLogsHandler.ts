@@ -10,10 +10,9 @@ export async function readLogsHandler(req: IRequest<any, TReadLogsQuery>, res: R
   const sinceMinutes = Number(req.query.since) || 0;
   try {
     const logs = await readLogs(sinceMinutes ? sinceMinutes : undefined);
-    res.send(JSON.stringify(logs));
+    res.json(logs);
   } catch (error) {
     log("Error", error);
     res.send(error);
   }
-
 }
