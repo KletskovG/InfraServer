@@ -7,6 +7,7 @@ import {
   doneMessageHandler,
   failHandler,
   flushLogsHandler,
+  readLogsHandler,
 } from "api";
 
 import budgetRouter from "api/budget/budgetRouter";
@@ -56,6 +57,12 @@ export function buildRouter(): Router {
     "/logs/flush",
     "get",
     flushLogsHandler,
+  );
+  registerHandler(
+    router,
+    "/logs",
+    "get",
+    readLogsHandler,
   );
 
   return router;
