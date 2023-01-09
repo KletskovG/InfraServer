@@ -1,5 +1,6 @@
 import bodyParser from "body-parser";
 import express from "express";
+import cors from "cors";
 import { buildRouter } from "api/router";
 import { getEnvVariable } from "utils/getEnvVariable";
 import {
@@ -17,6 +18,7 @@ app.use(bodyParser.urlencoded({
 }));
 
 app.use(buildRouter());
+app.use(cors());
 
 const PORT = getEnvVariable("PORT") || 3000;
 console.log(PORT);
