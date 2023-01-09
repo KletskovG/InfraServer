@@ -2,7 +2,7 @@ import { Response } from "express";
 import { IRequest } from "types/api";
 import  { sendNotification } from "telegram/bot";
 
-export function doneHandler(_, res: Response) {
+export function doneHandler(_: unknown, res: Response) {
   sendNotification("Command is done");
   res.end();
 }

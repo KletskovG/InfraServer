@@ -25,4 +25,6 @@ type EGeneralRoute =
   "/done" |
   "/done/:text" |
   "/fail" |
-  "/ping"
+  "/ping" |
+  "/logs" |
+  "/logs/flush"

@@ -3,7 +3,7 @@ import { Response } from "express";
 import { sendNotification } from "telegram/bot";
 import {getImgSrc} from "utils/getImgSrc";
 
-export function homeworksHandler(_, res: Response) {
+export function homeworksHandler(_: unknown, res: Response) {
 
   try {
     scrapeHomeworks()

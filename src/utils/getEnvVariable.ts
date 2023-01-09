@@ -1,6 +1,6 @@
 import { EEnvVariable, ArgvMap } from "types/EEnvVariable";
 
-export const getEnvVariable = (envVariable: EEnvVariable): string => {
+export const getEnvVariable = (envVariable: EEnvVariable): string | undefined => {
   if (process.argv[ArgvMap[envVariable]]) {
     return process.argv[ArgvMap[envVariable]];
   }
@@ -8,6 +8,4 @@ export const getEnvVariable = (envVariable: EEnvVariable): string => {
   if (process.env[envVariable]) {
     return process.env[envVariable];
   }
-
-  return `EMPTY ENV VARIABLE ${envVariable}`;
 };

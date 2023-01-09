@@ -3,16 +3,41 @@ import { createHash, createHmac } from "crypto";
 import qs from "qs";
 import { getEnvVariable } from "utils/getEnvVariable";
 import { KRAKEN_API_BASE_URL, KRAKEN_API_VERSION, KRAKEN_AUTH_HEADERS } from "const";
+import { KrakenError } from "kraken/KrakenError";
 
-const PUBLIC_METHODS = [ "Time", "Assets", "AssetPairs", "Ticker", "Depth", "Trades", "Spread", "OHLC" ] as const;
+const PUBLIC_METHODS = ["Time", "Assets", "AssetPairs", "Ticker", "Depth", "Trades", "Spread", "OHLC" ] as const;
 type TPublicMethod = typeof PUBLIC_METHODS[number];
 
-const PRIVATE_METHOD = [ "Balance", "TradeBalance", "OpenOrders", "ClosedOrders", "QueryOrders", "TradesHistory", "QueryTrades", "OpenPositions", "Ledgers", "QueryLedgers", "TradeVolume", "AddOrder", "CancelOrder", "DepositMethods", "DepositAddresses", "DepositStatus", "WithdrawInfo", "Withdraw", "WithdrawStatus", "WithdrawCancel", "GetWebSocketsToken" ] as const;
+const PRIVATE_METHOD = [
+  "Balance",
+  "TradeBalance",
+  "OpenOrders",
+  "ClosedOrders",
+  "QueryOrders",
+  "TradesHistory",
+  "QueryTrades",
+  "OpenPositions",
+  "Ledgers",
+  "QueryLedgers",
+  "TradeVolume",
+  "AddOrder",
+  "CancelOrder",
+  "DepositMethods",
+  "DepositAddresses",
+  "DepositStatus",
+  "WithdrawInfo",
+  "Withdraw",
+  "WithdrawStatus",
+  "WithdrawCancel",
+  "GetWebSocketsToken",
+  "Stake",
+  "Staking/Assets"
+] as const;
 type TPrivateMethod = typeof PRIVATE_METHOD[number];
 
 const getMessageSignature = (
   path: string,
-  params: Record<string, string>,
+  params: Record<string, string | number>,
   secret: string,
   nonce: number,
 ) => {
@@ -29,7 +54,7 @@ const getMessageSignature = (
 const rawRequest = async (
   url: string,
   headers: Record<string, string>,
-  params: Record<string, string>,
+  params: Record<string, string | number>,
   timeout = 10_000
 ) => {
   headers["User-Agent"] = "Kraken Javascript API Client";
@@ -50,10 +75,10 @@ const rawRequest = async (
       .map((e: string) => e.substr(1));
 
     if(!error.length) {
-      throw new Error("Kraken API returned an unknown error");
+      throw new KrakenError("Kraken API returned an unknown error");
     }
 
-    throw new Error(error.join(", "));
+    throw new KrakenError(error.join(", "));
   }
 
   return response;
@@ -79,7 +104,10 @@ export class KrakenClient {
     this.config = Object.assign({ key, secret });
   }
 
-  api(method: TPublicMethod | TPrivateMethod, params: Record<string, string>) {
+  api(
+    method: TPublicMethod | TPrivateMethod,
+    params: Record<string, string | number> = {}
+  ) {
     const publicApiMethod = PUBLIC_METHODS.find(item => item === method);
 
     if(publicApiMethod) {
@@ -92,7 +120,7 @@ export class KrakenClient {
       return this.privateMethod(privateApiMethod, params);
     }
 
-    throw new Error(method + " is not a valid API method.");
+    throw new KrakenError(`${method} is not a valid API method.`);
   }
 
   publicMethod(method: TPublicMethod, params = {}) {
@@ -103,7 +131,10 @@ export class KrakenClient {
     return response;
   }
 
-  privateMethod(method: TPrivateMethod, params: Record<string, string> = {}) {
+  privateMethod(
+    method: TPrivateMethod,
+    params: Record<string, string | number> = {}
+  ) {
 
     const path = "/" + KRAKEN_API_VERSION + "/private/" + method;
     const url = KRAKEN_API_BASE_URL + path;
@@ -114,6 +145,10 @@ export class KrakenClient {
 
     const nonce = Number(new Date()) * 1000;
     params.nonce = String(nonce);
+
+    if (!this.config.key || !this.config.secret) {
+      throw new KrakenError("KRAKEN API CREDS NOT FOUND");
+    }
 
     const signature = getMessageSignature(
       path,

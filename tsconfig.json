@@ -1,6 +1,7 @@
 {
     "compilerOptions": {
       "alwaysStrict": true,
+      "noImplicitAny": false,
       "target": "es2021",
       "module": "commonjs",
       "moduleResolution": "node",
@@ -22,6 +23,8 @@
         "const/": ["./src/const/*"],
         "scrapper/": ["./src/scrapper/*"],
         "lib/": ["./src/lib/*"],
+        "kraken/": ["./src/kraken/*"],
+        "logger/": ["./src/logger/*"],
       },
       "typeRoots": ["node_modules/@types", "./src/typings"],
       "types": [

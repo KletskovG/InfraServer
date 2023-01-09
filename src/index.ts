@@ -2,7 +2,12 @@ import bodyParser from "body-parser";
 import express from "express";
 import { buildRouter } from "api/router";
 import { getEnvVariable } from "utils/getEnvVariable";
-import { sendNotification } from "telegram";
+import {
+  log,
+} from "logger/logger";
+// import { connectKrakenDB } from "kraken";
+// import { getCurrentBalance } from "kraken/marketapi/getCurrentBalance";
+// import { getStakebleList } from "kraken/marketapi/getStakebleList";
 
 const app = express();
 
@@ -13,12 +18,21 @@ app.use(bodyParser.urlencoded({
 
 app.use(buildRouter());
 
-const PORT = getEnvVariable("PORT");
+const PORT = getEnvVariable("PORT") || 3000;
 console.log(PORT);
 app.listen(PORT, () => {
-  console.log(
-    `Infra server is up and running // UPDATED
-      http://localhost:${PORT}`
+  log(
+    "Important",
+    `Infra server is up and running http://localhost:${PORT}`
   );
-  sendNotification("Infra server is booted with ssh and automator");
 });
+
+// connectKrakenDB()
+//   .then(() => {
+//     getStakebleList();
+//     getCurrentBalance();
+//   })
+//   .catch(error => {
+//     console.log("DB ERROPR");
+//     console.log(error);
+//   });

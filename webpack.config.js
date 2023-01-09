@@ -27,6 +27,8 @@ module.exports = {
       const: path.resolve(__dirname, "src/const/"),
       scrapper: path.resolve(__dirname, "src/scrapper/"),
       lib: path.resolve(__dirname, "src/lib/"),
+      kraken: path.resolve(__dirname, "src/kraken/"),
+      logger: path.resolve(__dirname, "src/logger/"),
     }
   },
   module: {

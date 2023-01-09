@@ -14,10 +14,8 @@ import {
   order,
 } from "telegram/commands";
 
-const BOT_TOKEN = getEnvVariable("BOT_TOKEN");
-// const ACADEMY_CHAT = getEnvVariable("ACADEMY_CHAT");
-// const ACADEMY_SECOND = getEnvVariable("ACADEMY_SECOND");
-const CHAT_NUMBER = getEnvVariable("CHAT_NUMBER");
+const BOT_TOKEN = getEnvVariable("BOT_TOKEN") || "";
+const CHAT_NUMBER = getEnvVariable("CHAT_NUMBER") || 1;
 
 const bot = new Telegraf(BOT_TOKEN);
 bot.launch();

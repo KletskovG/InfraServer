@@ -4,7 +4,7 @@ import { sendNotification } from "telegram/bot";
 import {getImgSrc} from "utils/getImgSrc";
 import { getEnvVariable } from "utils/getEnvVariable";
 
-export function academyHandler(_, res: Response) {
+export function academyHandler(_: unknown, res: Response) {
   const academyChatId = getEnvVariable("ACADEMY_CHAT");
   try {
     scrapeProjectInfo()

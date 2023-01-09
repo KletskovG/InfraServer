@@ -11,4 +11,5 @@ export { currencyHandler } from "./budget/currencyHandler";
 export { budgetDatesHandler } from "./budget/budgetDatesHandler";
 export { getMIRCurrencyHandler } from "./budget/getMIRCurrencyHandler";
 export { homeworksHandler } from "./academy/homeworksHandler";
+export { flushLogsHandler } from "./logging/flushLogsHandler";
 export { registerHandler } from "./registerHandler";
