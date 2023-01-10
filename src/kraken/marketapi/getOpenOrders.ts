@@ -8,6 +8,7 @@ export async function getOpenOrders() {
 
   try {
     const { result } = await kraken.getOpenOrders();
+    log("Info", `getOpenOrders: ${JSON.stringify(result)}`);
     return result;
   } catch (error) {
     if (!inferErrorType<KrakenError>(error)) {

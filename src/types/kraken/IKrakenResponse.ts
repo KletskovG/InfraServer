@@ -7,12 +7,14 @@ export interface IKrakenBalanceResponse extends IKrakenResponse {
   result: {
     ZEUR: string;
     "EUR.M": string;
+    XLTC: string;
   }
 }
 
 export interface IKrakenBalanceResult {
   ZEUR: number;
   "EUM.M": number;
+  XLTC: number;
 }
 
 export type TTickerResult = {

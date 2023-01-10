@@ -8,7 +8,6 @@ export async function getCurrentBalance (): Promise<IKrakenBalanceResult | null>
   const kraken = new KrakenClient();
   try {
     const { result } = await kraken.getBalance();
-
     return transformCurrentBalance(result);
   } catch (error) {
     if (!inferErrorType<KrakenError>(error)) {
@@ -24,8 +23,14 @@ export async function getCurrentBalance (): Promise<IKrakenBalanceResult | null>
 function transformCurrentBalance(
   response: IKrakenBalanceResponse["result"],
 ): IKrakenBalanceResult {
-  return {
+  console.log(response);
+  const balance: IKrakenBalanceResult = {
     ZEUR: Number(response.ZEUR) || 0,
     "EUM.M": Number(response["EUR.M"]) || 0,
+    XLTC: Number(response.XLTC) || 0,
   };
+
+  log("Info", `getCurrentBalance: ${JSON.stringify(balance)}`);
+
+  return balance;
 }

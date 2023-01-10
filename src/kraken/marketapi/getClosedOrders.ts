@@ -9,6 +9,7 @@ export async function  getClosedOrders(ofs?: number) {
 
   try {
     const { result } = await kraken.getClosedOrders(ofs);
+    log("Info", `getClosedOrders: ${JSON.stringify(result)}`);
     return result;
   } catch (error) {
     if (!inferErrorType<KrakenError>(error)) {

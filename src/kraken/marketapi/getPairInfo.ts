@@ -33,5 +33,7 @@ function transformPairResponse<TPair extends string | undefined>(
     };
   });
 
+  log("Info", `getPairInfo: ${JSON.stringify(result)}`);
+
   return result;
 }

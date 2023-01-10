@@ -5,6 +5,7 @@ import { getEnvVariable } from "utils/getEnvVariable";
 import { KRAKEN_API_BASE_URL, KRAKEN_API_VERSION, KRAKEN_AUTH_HEADERS } from "const";
 import { KrakenError } from "kraken/KrakenError";
 import type {
+  IKrakenAddOrderResponse,
   IKrakenBalanceResponse,
   IKrakenClosedOrdersResponse,
   IKrakenOpenOrdersResponse,
@@ -142,7 +143,7 @@ export class KrakenClient {
   }
 
   public addOrder(params: IAddOrderRequestParams) {
-    return this.privateAPIMethod("AddOrder", {...params});
+    return this.privateAPIMethod<IKrakenAddOrderResponse>("AddOrder", {...params});
   }
 
 
