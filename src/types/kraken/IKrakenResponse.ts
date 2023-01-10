@@ -1,6 +1,6 @@
 export interface IKrakenResponse {
   error: string[];
-  result: Record<string, string | TTickerResult>;
+  result: Record<string, unknown>;
 }
 
 export interface IKrakenBalanceResponse extends IKrakenResponse {
@@ -38,3 +38,63 @@ type TickerResult = {
 }
 
 export type TKrakenPairInfoResult = Record<string, TickerResult>;
+
+// export interface IKrakenOpenOrdersResponse {
+//   open
+// }
+
+interface IOrder {
+  refid: string,
+  userref: string,
+  status: string,
+  opentm: number,
+  starttm: number,
+  expiretm: number,
+  descr: {
+    pair: string,
+    type: "buy" | "sell",
+    ordertype: string,
+    price: string,
+    price2: string,
+    leverage: string,
+    order: string,
+    close: string
+  },
+  vol: string,
+  vol_exec: string,
+  cost: string,
+  fee: string,
+  price: string,
+  stopprice: string,
+  limitprice: string,
+  trigger: string,
+  misc: string,
+  oflags: string,
+  trades: string[],
+  closetm: number,
+  reason: string
+}
+
+export interface IKrakenClosedOrdersResponse extends IKrakenResponse{
+  result: {
+    closed: Record<string, IOrder>;
+    count?: number;
+  }
+}
+
+export interface IKrakenOpenOrdersResponse extends IKrakenResponse {
+  result: {
+    open: Record<string, IOrder>;
+    count?: number;
+  }
+}
+
+export interface IKrakenAddOrderResponse extends IKrakenResponse {
+  result: {
+    descr: {
+      order: string;
+      close: string;
+      };
+    txid: string[];
+  }
+}

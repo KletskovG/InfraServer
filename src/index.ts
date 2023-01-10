@@ -7,9 +7,10 @@ import {
   log,
 } from "logger/logger";
 // import { connectKrakenDB } from "kraken";
-import { getPairInfo } from "kraken/marketapi/getPairInfo";
-import { getCurrentBalance } from "kraken/marketapi/getCurrentBalance";
-import { KRAKEN_ACTIVE_PAIR } from "./const";
+// import { getPairInfo } from "kraken/marketapi/getPairInfo";
+import { getOpenOrders } from "kraken/marketapi/getOpenOrders";
+// import { KRAKEN_ACTIVE_PAIR } from "./const";
+
 
 const app = express();
 
@@ -31,11 +32,17 @@ app.listen(PORT, () => {
 });
 
 const getInfo = async () => {
-  const result = await getPairInfo(KRAKEN_ACTIVE_PAIR);
-  console.log(result);
+  // const result = await getPairInfo(KRAKEN_ACTIVE_PAIR);
+  // console.log(result);
 
-  const balance = await getCurrentBalance();
-  console.log(balance);
+  // const balance = await getCurrentBalance();
+  // console.log(balance);
+
+  // const closedOrders = await getClosedOrders(0);
+  // console.log(closedOrders);
+
+  const openOrders = await getOpenOrders();
+  console.log(openOrders);
 };
 
 getInfo();

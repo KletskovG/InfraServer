@@ -6,9 +6,14 @@ import { KRAKEN_API_BASE_URL, KRAKEN_API_VERSION, KRAKEN_AUTH_HEADERS } from "co
 import { KrakenError } from "kraken/KrakenError";
 import type {
   IKrakenBalanceResponse,
+  IKrakenClosedOrdersResponse,
+  IKrakenOpenOrdersResponse,
   IKrakenPairInfoResponse,
   IKrakenResponse,
 } from "types/kraken/IKrakenResponse";
+import type {
+  IAddOrderRequestParams,
+} from "types/kraken/IKrakenRequestParams";
 
 const PUBLIC_METHODS = ["Time", "Assets", "AssetPairs", "Ticker", "Depth", "Trades", "Spread", "OHLC" ] as const;
 type TPublicMethod = typeof PUBLIC_METHODS[number];
@@ -42,7 +47,7 @@ type TPrivateMethod = typeof PRIVATE_METHOD[number];
 
 const getMessageSignature = (
   path: string,
-  params: Record<string, string | number>,
+  params: Record<string, string | number | boolean>,
   secret: string,
   nonce: number,
 ) => {
@@ -59,7 +64,7 @@ const getMessageSignature = (
 const rawRequest = async <TResult extends IKrakenResponse>(
   url: string,
   headers: Record<string, string>,
-  params: Record<string, string | number>,
+  params: Record<string, string | number | boolean>,
   timeout = 10_000
 ) => {
   headers["User-Agent"] = "Kraken Javascript API Client";
@@ -122,6 +127,24 @@ export class KrakenClient {
     return this.publicAPIMethod<IKrakenPairInfoResponse<TPair>>("Ticker", {...requestParams});
   }
 
+  public getClosedOrders(ofs?: number) {
+    const requestParams: Record<string, string | number> = {};
+
+    if (ofs) {
+      requestParams.ofs = ofs;
+    }
+
+    return this.privateAPIMethod<IKrakenClosedOrdersResponse>("ClosedOrders", {...requestParams});
+  }
+
+  public getOpenOrders() {
+    return this.privateAPIMethod<IKrakenOpenOrdersResponse>("OpenOrders");
+  }
+
+  public addOrder(params: IAddOrderRequestParams) {
+    return this.privateAPIMethod("AddOrder", {...params});
+  }
+
 
   private publicAPIMethod<TResult extends IKrakenResponse>(method: TPublicMethod, params = {}) {
     const path = "/" + KRAKEN_API_VERSION + "/public/" + method;
@@ -133,7 +156,7 @@ export class KrakenClient {
 
   private privateAPIMethod<TResult extends IKrakenResponse>(
     method: TPrivateMethod,
-    params: Record<string, string | number> = {}
+    params: Record<string, string | number | boolean> = {}
   ) {
 
     const path = "/" + KRAKEN_API_VERSION + "/private/" + method;

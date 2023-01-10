@@ -1,10 +1,6 @@
 export const KRAKEN_API_BASE_URL = "https://api.kraken.com";
 export const KRAKEN_API_VERSION = 0;
 
-export enum KRAKEN_API_ENDPOINT {
-  BALANCE = "private/Balance",
-}
-
 export enum KRAKEN_AUTH_HEADERS {
   KEY = "API-Key",
   SIGN = "API-Sign"

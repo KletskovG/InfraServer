@@ -4,7 +4,7 @@ import { log } from "logger/logger";
 import { inferErrorType } from "utils/inferErrorType";
 import { IKrakenBalanceResponse, IKrakenBalanceResult } from "types/kraken/IKrakenResponse";
 
-export const getCurrentBalance = async (): Promise<IKrakenBalanceResult | null> => {
+export async function getCurrentBalance (): Promise<IKrakenBalanceResult | null> {
   const kraken = new KrakenClient();
   try {
     const { result } = await kraken.getBalance();
@@ -12,13 +12,13 @@ export const getCurrentBalance = async (): Promise<IKrakenBalanceResult | null> 
     return transformCurrentBalance(result);
   } catch (error) {
     if (!inferErrorType<KrakenError>(error)) {
-      log("Error", `getPairInfor: Cant handle error ${error}`);
+      log("Error", `getPairInfo: Cant handle error ${error}`);
       return null;
     }
     log("Error", `getPairInfo: ${error.error.message}`);
     return null;
   }
-};
+}
 
 
 function transformCurrentBalance(
