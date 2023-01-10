@@ -12,6 +12,11 @@ import {
   academy,
   homeworks,
   order,
+  status,
+  start,
+  stop,
+  topupSet,
+  topupUpdate,
 } from "telegram/commands";
 
 const BOT_TOKEN = getEnvVariable("BOT_TOKEN") || "";
@@ -27,7 +32,7 @@ export function registerCommandHanlder(
 ) {
   bot.hears(command, (ctx) => {
     if (isProtected && ctx.chat.id !== Number(CHAT_NUMBER)) {
-      ctx.reply(`PERMISSION DENIED ${ctx.chat.id} ${CHAT_NUMBER}`);
+      ctx.reply("PERMISSION DENIED");
       return;
     }
 
@@ -40,9 +45,12 @@ registerCommandHanlder("/academy", academy());
 registerCommandHanlder("/homeworks", homeworks);
 registerCommandHanlder("/tag", tag);
 registerCommandHanlder("/mir", mir);
-registerCommandHanlder("/kraken_stop", (ctx) => {
-  ctx.reply("SHOULD STOP KRAKEN");
-}, true);
+
+registerCommandHanlder("/kraken_stop", stop, true);
+registerCommandHanlder("/kraken_start", start, true);
+registerCommandHanlder("/kraken_start", status, true);
+registerCommandHanlder("/kraken_topup_set", topupSet, true);
+registerCommandHanlder("/kraken_topup_update", topupUpdate, true);
 
 academyScrapeConfig.forEach(course => {
   registerCommandHanlder(course.additional.order, order(course.name));

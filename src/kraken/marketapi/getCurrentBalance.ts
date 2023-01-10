@@ -1,12 +1,31 @@
-// import { KrakenClient } from "kraken/marketapi/Kraken";
-// import { log } from "logger/logger";
+import { KrakenClient } from "kraken/marketapi/Kraken";
+import { KrakenError } from "kraken/KrakenError";
+import { log } from "logger/logger";
+import { inferErrorType } from "utils/inferErrorType";
+import { IKrakenBalanceResponse, IKrakenBalanceResult } from "types/kraken/IKrakenResponse";
 
-// export const getCurrentBalance = async () => {
-//   const kraken = new KrakenClient();
-//   try {
-//     const result = await kraken.api("Balance");
+export const getCurrentBalance = async (): Promise<IKrakenBalanceResult | null> => {
+  const kraken = new KrakenClient();
+  try {
+    const { result } = await kraken.getBalance();
 
-//   } catch (error) {
+    return transformCurrentBalance(result);
+  } catch (error) {
+    if (!inferErrorType<KrakenError>(error)) {
+      log("Error", `getPairInfor: Cant handle error ${error}`);
+      return null;
+    }
+    log("Error", `getPairInfo: ${error.error.message}`);
+    return null;
+  }
+};
 
-//   }
-// };
+
+function transformCurrentBalance(
+  response: IKrakenBalanceResponse["result"],
+): IKrakenBalanceResult {
+  return {
+    ZEUR: Number(response.ZEUR) || 0,
+    "EUM.M": Number(response["EUR.M"]) || 0,
+  };
+}

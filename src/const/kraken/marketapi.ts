@@ -11,5 +11,5 @@ export enum KRAKEN_AUTH_HEADERS {
 }
 
 export const KRAKEN_FIAT_CURRENCY = "ZEUR";
-export const KRAKEN_ACTIVE_PAIR = "LTCEUR";
+export const KRAKEN_ACTIVE_PAIR = "XLTCZEUR";
 export const KRAKEN_EARNINGS_RETURN_PERCENT = 20;

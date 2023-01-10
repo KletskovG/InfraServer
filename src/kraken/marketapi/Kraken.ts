@@ -4,6 +4,11 @@ import qs from "qs";
 import { getEnvVariable } from "utils/getEnvVariable";
 import { KRAKEN_API_BASE_URL, KRAKEN_API_VERSION, KRAKEN_AUTH_HEADERS } from "const";
 import { KrakenError } from "kraken/KrakenError";
+import type {
+  IKrakenBalanceResponse,
+  IKrakenPairInfoResponse,
+  IKrakenResponse,
+} from "types/kraken/IKrakenResponse";
 
 const PUBLIC_METHODS = ["Time", "Assets", "AssetPairs", "Ticker", "Depth", "Trades", "Spread", "OHLC" ] as const;
 type TPublicMethod = typeof PUBLIC_METHODS[number];
@@ -51,7 +56,7 @@ const getMessageSignature = (
   return hmac_digest;
 };
 
-const rawRequest = async (
+const rawRequest = async <TResult extends IKrakenResponse>(
   url: string,
   headers: Record<string, string>,
   params: Record<string, string | number>,
@@ -67,8 +72,7 @@ const rawRequest = async (
   });
 
   const { body } = await got(url, options);
-  const response = JSON.parse(body);
-
+  const response: TResult = JSON.parse(body);
   if(response.error?.length) {
     const error = response.error
       .filter((e: string) => e.startsWith("E"))
@@ -104,34 +108,30 @@ export class KrakenClient {
     this.config = Object.assign({ key, secret });
   }
 
-  api(
-    method: TPublicMethod | TPrivateMethod,
-    params: Record<string, string | number> = {}
-  ) {
-    const publicApiMethod = PUBLIC_METHODS.find(item => item === method);
-
-    if(publicApiMethod) {
-      return this.publicMethod(publicApiMethod, params);
-    }
-
-    const privateApiMethod = PRIVATE_METHOD.find(item => item === method);
-
-    if(privateApiMethod) {
-      return this.privateMethod(privateApiMethod, params);
-    }
-
-    throw new KrakenError(`${method} is not a valid API method.`);
+  public getBalance() {
+    return this.privateAPIMethod<IKrakenBalanceResponse>("Balance");
   }
 
-  publicMethod(method: TPublicMethod, params = {}) {
+  public getPairInfo<TPair extends string | undefined>(pair: TPair) {
+    const requestParams: Record<string, string> = {};
+
+    if (pair) {
+      requestParams.pair = pair;
+    }
+
+    return this.publicAPIMethod<IKrakenPairInfoResponse<TPair>>("Ticker", {...requestParams});
+  }
+
+
+  private publicAPIMethod<TResult extends IKrakenResponse>(method: TPublicMethod, params = {}) {
     const path = "/" + KRAKEN_API_VERSION + "/public/" + method;
     const url = KRAKEN_API_BASE_URL + path;
-    const response = rawRequest(url, {}, params, 10_000);
+    const response = rawRequest<TResult>(url, {}, params, 10_000);
 
     return response;
   }
 
-  privateMethod(
+  private privateAPIMethod<TResult extends IKrakenResponse>(
     method: TPrivateMethod,
     params: Record<string, string | number> = {}
   ) {
@@ -162,7 +162,7 @@ export class KrakenClient {
       [KRAKEN_AUTH_HEADERS.SIGN]: signature,
     };
 
-    const response = rawRequest(url, headers, params, 10_000);
+    const response = rawRequest<TResult>(url, headers, params, 10_000);
 
     return response;
   }

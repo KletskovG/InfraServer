@@ -1,10 +1,17 @@
 import { orderBotCommand, openedCoursesNames } from "types/academy/IAcademyConfig";
 
+export type EBotKrakenCommand =
+  "/kraken_stop" |
+  "/kraken_start" |
+  "/kraken_topup_update" |
+  "/kraken_topup_set" |
+  "/kraken_status"
+
 export type EBotCommands =
   "/chatid" |
   "/academy" |
   "/homeworks" |
   "/tag" |
   "/mir" |
-  "/kraken_stop" |
-  `${orderBotCommand}_${openedCoursesNames}`
+  `${orderBotCommand}_${openedCoursesNames}` |
+  EBotKrakenCommand

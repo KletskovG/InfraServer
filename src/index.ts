@@ -7,8 +7,9 @@ import {
   log,
 } from "logger/logger";
 // import { connectKrakenDB } from "kraken";
-// import { getCurrentBalance } from "kraken/marketapi/getCurrentBalance";
-// import { getStakebleList } from "kraken/marketapi/getStakebleList";
+import { getPairInfo } from "kraken/marketapi/getPairInfo";
+import { getCurrentBalance } from "kraken/marketapi/getCurrentBalance";
+import { KRAKEN_ACTIVE_PAIR } from "./const";
 
 const app = express();
 
@@ -29,10 +30,18 @@ app.listen(PORT, () => {
   );
 });
 
+const getInfo = async () => {
+  const result = await getPairInfo(KRAKEN_ACTIVE_PAIR);
+  console.log(result);
+
+  const balance = await getCurrentBalance();
+  console.log(balance);
+};
+
+getInfo();
 // connectKrakenDB()
 //   .then(() => {
 //     getStakebleList();
-//     getCurrentBalance();
 //   })
 //   .catch(error => {
 //     console.log("DB ERROPR");

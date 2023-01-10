@@ -1,15 +1,37 @@
 import { KrakenClient } from "kraken/marketapi/Kraken";
+import { log } from "logger/logger";
+import { inferErrorType } from "utils/inferErrorType";
+import { KrakenError } from "kraken/KrakenError";
+import { IKrakenPairInfoResponse, TKrakenPairInfoResult, TTickerResult } from "src/types/kraken/IKrakenResponse";
 
-export const getPairInfo = async (pair?: string) => {
+export const getPairInfo = async <TPair extends string | undefined>(
+  pair: TPair
+): Promise<TKrakenPairInfoResult | null> => {
   const kraken = new KrakenClient();
-  const requestParams: Record<string, string> = {};
-
-  if (pair) {
-    requestParams.pair = pair;
+  try {
+    const { result } = await kraken.getPairInfo<TPair>(pair);
+    return transformPairResponse(result);
+  } catch (error) {
+    if (!inferErrorType<KrakenError>(error)) {
+      log("Error", `getPairInfor: Cant handle error ${error.error.message}`);
+      return null;
+    }
+    log("Error", `getPairInfo: ${error.error.message}`);
+    return null;
   }
-
-  const result = await kraken.api("Ticker", {...requestParams});
-  console.log("TICKER INFO");
-  console.log(result.result);
-  // console.log(result.result.XLTCZEUR.c)
 };
+
+function transformPairResponse<TPair extends string | undefined>(
+  response: IKrakenPairInfoResponse<TPair>["result"]
+): TKrakenPairInfoResult {
+  const tickers = Object.entries<TTickerResult>(response);
+  const result: TKrakenPairInfoResult = {};
+
+  tickers.forEach(([key, value]) => {
+    result[key] = {
+      price: Number(value.c[0]),
+    };
+  });
+
+  return result;
+}
