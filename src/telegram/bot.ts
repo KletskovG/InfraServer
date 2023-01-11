@@ -30,7 +30,8 @@ export function registerCommandHanlder(
   handler: (ctx: TelegrafContext) => void,
   isProtected = false,
 ) {
-  bot.hears(command, (ctx) => {
+  const commandRegexp = "/" + command;
+  bot.hears(new RegExp(commandRegexp), (ctx: TelegrafContext) => {
     if (isProtected && ctx.chat.id !== Number(CHAT_NUMBER)) {
       ctx.reply("PERMISSION DENIED");
       return;
@@ -40,17 +41,17 @@ export function registerCommandHanlder(
   });
 }
 
-registerCommandHanlder("/chatid", chatid);
-registerCommandHanlder("/academy", academy());
-registerCommandHanlder("/homeworks", homeworks);
-registerCommandHanlder("/tag", tag);
-registerCommandHanlder("/mir", mir);
+registerCommandHanlder("chatid", chatid);
+registerCommandHanlder("academy", academy());
+registerCommandHanlder("homeworks", homeworks);
+registerCommandHanlder("tag", tag);
+registerCommandHanlder("mir", mir);
 
-registerCommandHanlder("/kraken_stop", stop, true);
-registerCommandHanlder("/kraken_start", start, true);
-registerCommandHanlder("/kraken_start", status, true);
-registerCommandHanlder("/kraken_topup_set", topupSet, true);
-registerCommandHanlder("/kraken_topup_update", topupUpdate, true);
+registerCommandHanlder("kraken_stop", stop, true);
+registerCommandHanlder("kraken_start", start, true);
+registerCommandHanlder("kraken_start", status, true);
+registerCommandHanlder("kraken_topup_set", topupSet, true);
+registerCommandHanlder("kraken_topup_update", topupUpdate, true);
 
 academyScrapeConfig.forEach(course => {
   registerCommandHanlder(course.additional.order, order(course.name));

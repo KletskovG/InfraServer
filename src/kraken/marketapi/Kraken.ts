@@ -133,7 +133,7 @@ export class KrakenClient {
   public getClosedOrders(ofs?: number) {
     const requestParams: Record<string, string | number> = {};
 
-    if (ofs) {
+    if (ofs !== undefined && ofs !== null) {
       requestParams.ofs = ofs;
     }
 

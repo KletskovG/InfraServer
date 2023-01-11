@@ -45,7 +45,7 @@ export type TKrakenPairInfoResult = Record<string, TickerResult>;
 //   open
 // }
 
-interface IOrder {
+export interface IOrder {
   refid: string,
   userref: string,
   status: string,
