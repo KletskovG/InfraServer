@@ -13,6 +13,7 @@ import {
 import budgetRouter from "api/budget/budgetRouter";
 import academyRouter from "api/academy/academyRouter";
 import xmrRouter from "api/xmr/xmrRouter";
+import krakenRouter from "api/kraken/krakenRouter";
 
 
 export function buildRouter(): Router {
@@ -21,6 +22,7 @@ export function buildRouter(): Router {
   router.use(budgetRouter);
   router.use(academyRouter);
   router.use(xmrRouter);
+  router.use(krakenRouter);
 
   registerHandler(
     router,

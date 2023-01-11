@@ -100,3 +100,9 @@ export interface IKrakenAddOrderResponse extends IKrakenResponse {
     txid: string[];
   }
 }
+
+export interface IKrakenCancelAllResponse extends IKrakenResponse {
+  result: {
+    count: number;
+  }
+}

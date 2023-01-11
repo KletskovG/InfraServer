@@ -11,6 +11,7 @@ import type {
   IKrakenOpenOrdersResponse,
   IKrakenPairInfoResponse,
   IKrakenResponse,
+  IKrakenCancelAllResponse,
 } from "types/kraken/IKrakenResponse";
 import type {
   IAddOrderRequestParams,
@@ -33,6 +34,7 @@ const PRIVATE_METHOD = [
   "TradeVolume",
   "AddOrder",
   "CancelOrder",
+  "CancelAll",
   "DepositMethods",
   "DepositAddresses",
   "DepositStatus",
@@ -144,6 +146,10 @@ export class KrakenClient {
 
   public addOrder(params: IAddOrderRequestParams) {
     return this.privateAPIMethod<IKrakenAddOrderResponse>("AddOrder", {...params});
+  }
+
+  public cancelOrders() {
+    return this.privateAPIMethod<IKrakenCancelAllResponse>("CancelAll");
   }
 
 

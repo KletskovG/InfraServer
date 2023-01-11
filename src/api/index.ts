@@ -12,4 +12,7 @@ export { getMIRCurrencyHandler } from "./budget/getMIRCurrencyHandler";
 export { homeworksHandler } from "./academy/homeworksHandler";
 export { flushLogsHandler } from "./logging/flushLogsHandler";
 export { readLogsHandler } from "./logging/readLogsHandler";
+export { mainLoopHandler } from "./kraken/mainLoopHandler";
+export { startLoopHandler } from "./kraken/startLoopHandler";
+export { stopLoopHandler } from "./kraken/stopLoopHandler";
 export { registerHandler } from "./registerHandler";

@@ -1,5 +1,6 @@
 import TelegrafContext from "telegraf/typings/context";
+import { startMainLoop } from "kraken/core/mainLoop";
 
-export function start(ctx: TelegrafContext) {
-  ctx.reply("NOT IMPLEMENTED");
+export function start(_: TelegrafContext) {
+  startMainLoop();
 }

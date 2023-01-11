@@ -3,21 +3,10 @@ import express from "express";
 import cors from "cors";
 import { buildRouter } from "api/router";
 import { getEnvVariable } from "utils/getEnvVariable";
-import { ceilNumber } from "utils/ceilNumber";
 import {
   log,
 } from "logger/logger";
 // import { connectKrakenDB } from "kraken";
-// import { getPairInfo } from "kraken/marketapi/getPairInfo";
-import { getCurrentBalance } from "kraken/marketapi/getCurrentBalance";
-// import { getOpenOrders } from "kraken/marketapi/getOpenOrders";
-import { addOrder } from "kraken/marketapi/addOrder";
-import { KRAKEN_ACTIVE_PAIR } from "./const";
-
-// import { KRAKEN_ACTIVE_PAIR } from "./const";
-import { KRAKEN_PROFIT } from "./const/kraken/core";
-// import { KRAKEN_ACTIVE_PAIR } from "./const";
-
 
 const app = express();
 
@@ -69,17 +58,20 @@ const getInfo = async () => {
   // });
   // console.log(addOrderResult);
 
-  const buyPrice = 74.71;
-  const balance = await getCurrentBalance();
-  const addOrderResult = await addOrder({
-    type: "sell",
-    validate: false,
-    ordertype: "take-profit",
-    volume: String(balance.XLTC),
-    pair: KRAKEN_ACTIVE_PAIR,
-    price: String(ceilNumber(buyPrice * KRAKEN_PROFIT, 2)),
-  });
-  log("Important", `Set Take profit order: ${JSON.stringify(addOrderResult.descr)} TXID: ${addOrderResult.txid}`);
+  // const buyPrice = 74.71;
+  // const balance = await getCurrentBalance();
+  // const addOrderResult = await addOrder({
+  //   type: "sell",
+  //   validate: false,
+  //   ordertype: "take-profit",
+  //   volume: String(balance.XLTC),
+  //   pair: KRAKEN_ACTIVE_PAIR,
+  //   price: String(ceilNumber(buyPrice * KRAKEN_PROFIT, 2)),
+  // });
+  // log("Important", `Set Take profit order: ${JSON.stringify(addOrderResult.descr)} TXID: ${addOrderResult.txid}`);
+
+  // const result = await cancelAllOrders();
+  // console.log(result)
 };
 
 getInfo();

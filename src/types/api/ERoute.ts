@@ -2,7 +2,8 @@ export type ERoute =
     EGeneralRoute |
     EAcademyRoute |
     EBudgetRoute |
-    EXMRRoute
+    EXMRRoute |
+    EKrakenRoute
 
 type EAcademyRoute =
   "/academy" |
@@ -18,6 +19,11 @@ type EBudgetRoute =
 type EXMRRoute =
   "/xmr/sync" |
   "/xmr/share"
+
+type EKrakenRoute =
+  "/kraken/mainloop" |
+  "/kraken/start" |
+  "/kraken/stop"
 
 type EGeneralRoute =
   "/" |
