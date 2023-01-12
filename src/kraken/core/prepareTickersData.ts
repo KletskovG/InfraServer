@@ -21,7 +21,7 @@ export async function prepareTickersData() {
     for (const [ticker, value] of entries) {
       processTicker(ticker, value, timestamp);
     }
-    log("Info", "TICKERS PREPARED");
+    log("Important", "TICKERS PREPARED");
 
   } catch (error) {
     log("Error", `prepareTickersData ${JSON.stringify(error)}`);
@@ -54,9 +54,7 @@ async function processTicker(
       prices: tick,
     }
   })
-    .then(() => {
-      console.log("TICKER UPDATED");
-    })
+    .then(() => undefined)
     .catch(err => {
       console.log(err);
     });

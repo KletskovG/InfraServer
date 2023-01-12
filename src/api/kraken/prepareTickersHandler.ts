@@ -1,12 +1,15 @@
 import { Response } from "express";
 import { prepareTickersData } from "kraken/core/prepareTickersData";
+import { scanHikeTickers } from "kraken/core/scanHikeTickers";
+import { HIKE_TIME_FRAME } from "const/kraken/core";
 
-let currentStreak = 0;
+let currentStreak = 8;
 
 export function prepareTickersHandler(_: unknown, res: Response) {
-  if (currentStreak === 6) {
+  if (currentStreak === HIKE_TIME_FRAME) {
     res.send("SCAN");
-    currentStreak = 0;
+    currentStreak -= 3;
+    scanHikeTickers();
     return;
   }
   res.send("PREPARE");

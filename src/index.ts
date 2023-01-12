@@ -7,6 +7,7 @@ import {
   log,
 } from "logger/logger";
 import { connectKrakenDB } from "kraken";
+import { cleanTickerPrices } from "kraken/db/cleanTickerPrices";
 
 
 const app = express();
@@ -28,32 +29,10 @@ app.listen(PORT, () => {
   );
 });
 
-const getInfo = async () => {
-  // const result = await getPairInfo("");
-  // const currentTimestamp = Math.floor(new Date().getTime() / 1000);
-  // const tickers: IPriceModel[] = [];
-  // for (const [ticker, value] of Object.entries(result)) {
-  //   tickers.push({
-  //     ticker,
-  //     price: value.price,
-  //     timestamp: currentTimestamp,
-  //   });
-  // }
-
-  // Price.insertMany(tickers)
-  //   .then((result) => {
-  //     log("Important", );
-  //   })
-  //   .catch(err => {
-  //     log("Error", JSON.stringify(err));
-  //   })
-};
-
-
 connectKrakenDB()
   .then(() => {
     log("Important", "KRAKEN DB CONNECTED");
-    getInfo();
+    cleanTickerPrices();
   })
   .catch(error => {
     log("Error", `DB ERROR: ${JSON.stringify(error.message)}`);
