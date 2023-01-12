@@ -9,7 +9,8 @@ export type EEnvVariable =
     "KRAKEN_DB_CONNECT" |
     "KRAKEN_API_KEY" |
     "KRAKEN_API_SIGN" |
-    "LOGFILE_PATH"
+    "LOGFILE_PATH" |
+    "KRAKEN_OHLC_DB_CONNECT"
 
 
 export enum EArgvVariable {
@@ -25,7 +26,8 @@ export enum EArgvVariable {
 
   KRAKEN_DB_CONNECT,
   KRAKEN_API_KEY,
-  KRAKEN_API_SIGN
+  KRAKEN_API_SIGN,
+  KRAKEN_OHLC_DB_CONNECT,
 }
 
 export const ArgvMap: Record<EEnvVariable, EArgvVariable> = {
@@ -42,4 +44,5 @@ export const ArgvMap: Record<EEnvVariable, EArgvVariable> = {
   KRAKEN_DB_CONNECT: 10,
   KRAKEN_API_KEY: 11,
   KRAKEN_API_SIGN: 12,
+  KRAKEN_OHLC_DB_CONNECT: 13,
 };

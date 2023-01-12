@@ -1,6 +1,6 @@
 import { log } from "logger/logger";
 import { Balance } from "kraken/db/models/balance";
-import { Deal } from "kraken/db/models/Deal";
+import { Deal } from "kraken/db/models/deal";
 import { getCurrentBalance } from "kraken/marketapi/getCurrentBalance";
 import { getOpenOrders } from "kraken/marketapi/getOpenOrders";
 import { getClosedOrders } from "kraken/marketapi/getClosedOrders";

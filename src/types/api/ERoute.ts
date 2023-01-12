@@ -23,7 +23,8 @@ type EXMRRoute =
 type EKrakenRoute =
   "/kraken/mainloop" |
   "/kraken/start" |
-  "/kraken/stop"
+  "/kraken/stop" |
+  "/kraken/tickers/prepare"
 
 type EGeneralRoute =
   "/" |

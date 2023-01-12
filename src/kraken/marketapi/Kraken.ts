@@ -152,8 +152,14 @@ export class KrakenClient {
     return this.privateAPIMethod<IKrakenCancelAllResponse>("CancelAll");
   }
 
+  public getOHLCData<TPair extends string>(pair: string, since: number, interval: number) {
+    return this.publicAPIMethod<IKrakenPairInfoResponse<TPair>>("OHLC", {pair, since, interval});
+  }
 
-  private publicAPIMethod<TResult extends IKrakenResponse>(method: TPublicMethod, params = {}) {
+  private publicAPIMethod<TResult extends IKrakenResponse>(
+    method: TPublicMethod,
+    params = {}
+  ) {
     const path = "/" + KRAKEN_API_VERSION + "/public/" + method;
     const url = KRAKEN_API_BASE_URL + path;
     const response = rawRequest<TResult>(url, {}, params, 10_000);

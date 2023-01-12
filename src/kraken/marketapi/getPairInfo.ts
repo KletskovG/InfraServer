@@ -21,7 +21,7 @@ export const getPairInfo = async <TPair extends string | undefined>(
   }
 };
 
-function transformPairResponse<TPair extends string | undefined>(
+export function transformPairResponse<TPair extends string | undefined>(
   response: IKrakenPairInfoResponse<TPair>["result"]
 ): TKrakenPairInfoResult {
   const tickers = Object.entries<TTickerResult>(response);

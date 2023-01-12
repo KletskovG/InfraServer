@@ -35,6 +35,24 @@ export interface IKrakenPairInfoResponse <
   >;
 }
 
+type TOHLCTick = [
+  number, // timestamp
+  string,
+  string,
+  string,
+  string,
+  string,
+  string,
+  string, // Current price
+  number,
+]
+
+export interface IKrakenOHLCResponse extends IKrakenResponse {
+  result: Record<string, [
+    TOHLCTick[]
+  ]>;
+}
+
 type TickerResult = {
   price: number;
 }
