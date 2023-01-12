@@ -2,10 +2,20 @@ import { Price } from "kraken/db/models/price";
 import { getSecondsTimestamp } from "utils/getSecondsTimestamp";
 import { log } from "logger/logger";
 import { getPairInfo } from "kraken/marketapi/getPairInfo";
-// import { KRAKEN_ACTIVE_PAIR } from "const";
+import { scanHikeTickers } from "kraken/core/scanHikeTickers";
 
+export async function prepareTickersData(executeScan: boolean) {
+  await collectTickersInfo();
+  log("Important", "TICKERS PREPARED");
 
-export async function prepareTickersData() {
+  if (!executeScan) {
+    return;
+  }
+
+  scanHikeTickers();
+}
+
+async function collectTickersInfo() {
   const timestamp = getSecondsTimestamp();
 
   log("Info", "PREPARE TICKER INFO");
@@ -21,8 +31,6 @@ export async function prepareTickersData() {
     for (const [ticker, value] of entries) {
       processTicker(ticker, value, timestamp);
     }
-    log("Important", "TICKERS PREPARED");
-
   } catch (error) {
     log("Error", `prepareTickersData ${JSON.stringify(error)}`);
   }

@@ -39,7 +39,7 @@ async function checkMaxDiff(tickerName: string) {
   const priceDiff = ceilNumber(maxPrice.price / initialPrice, 2);
 
   if (isHikePerformingNow && priceDiff > 1.1) {
-    log("Important", `HIKE: ${ticker.ticker} +${priceDiff}%`);
+    log("Important", `HIKE: ${ticker.ticker} +${priceDiff}% \n`);
     return;
   }
 

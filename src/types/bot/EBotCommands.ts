@@ -6,7 +6,8 @@ export type EBotKrakenCommand =
   "kraken_topup_update" |
   "kraken_topup_set" |
   "kraken_status" |
-  "kraken_monitor"
+  "kraken_deal" |
+  "kraken_close_deal"
 
 export type EBotCommands =
   "chatid" |

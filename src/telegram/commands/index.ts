@@ -9,3 +9,4 @@ export { stop } from "./kraken/stop";
 export { topupSet } from "./kraken/topupSet";
 export { topupUpdate } from "./kraken/topupUpdate";
 export { status } from "./kraken/status";
+export { addDeal } from "./kraken/addDeal";

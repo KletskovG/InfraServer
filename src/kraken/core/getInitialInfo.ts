@@ -5,12 +5,12 @@ import { getCurrentBalance } from "kraken/marketapi/getCurrentBalance";
 import { getOpenOrders } from "kraken/marketapi/getOpenOrders";
 import { getClosedOrders } from "kraken/marketapi/getClosedOrders";
 import { IBalanceModel } from "types/kraken/IBalanceModel";
-import { ILastDealModel } from "types/kraken/ILastDealModel";
+// import { ILastDealModel } from "types/kraken/ILastDealModel";
 import { IOrder } from "types/kraken/IKrakenResponse";
 
 type TInitialInfo = {
   balance: IBalanceModel,
-  lastDeal: ILastDealModel,
+  lastDeal: any,
   activeOrder: IOrder,
   lastOrder: IOrder,
   // prices

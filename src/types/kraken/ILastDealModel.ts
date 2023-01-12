@@ -1,7 +1,6 @@
-export interface ILastDealModel {
-  ordertype: "buy" | "sell",
-  price: number;
-  pair: string;
-  timestamp: number;
-  dealResult: "success" | "fail",
+export interface IDealModel {
+  orderId: string;
+  buyPrice: number;
+  sellPrice: number;
+  defenseThershold: number;
 }
