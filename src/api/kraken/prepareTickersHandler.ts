@@ -3,7 +3,7 @@ import { prepareTickersData } from "kraken/core/prepareTickersData";
 import { scanHikeTickers } from "kraken/core/scanHikeTickers";
 import { HIKE_TIME_FRAME } from "const/kraken/core";
 
-let currentStreak = 8;
+let currentStreak = 0;
 
 export function prepareTickersHandler(_: unknown, res: Response) {
   if (currentStreak === HIKE_TIME_FRAME) {
