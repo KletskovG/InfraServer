@@ -1,9 +1,16 @@
-import { Response } from "express";
+import { Response, Request } from "express";
 import { Price } from "kraken/db/models/price";
 import { log } from "logger/logger";
 
-export async function flushTickersHandler(_: unknown, res: Response) {
+type PrepareTickerQuery = {
+  clear?: string;
+}
+
+type PrepareTickersRequest = Request<unknown, unknown, unknown, PrepareTickerQuery>;
+
+export async function flushTickersHandler(req: PrepareTickersRequest, res: Response) {
   const tickers = await Price.find({}, { ticker: true });
+  const {clear} = req.query;
 
   if (!tickers) {
     res.send("OK");
@@ -14,7 +21,7 @@ export async function flushTickersHandler(_: unknown, res: Response) {
   tickers.forEach(ticker => {
     Price.findOne({ ticker: ticker.ticker })
       .then(result => {
-        result.updateOne({ prices: result.prices.slice(-8) })
+        result.updateOne({ prices: clear ?  [] : result.prices.slice(-8) })
           .then(result => result)
           .catch(err => console.error(err));
       })

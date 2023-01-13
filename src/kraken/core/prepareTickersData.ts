@@ -5,12 +5,12 @@ import { getPairInfo } from "kraken/marketapi/getPairInfo";
 import { scanHikeTickers } from "kraken/core/scanHikeTickers";
 
 export async function prepareTickersData(executeScan: boolean) {
-  await collectTickersInfo();
-  if (!executeScan) {
+  if (executeScan) {
+    scanHikeTickers();
     return;
   }
 
-  scanHikeTickers();
+  collectTickersInfo();
 }
 
 async function collectTickersInfo() {

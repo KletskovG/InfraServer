@@ -3,7 +3,7 @@ import { prepareTickersData } from "kraken/core/prepareTickersData";
 import { log } from "logger/logger";
 
 type PrepareTickerQuery = {
-  scan?: Text;
+  scan?: string;
 }
 
 type PrepareTickersRequest = Request<unknown, unknown, unknown, PrepareTickerQuery>;
