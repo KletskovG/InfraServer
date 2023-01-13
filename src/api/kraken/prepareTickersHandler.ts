@@ -14,6 +14,10 @@ export function prepareTickersHandler(_: unknown, res: Response) {
     return;
   }
 
+  if (HIKE_TIME_FRAME - currentStreak === 1) {
+    log("Important", "tickers prepared, scan will be performed soon");
+  }
+
   res.send("PREPARE");
   prepareTickersData(false);
   currentStreak += 1;

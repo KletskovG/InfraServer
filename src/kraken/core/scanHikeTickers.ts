@@ -42,19 +42,12 @@ async function checkMaxDiff(tickerName: string) {
     const currentPrice = ticker.prices[ticker.prices.length - 1].price;
     const profitPrice = currentPrice * KRAKEN_PROFIT;
 
-    log("Important", `HIKE: ${ticker.ticker} +${priceDiff}% CURRENT PRICE: ${currentPrice} profit price: ${profitPrice}`);
+    log("Important", `HIKE: ${ticker.ticker} +${priceDiff}%`);
+    log("Important", `CURRENT PRICE: ${currentPrice} profit price: ${profitPrice}`);
     return;
   }
 
-  for (let i = 0; i < 3; i++) {
-    Price.findOneAndUpdate({ticker: tickerName}, {
-      $pop: {
-        prices: -1
-      }
-    })
-      .then(() => undefined)
-      .catch(err => {
-        log("Error", err);
-      });
-  }
+  ticker.updateOne({ prices: [...ticker.prices.slice(3)] })
+    .then((result) => result)
+    .catch(err => console.log(err));
 }

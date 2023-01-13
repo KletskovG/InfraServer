@@ -6,8 +6,6 @@ import { scanHikeTickers } from "kraken/core/scanHikeTickers";
 
 export async function prepareTickersData(executeScan: boolean) {
   await collectTickersInfo();
-  log("Important", "TICKERS PREPARED");
-
   if (!executeScan) {
     return;
   }
