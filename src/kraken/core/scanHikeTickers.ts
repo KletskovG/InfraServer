@@ -15,9 +15,13 @@ export async function scanHikeTickers() {
 }
 
 async function checkMaxDiff(tickerName: string) {
+  const isFiatPair = tickerName.toUpperCase().endsWith("EUR") || tickerName.toUpperCase().endsWith("USD");
+  if (!isFiatPair) {
+    return;
+  }
   const ticker = await Price.findOne({ ticker: tickerName });
 
-  if (ticker.prices.length < HIKE_TIME_FRAME) {
+  if (ticker.prices.length < HIKE_TIME_FRAME || !isFiatPair) {
     return;
   }
 
@@ -39,9 +43,8 @@ async function checkMaxDiff(tickerName: string) {
   const isHikePerformingNow = maxPriceIndex > 5;
   const priceDiff = ceilNumber(maxPrice.price / initialPrice, 2);
   log("Info", `MAX PRICE: ${tickerName} ${JSON.stringify(maxPrice)} DIFF: ${priceDiff}`);
-  const isFiatHike = ticker.ticker.toUpperCase().endsWith("EUR") || ticker.ticker.toUpperCase().endsWith("USD");
 
-  if (isHikePerformingNow && priceDiff > 1.09 && isFiatHike) {
+  if (isHikePerformingNow && priceDiff > 1.09) {
     const currentPrice = freshChartData[freshChartData.length - 1].price;
     const profitPrice = currentPrice * KRAKEN_PROFIT;
     const maxPriceTime = HIKE_TIME_FRAME - maxPriceIndex;
