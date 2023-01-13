@@ -16,4 +16,5 @@ export { mainLoopHandler } from "./kraken/mainLoopHandler";
 export { startLoopHandler } from "./kraken/startLoopHandler";
 export { stopLoopHandler } from "./kraken/stopLoopHandler";
 export { prepareTickersHandler } from "./kraken/prepareTickersHandler";
+export { flushTickersHandler } from "./kraken/flushTickersHandler";
 export { registerHandler } from "./registerHandler";

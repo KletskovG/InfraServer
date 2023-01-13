@@ -1,25 +1,27 @@
-import { Response } from "express";
+import { Response, Request } from "express";
 import { prepareTickersData } from "kraken/core/prepareTickersData";
-import { HIKE_TIME_FRAME } from "const/kraken/core";
 import { log } from "logger/logger";
 
-let currentStreak = 0;
+type PrepareTickerQuery = {
+  scan?: Text;
+}
 
-export function prepareTickersHandler(_: unknown, res: Response) {
-  if (currentStreak === HIKE_TIME_FRAME) {
+type PrepareTickersRequest = Request<unknown, unknown, unknown, PrepareTickerQuery>;
+
+export function prepareTickersHandler(
+  req: PrepareTickersRequest,
+  res: Response
+) {
+  const {scan} = req.query;
+
+  if (Number(scan) === 1) {
     res.send("SCAN");
     log("Important", "Init hike scan");
-    currentStreak -= 3;
     prepareTickersData(true);
     return;
   }
 
-  if (HIKE_TIME_FRAME - currentStreak === 1) {
-    log("Important", "tickers prepared, scan will be performed soon");
-  }
-
   res.send("PREPARE");
   prepareTickersData(false);
-  currentStreak += 1;
-  log("Info", `Prepare hike data, streak: ${currentStreak}`);
+  log("Info", "Prepare hike data");
 }

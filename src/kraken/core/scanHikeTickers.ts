@@ -6,11 +6,7 @@ import { ceilNumber } from "utils/ceilNumber";
 export async function scanHikeTickers() {
   log("Info", "Scan hike tickers");
 
-  const allAvailableTickers = await Price.find({
-    prices: {
-      $size: HIKE_TIME_FRAME, // Last two hours
-    }
-  }, { ticker: true });
+  const allAvailableTickers = await Price.find({}, { ticker: true });
 
   allAvailableTickers.forEach(async (ticker) => await checkMaxDiff(ticker.ticker));
   log("Important", "Ticker Scan completed");
@@ -18,36 +14,37 @@ export async function scanHikeTickers() {
 
 async function checkMaxDiff(tickerName: string) {
   const ticker = await Price.findOne({ticker: tickerName});
-  console.log("TICKER");
-  console.log(ticker);
-  const initialPrice = ticker.prices[0].price;
-  console.log("START", initialPrice);
 
+  if (ticker.prices.length < HIKE_TIME_FRAME) {
+    return;
+  }
+
+  const freshChartData = ticker.prices.slice(-HIKE_TIME_FRAME);
+  const initialPrice = freshChartData[0].price;
+  log("Info", `TICKER: ${JSON.stringify({ ticker: ticker.ticker, start: initialPrice, freshChartData })}`);
   let maxPrice = {
     price: 0,
     timestamp: 0,
   };
   let maxPriceIndex = -1;
 
-  for (let i = 0; i < ticker.prices.length; i++) {
-    if (ticker.prices[i].price > maxPrice.price) {
-      maxPrice = ticker.prices[i];
+  for (let i = 0; i < freshChartData.length; i++) {
+    if (freshChartData[i].price > maxPrice.price) {
+      maxPrice = freshChartData[i];
       maxPriceIndex = i;
     }
   }
   const isHikePerformingNow = maxPriceIndex > 3;
   const priceDiff = ceilNumber(maxPrice.price / initialPrice, 2);
-
+  log("Info", `MAX PRICE: ${tickerName} ${JSON.stringify(maxPrice)}`);
+  log("Info", `DIFF: ${priceDiff}`);
   if (isHikePerformingNow && priceDiff > 1.1) {
-    const currentPrice = ticker.prices[ticker.prices.length - 1].price;
+    const currentPrice = freshChartData[freshChartData.length - 1].price;
     const profitPrice = currentPrice * KRAKEN_PROFIT;
-
-    log("Important", `HIKE: ${ticker.ticker} +${priceDiff}%`);
-    log("Important", `CURRENT PRICE: ${currentPrice} profit price: ${profitPrice}`);
+    log("Important",
+      `HIKE: ${ticker.ticker} +${priceDiff}%` +
+      `CURRENT PRICE: ${ceilNumber(currentPrice, 3)} profit price: ${ceilNumber(profitPrice, 3)}`
+    );
     return;
   }
-
-  ticker.updateOne({ prices: [...ticker.prices.slice(3)] })
-    .then((result) => result)
-    .catch(err => console.log(err));
 }

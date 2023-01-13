@@ -9,7 +9,6 @@ import {
 import { connectKrakenDB } from "kraken";
 import { cleanTickerPrices } from "kraken/db/cleanTickerPrices";
 
-
 const app = express();
 
 app.use(bodyParser.json());

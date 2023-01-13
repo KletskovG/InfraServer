@@ -5,6 +5,7 @@ import {
   startLoopHandler,
   stopLoopHandler,
   prepareTickersHandler,
+  flushTickersHandler,
 } from "api";
 
 const krakenRouter = Router();
@@ -34,5 +35,13 @@ registerHandler(
   "get",
   prepareTickersHandler,
 );
+
+registerHandler(
+  krakenRouter,
+  "/kraken/tickers/flush",
+  "get",
+  flushTickersHandler,
+);
+
 
 export default krakenRouter;

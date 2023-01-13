@@ -50,6 +50,7 @@ async function processTicker(
   if (!storedTicker) {
     Price.create({
       ticker,
+      timestamp,
       prices: [tick],
     });
     return;
@@ -58,7 +59,8 @@ async function processTicker(
   Price.updateOne({ _id: storedTicker._id }, {
     $push: {
       prices: tick,
-    }
+    },
+    timestamp,
   })
     .then(() => undefined)
     .catch(err => {
