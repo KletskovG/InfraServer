@@ -10,8 +10,9 @@ export async function getCurrentBalance (): Promise<IKrakenBalanceResult | null>
     const { result } = await kraken.getBalance();
     return transformCurrentBalance(result);
   } catch (error) {
+    console.log(error);
     if (!inferErrorType<KrakenError>(error)) {
-      log("Error", `getPairInfo: Cant handle error ${error}`);
+      log("Error", `getPairInfo: Cant handle error ${JSON.stringify(error)}`);
       return null;
     }
     log("Error", `getPairInfo: ${error.error.message}`);

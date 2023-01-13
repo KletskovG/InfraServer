@@ -7,6 +7,7 @@ import {
   log,
 } from "logger/logger";
 import { connectKrakenDB } from "kraken";
+// import { monitorOrders } from "kraken/core/orders/monitorOrders";
 
 const app = express();
 
@@ -30,6 +31,7 @@ app.listen(PORT, () => {
 connectKrakenDB()
   .then(() => {
     log("Important", "KRAKEN DB CONNECTED");
+    // monitorOrders();
   })
   .catch(error => {
     log("Error", `DB ERROR: ${JSON.stringify(error.message)}`);

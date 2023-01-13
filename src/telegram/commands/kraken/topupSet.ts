@@ -1,14 +1,10 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import TelegrafContext from "telegraf/typings/context";
 import { Balance } from "kraken/db/models/balance";
+import { getMessageWithText } from "telegram/lib/getMessageWithText";
 import {log} from "logger/logger";
 
 export async function topupSet(ctx: TelegrafContext) {
-  //@ts-ignore // Telegraf typings dont have text field
-  const text: string = ctx.message.text ?? "";
-  if (!text) {
-    return;
-  }
+  const { text } = getMessageWithText(ctx).message;
 
   const dividerIndex = text.indexOf(" ");
 

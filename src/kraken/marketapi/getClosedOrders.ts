@@ -13,7 +13,7 @@ export async function  getClosedOrders(ofs?: number) {
     return result;
   } catch (error) {
     if (!inferErrorType<KrakenError>(error)) {
-      log("Error", `getClosedOrders: Cant handle error ${error}`);
+      log("Error", `getClosedOrders: Cant handle error ${JSON.stringify(error)}`);
       return null;
     }
     log("Error", `getClosedOrders: ${error.error.message}`);

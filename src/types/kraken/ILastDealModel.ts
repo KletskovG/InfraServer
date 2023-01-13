@@ -3,4 +3,5 @@ export interface IDealModel {
   buyPrice: number;
   sellPrice: number;
   defenseThershold: number;
+  ticker: string;
 }

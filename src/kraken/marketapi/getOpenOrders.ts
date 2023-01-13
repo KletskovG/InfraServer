@@ -11,8 +11,9 @@ export async function getOpenOrders() {
     log("Info", `getOpenOrders: ${JSON.stringify(result)}`);
     return result;
   } catch (error) {
+    // console.log(error)
     if (!inferErrorType<KrakenError>(error)) {
-      log("Error", `getOpenOrders: Cant handle error ${error}`);
+      log("Error", `getOpenOrders: Cant handle error ${JSON.stringify(error)}`);
       return null;
     }
     log("Error", `getOpenOrders: ${error.error.message}`);

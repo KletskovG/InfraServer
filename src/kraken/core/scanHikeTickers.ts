@@ -1,6 +1,7 @@
 import { Price } from "kraken/db/models/price";
 import { log } from "logger/logger";
 import { HIKE_TIME_FRAME, KRAKEN_PROFIT } from "const/kraken/core";
+// import { monitorOrders } from "kraken/core/orders/monitorOrders";
 import { ceilNumber } from "utils/ceilNumber";
 
 export async function scanHikeTickers() {
@@ -10,6 +11,7 @@ export async function scanHikeTickers() {
 
   allAvailableTickers.forEach(async (ticker) => await checkMaxDiff(ticker.ticker));
   log("Important", "Ticker Scan completed");
+  // monitorOrders();
 }
 
 async function checkMaxDiff(tickerName: string) {
@@ -34,10 +36,10 @@ async function checkMaxDiff(tickerName: string) {
       maxPriceIndex = i;
     }
   }
-  const isHikePerformingNow = maxPriceIndex > 3;
+  const isHikePerformingNow = maxPriceIndex > 5;
   const priceDiff = ceilNumber(maxPrice.price / initialPrice, 2);
   log("Info", `MAX PRICE: ${tickerName} ${JSON.stringify(maxPrice)} DIFF: ${priceDiff}`);
-  if (isHikePerformingNow && priceDiff > 1.1) {
+  if (isHikePerformingNow && priceDiff > 1.09) {
     const currentPrice = freshChartData[freshChartData.length - 1].price;
     const profitPrice = currentPrice * KRAKEN_PROFIT;
     const maxPriceTime = HIKE_TIME_FRAME - maxPriceIndex;
