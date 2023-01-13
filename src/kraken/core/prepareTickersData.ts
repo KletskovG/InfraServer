@@ -6,7 +6,11 @@ import { scanHikeTickers } from "kraken/core/scanHikeTickers";
 
 export async function prepareTickersData(executeScan: boolean) {
   if (executeScan) {
-    scanHikeTickers();
+    await scanHikeTickers();
+
+    setTimeout(() => {
+      collectTickersInfo();
+    }, 1000 * 60 * 1);
     return;
   }
 

@@ -40,9 +40,11 @@ async function checkMaxDiff(tickerName: string) {
   if (isHikePerformingNow && priceDiff > 1.1) {
     const currentPrice = freshChartData[freshChartData.length - 1].price;
     const profitPrice = currentPrice * KRAKEN_PROFIT;
+    const maxPriceTime = HIKE_TIME_FRAME - maxPriceIndex;
+
     log("Important",
       `HIKE: ${ticker.ticker} +${priceDiff}%` +
-      `PICK: ${maxPriceIndex * 15}m ago` +
+      `PICK: ${maxPriceTime * 15}m ago` +
       `CURRENT PRICE: ${ceilNumber(currentPrice, 3)} profit price: ${ceilNumber(profitPrice, 3)}`
     );
     return;

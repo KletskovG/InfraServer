@@ -16,7 +16,6 @@ export function prepareTickersHandler(
 
   if (Number(scan) === 1) {
     res.send("SCAN");
-    log("Important", "Init hike scan");
     prepareTickersData(true);
     return;
   }
