@@ -15,7 +15,7 @@ export async function scanHikeTickers() {
 }
 
 async function checkMaxDiff(tickerName: string) {
-  const ticker = await Price.findOne({ticker: tickerName});
+  const ticker = await Price.findOne({ ticker: tickerName });
 
   if (ticker.prices.length < HIKE_TIME_FRAME) {
     return;
@@ -39,7 +39,9 @@ async function checkMaxDiff(tickerName: string) {
   const isHikePerformingNow = maxPriceIndex > 5;
   const priceDiff = ceilNumber(maxPrice.price / initialPrice, 2);
   log("Info", `MAX PRICE: ${tickerName} ${JSON.stringify(maxPrice)} DIFF: ${priceDiff}`);
-  if (isHikePerformingNow && priceDiff > 1.09) {
+  const isFiatHike = ticker.ticker.toUpperCase().endsWith("EUR") || ticker.ticker.toUpperCase().endsWith("USD");
+
+  if (isHikePerformingNow && priceDiff > 1.09 && isFiatHike) {
     const currentPrice = freshChartData[freshChartData.length - 1].price;
     const profitPrice = currentPrice * KRAKEN_PROFIT;
     const maxPriceTime = HIKE_TIME_FRAME - maxPriceIndex;
