@@ -3,6 +3,7 @@ import { getSecondsTimestamp } from "utils/getSecondsTimestamp";
 import { log } from "logger/logger";
 import { getPairInfo } from "kraken/marketapi/getPairInfo";
 import { scanHikeTickers } from "kraken/core/scanHikeTickers";
+import { IPriceModel } from "types/kraken/IPriceModel";
 
 let isScanRequired = true;
 
@@ -50,11 +51,15 @@ async function processTicker(
   };
 
   if (!storedTicker) {
-    Price.create({
+    const newTicker: IPriceModel = {
       ticker,
       timestamp,
+      isNew: true,
       prices: [tick],
-    });
+    };
+
+    Price.create(newTicker);
+    log("Important", `Found new currency: ${ticker}`);
     return;
   }
 

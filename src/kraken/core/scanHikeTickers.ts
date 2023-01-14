@@ -16,11 +16,12 @@ export async function scanHikeTickers() {
     log("Important", "No tickers available to scan");
   }
 
-  Object.entries(allAvailableTickers).forEach(async ([ticker, value]) => {
+  const tickers = Object.entries(allAvailableTickers);
+  tickers.forEach(async ([ticker, value]) => {
     await checkMaxDiff(ticker, value);
     return 1;
   });
-  log("Important", "Ticker Scan completed");
+  log("Important", `Ticker scan completed | ${tickers.length}`);
   // monitorOrders();
 }
 
