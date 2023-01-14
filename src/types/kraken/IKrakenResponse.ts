@@ -53,7 +53,7 @@ export interface IKrakenOHLCResponse extends IKrakenResponse {
   ]>;
 }
 
-type TickerResult = {
+export type TickerResult = {
   price: number;
 }
 

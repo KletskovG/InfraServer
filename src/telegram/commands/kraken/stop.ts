@@ -1,6 +1,6 @@
-import TelegrafContext from "telegraf/typings/context";
-import { stopMainLoop } from "kraken/core/mainLoop";
+// import TelegrafContext from "telegraf/typings/context";
+import { stopScan } from "kraken/core/prepareTickersData";
 
-export function stop(_: TelegrafContext) {
-  stopMainLoop();
+export function stop() {
+  stopScan();
 }

@@ -3,29 +3,45 @@ import { log } from "logger/logger";
 import { HIKE_TIME_FRAME, KRAKEN_PROFIT } from "const/kraken/core";
 // import { monitorOrders } from "kraken/core/orders/monitorOrders";
 import { ceilNumber } from "utils/ceilNumber";
+import { getSecondsTimestamp } from "utils/getSecondsTimestamp";
+import { getPairInfo } from "kraken/marketapi/getPairInfo";
+import { TickerResult } from "types/kraken/IKrakenResponse";
 
 export async function scanHikeTickers() {
   log("Info", "Scan hike tickers");
 
-  const allAvailableTickers = await Price.find({}, { ticker: true });
+  const allAvailableTickers = await getPairInfo("");
 
-  allAvailableTickers.forEach(async (ticker) => await checkMaxDiff(ticker.ticker));
+  if (!allAvailableTickers) {
+    log("Important", "No tickers available to scan");
+  }
+
+  Object.entries(allAvailableTickers).forEach(async ([ticker, value]) => {
+    await checkMaxDiff(ticker, value);
+    return 1;
+  });
   log("Important", "Ticker Scan completed");
   // monitorOrders();
 }
 
-async function checkMaxDiff(tickerName: string) {
-  const isFiatPair = tickerName.toUpperCase().endsWith("EUR") || tickerName.toUpperCase().endsWith("USD");
+async function checkMaxDiff(tickerName: string, lastState: TickerResult) {
+  const isFiatPair = tickerName.toUpperCase().endsWith("EUR") ||
+    tickerName.toUpperCase().endsWith("USD");
+
   if (!isFiatPair) {
     return;
   }
+
   const ticker = await Price.findOne({ ticker: tickerName });
 
-  if (ticker.prices.length < HIKE_TIME_FRAME || !isFiatPair) {
+  if (ticker.prices.length < HIKE_TIME_FRAME) {
     return;
   }
 
-  const freshChartData = ticker.prices.slice(-HIKE_TIME_FRAME);
+  const freshChartData = [
+    ...ticker.prices.slice(-HIKE_TIME_FRAME),
+    { ...lastState, timestamp: getSecondsTimestamp() }
+  ];
   const initialPrice = freshChartData[0].price;
   log("Info", `TICKER: ${JSON.stringify({ ticker: ticker.ticker, start: initialPrice })}`);
   let maxPrice = {

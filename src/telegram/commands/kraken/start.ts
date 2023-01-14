@@ -1,6 +1,5 @@
-import TelegrafContext from "telegraf/typings/context";
-import { startMainLoop } from "kraken/core/mainLoop";
+import { startScan } from "kraken/core/prepareTickersData";
 
-export function start(_: TelegrafContext) {
-  startMainLoop();
+export function start() {
+  startScan();
 }

@@ -4,13 +4,11 @@ import { log } from "logger/logger";
 import { getPairInfo } from "kraken/marketapi/getPairInfo";
 import { scanHikeTickers } from "kraken/core/scanHikeTickers";
 
-export async function prepareTickersData(executeScan: boolean) {
-  if (executeScan) {
-    await collectTickersInfo();
+let isScanRequired = true;
 
-    setTimeout(() => {
-      scanHikeTickers();
-    }, 1000 * 45 * 1);
+export async function prepareTickersData(executeScan: boolean) {
+  if (executeScan && isScanRequired) {
+    scanHikeTickers();
     return;
   }
 
@@ -70,4 +68,14 @@ async function processTicker(
     .catch(err => {
       console.log(err);
     });
+}
+
+export function stopScan() {
+  isScanRequired = false;
+  log("Important", "Hike scan stopped");
+}
+
+export function startScan() {
+  isScanRequired = true;
+  log("Important", "Hike scan enabled");
 }
