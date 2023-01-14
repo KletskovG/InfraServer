@@ -17,6 +17,7 @@ export async function scanHikeTickers() {
 async function checkMaxDiff(tickerName: string) {
   const ticker = await Price.findOne({ticker: tickerName});
 
+
   if (ticker.prices.length < HIKE_TIME_FRAME) {
     return;
   }
