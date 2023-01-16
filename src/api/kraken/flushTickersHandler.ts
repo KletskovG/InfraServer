@@ -27,7 +27,7 @@ export async function flushTickersHandler(req: PrepareTickersRequest, res: Respo
       })
       .catch(err => console.error(err));
   });
-  log("Important", "Ticker prices flushed");
+  log("Notify", "Ticker prices flushed");
   res.send("OK");
 
 }

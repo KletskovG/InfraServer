@@ -3,5 +3,5 @@ import { log } from "logger/logger";
 
 export async function cleanTickerPrices() {
   await Price.updateMany({}, { prices: [] });
-  log("Important", "Prices cleared");
+  log("Notify", "Prices cleared");
 }

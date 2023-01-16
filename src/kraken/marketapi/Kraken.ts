@@ -152,8 +152,8 @@ export class KrakenClient {
     return this.privateAPIMethod<IKrakenCancelAllResponse>("CancelAll");
   }
 
-  public getOHLCData<TPair extends string>(pair: string, since: number, interval: number) {
-    return this.publicAPIMethod<IKrakenPairInfoResponse<TPair>>("OHLC", {pair, since, interval});
+  public getOHLCData<TPair extends string>(pair: string, interval: number) {
+    return this.publicAPIMethod<IKrakenPairInfoResponse<TPair>>("OHLC", {pair, interval});
   }
 
   private publicAPIMethod<TResult extends IKrakenResponse>(

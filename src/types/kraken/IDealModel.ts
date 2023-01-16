@@ -1,7 +1,5 @@
 export interface IDealModel {
-  orderId: string;
+  triggerPrices: number[];
   buyPrice: number;
-  sellPrice: number;
-  defenseThershold: number;
   ticker: string;
 }

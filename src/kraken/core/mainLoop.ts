@@ -6,13 +6,13 @@ let isKrakenEnabled = true;
 
 export function stopMainLoop () {
   isKrakenEnabled = false;
-  log("Important", "Kraken bot stopped");
+  log("Notify", "Kraken bot stopped");
 }
 
 export function startMainLoop() {
   isKrakenEnabled = true;
   isBootRun = true;
-  log("Important", "Kraken bot started");
+  log("Notify", "Kraken bot started");
 }
 
 export async function mainLoop() {

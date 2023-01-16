@@ -77,10 +77,10 @@ async function processTicker(
 
 export function stopScan() {
   isScanRequired = false;
-  log("Important", "Hike scan stopped");
+  log("Notify", "Hike scan stopped");
 }
 
 export function startScan() {
   isScanRequired = true;
-  log("Important", "Hike scan enabled");
+  log("Notify", "Hike scan enabled");
 }

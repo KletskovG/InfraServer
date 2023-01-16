@@ -1,10 +1,9 @@
 import {Schema, model} from "mongoose";
-import type { IDealModel } from "types/kraken/ILastDealModel";
+import type { IDealModel } from "types/kraken/IDealModel";
 
 export const schema = new Schema<IDealModel>({
-  orderId: String,
+  triggerPrices: [Number],
   buyPrice: Number,
-  defenseThershold: Number,
   ticker: String,
 });
 

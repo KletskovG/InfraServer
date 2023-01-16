@@ -26,7 +26,9 @@ type EKrakenRoute =
   "/kraken/stop" |
   "/kraken/tickers/prepare" |
   "/kraken/tickers/flush" |
-  "/kraken/order/monitor"
+  "/kraken/order/monitor" |
+  "/kraken/order/update"
+
 
 type EGeneralRoute =
   "/" |

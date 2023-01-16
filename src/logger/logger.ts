@@ -3,7 +3,7 @@ import fs from "fs/promises";
 import { createReadStream, existsSync, createWriteStream, mkdirSync } from "fs";
 import { sendNotification } from "telegram";
 
-type TLogLevel = "Error" | "Info" | "Important";
+type TLogLevel = "Error" | "Info" | "Notify" | "Important";
 const LOGFILE_DIR = getEnvVariable("LOGFILE_PATH");
 
 export function log (level: TLogLevel, message: string, skipLogFile = false) {
@@ -25,6 +25,10 @@ export function log (level: TLogLevel, message: string, skipLogFile = false) {
 
   if (level === "Error") {
     sendNotification(`ERROR \n ${message}`);
+  }
+
+  if (level === "Notify") {
+    sendNotification(`${message}`);
   }
 
   if (level === "Important") {
@@ -83,7 +87,7 @@ export function flushLogs() {
       const freshLogs = logs.join("\n");
       writeStream.write(freshLogs);
       setTimeout(() => {
-        writeStream.close(() => log("Important", "LOGS FLUSHED"));
+        writeStream.close(() => log("Notify", "LOGS FLUSHED"));
       }, 10_000);
     })
     .catch(err => {

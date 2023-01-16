@@ -23,14 +23,14 @@ const PORT = getEnvVariable("PORT") || 3000;
 console.log(PORT);
 app.listen(PORT, () => {
   log(
-    "Important",
+    "Notify",
     `Infra server is up and running http://localhost:${PORT}`
   );
 });
 
 connectKrakenDB()
   .then(() => {
-    log("Important", "KRAKEN DB CONNECTED");
+    log("Notify", "KRAKEN DB CONNECTED");
     // monitorOrders();
   })
   .catch(error => {
