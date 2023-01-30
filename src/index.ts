@@ -7,7 +7,6 @@ import {
   log,
 } from "logger/logger";
 import { connectKrakenDB } from "kraken";
-// import { monitorOrders } from "kraken/core/orders/monitorOrders";
 
 const app = express();
 
