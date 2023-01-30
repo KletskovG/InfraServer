@@ -26,4 +26,14 @@ const currentJs2: Course<"js2", "https://up.htmlacademy.ru/ecmascript/19"> = {
   }
 };
 
-export const academyScrapeConfig = [currentJs2];
+const currentNodeApi: Course<"nodeapi", "https://up.htmlacademy.ru/nodejs-api/3"> = {
+  name: "nodeapi",
+  link: "https://up.htmlacademy.ru/nodejs-api/3",
+  protectActive: true,
+  additional: {
+    order: "/order_nodeapi",
+    projects: "https://up.htmlacademy.ru/nodejs-api/3/check/projects"
+  }
+};
+
+export const academyScrapeConfig = [currentJs2, currentNodeApi];
