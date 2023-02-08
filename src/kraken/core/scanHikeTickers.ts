@@ -57,7 +57,7 @@ async function checkMaxDiff(tickerName: string, lastState: TickerResult) {
       maxPriceIndex = i;
     }
   }
-  const isHikePerformingNow = maxPriceIndex > 5;
+  const isHikePerformingNow = maxPriceIndex > 6;
   const priceDiff = ceilNumber(maxPrice.price / initialPrice, 2);
   log("Info", `MAX PRICE: ${tickerName} ${JSON.stringify(maxPrice)} DIFF: ${priceDiff}`);
 

@@ -56,6 +56,7 @@ async function processTicker(
       timestamp,
       isNew: true,
       prices: [tick],
+      createdTimestamp: timestamp,
     };
 
     Price.create(newTicker);
