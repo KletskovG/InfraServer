@@ -66,8 +66,8 @@ async function checkMaxDiff(tickerName: string, lastState: TickerResult) {
     const maxPriceTime = HIKE_TIME_FRAME - maxPriceIndex;
 
     log("Important",
-      `HIKE: ${ticker.ticker} +${priceDiff}%` +
-      `PICK: ${maxPriceTime * 15}m ago` +
+      `HIKE: ${ticker.ticker} +${priceDiff}% ` +
+      `PICK: ${maxPriceTime * 15}m ago ` +
       `${buildAppUrl(ticker.ticker)}`
     );
     return;
