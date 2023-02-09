@@ -6,6 +6,7 @@ import { ceilNumber } from "utils/ceilNumber";
 import { getSecondsTimestamp } from "utils/getSecondsTimestamp";
 import { getPairInfo } from "kraken/marketapi/getPairInfo";
 import { TickerResult } from "types/kraken/IKrakenResponse";
+import { buildAppUrl } from "lib/kraken/buildAppUrl";
 
 export async function scanHikeTickers() {
   log("Info", "Scan hike tickers");
@@ -66,7 +67,8 @@ async function checkMaxDiff(tickerName: string, lastState: TickerResult) {
 
     log("Important",
       `HIKE: ${ticker.ticker} +${priceDiff}%` +
-      `PICK: ${maxPriceTime * 15}m ago`
+      `PICK: ${maxPriceTime * 15}m ago` +
+      `${buildAppUrl(ticker.ticker)}`
     );
     return;
   }
