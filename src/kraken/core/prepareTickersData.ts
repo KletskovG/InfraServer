@@ -4,6 +4,8 @@ import { log } from "logger/logger";
 import { getPairInfo } from "kraken/marketapi/getPairInfo";
 import { scanHikeTickers } from "kraken/core/scanHikeTickers";
 import { IPriceModel } from "types/kraken/IPriceModel";
+import { IPOTickers } from "types/kraken/IPOTickers";
+import { buildAppUrl } from "lib/kraken/buildAppUrl";
 
 let isScanRequired = true;
 
@@ -44,7 +46,7 @@ async function processTicker(
   timestamp: number,
 ) {
   const storedTicker = await Price.findOne({ ticker }, { _id: true, ticker: true });
-  console.log(storedTicker);
+
   const tick = {
     price: value.price,
     timestamp,
@@ -70,7 +72,9 @@ async function processTicker(
     },
     timestamp,
   })
-    .then(() => undefined)
+    .then(() => {
+      checkIPOPrice(storedTicker);
+    })
     .catch(err => {
       console.log(err);
     });
@@ -84,4 +88,15 @@ export function stopScan() {
 export function startScan() {
   isScanRequired = true;
   log("Notify", "Hike scan enabled");
+}
+
+async function checkIPOPrice(ticker: IPriceModel) {
+  log("Info", `Check IPO price ${ticker.ticker}`);
+  if (IPOTickers.find((el) => el === ticker.ticker)) {
+    log("Important", `Ticker is available to buy: ${ticker.ticker} ${buildAppUrl(ticker.ticker)}`);
+    log("Info", `${Number(ticker.prices[ticker.prices.length - 1])}`);
+    return Number(ticker.prices[ticker.prices.length - 1]) > 0;
+  }
+
+  return false;
 }
