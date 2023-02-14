@@ -93,9 +93,10 @@ export function startScan() {
 async function checkIPOPrice(ticker: IPriceModel) {
   log("Info", `Check IPO price ${ticker.ticker}`);
   if (IPOTickers.find((el) => el === ticker.ticker)) {
-    log("Important", `Ticker is available to buy: ${ticker.ticker} ${buildAppUrl(ticker.ticker)}`);
-    log("Info", `${Number(ticker.prices[ticker.prices.length - 1])}`);
-    return Number(ticker.prices[ticker.prices.length - 1]) > 0;
+    const lastTickerPrice = ticker.prices[ticker.prices.length - 1];
+    log("Important", `Ticker is available to buy: ${ticker.ticker} ${lastTickerPrice} ${buildAppUrl(ticker.ticker)}`);
+    log("Info", `${Number(lastTickerPrice)}`);
+    return Number(lastTickerPrice) > 0;
   }
 
   return false;
