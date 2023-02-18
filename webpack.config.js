@@ -29,6 +29,8 @@ module.exports = {
       lib: path.resolve(__dirname, "src/lib/"),
       kraken: path.resolve(__dirname, "src/kraken/"),
       logger: path.resolve(__dirname, "src/logger/"),
+      binance: path.resolve(__dirname, "src/binance/"),
+      db: path.resolve(__dirname, "src/db/"),
     }
   },
   module: {

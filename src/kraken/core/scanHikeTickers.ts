@@ -1,4 +1,4 @@
-import { Price } from "kraken/db/models/price";
+import { Price } from "db/models/price";
 import { log } from "logger/logger";
 import { HIKE_TIME_FRAME } from "const/kraken/core";
 // import { monitorOrders } from "kraken/core/orders/monitorOrders";

@@ -25,6 +25,8 @@
         "lib/": ["./src/lib/*"],
         "kraken/": ["./src/kraken/*"],
         "logger/": ["./src/logger/*"],
+        "binance/": ["./src/binance/*"],
+        "db/": ["./src/db/*"],
       },
       "typeRoots": ["node_modules/@types", "./src/typings"],
       "types": [

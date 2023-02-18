@@ -1,7 +1,7 @@
 import mongoose  from "mongoose";
 import { getEnvVariable } from "utils/getEnvVariable";
 
-export const connectKrakenDB = () => {
+export const connectDB = () => {
   const DB_CONNECTION = getEnvVariable("KRAKEN_DB_CONNECT");
 
   return new Promise((res, reject) => {

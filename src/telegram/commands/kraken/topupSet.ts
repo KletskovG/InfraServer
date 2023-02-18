@@ -1,5 +1,5 @@
 import TelegrafContext from "telegraf/typings/context";
-import { Balance } from "kraken/db/models/balance";
+import { Balance } from "db/models/balance";
 import { getMessageWithText } from "telegram/lib/getMessageWithText";
 import {log} from "logger/logger";
 

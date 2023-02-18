@@ -1,19 +1,21 @@
 export type EEnvVariable =
-    "BOT_TOKEN" |
-    "CHAT_NUMBER" |
-    "PORT" |
-    "ACADEMY_EMAIL" |
-    "ACADEMY_PWD" |
-    "ACADEMY_CHAT" |
-    "ACADEMY_SECOND" |
-    "KRAKEN_DB_CONNECT" |
-    "KRAKEN_API_KEY" |
-    "KRAKEN_API_SIGN" |
-    "LOGFILE_PATH" |
-    "KRAKEN_OHLC_DB_CONNECT"
+  | "BOT_TOKEN"
+  | "CHAT_NUMBER"
+  | "PORT"
+  | "ACADEMY_EMAIL"
+  | "ACADEMY_PWD"
+  | "ACADEMY_CHAT"
+  | "ACADEMY_SECOND"
+  | "KRAKEN_DB_CONNECT"
+  | "KRAKEN_API_KEY"
+  | "KRAKEN_API_SIGN"
+  | "LOGFILE_PATH"
+  | "KRAKEN_OHLC_DB_CONNECT"
+  | "BINANCE_API_KEY"
+  | "BINANCE_SECRET"
 
 
-export enum EArgvVariable {
+export const enum EArgvVariable {
   BOT_TOKEN = 2,
   CHAT_NUMBER,
   PORT,
@@ -28,6 +30,8 @@ export enum EArgvVariable {
   KRAKEN_API_KEY,
   KRAKEN_API_SIGN,
   KRAKEN_OHLC_DB_CONNECT,
+  BINANCE_API_KEY,
+  BINANCE_SECRET,
 }
 
 export const ArgvMap: Record<EEnvVariable, EArgvVariable> = {
@@ -45,4 +49,7 @@ export const ArgvMap: Record<EEnvVariable, EArgvVariable> = {
   KRAKEN_API_KEY: 11,
   KRAKEN_API_SIGN: 12,
   KRAKEN_OHLC_DB_CONNECT: 13,
+
+  BINANCE_API_KEY: 14,
+  BINANCE_SECRET: 15,
 };

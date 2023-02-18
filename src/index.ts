@@ -6,7 +6,7 @@ import { getEnvVariable } from "utils/getEnvVariable";
 import {
   log,
 } from "logger/logger";
-import { connectKrakenDB } from "kraken";
+import { connectDB } from "db/dbconnection";
 
 const app = express();
 
@@ -27,11 +27,12 @@ app.listen(PORT, () => {
   );
 });
 
-connectKrakenDB()
+connectDB()
   .then(() => {
-    log("Notify", "KRAKEN DB CONNECTED");
+    log("Notify", "CRYPTO DB CONNECTED");
+    // scanTickers();
     // monitorOrders();
   })
-  .catch(error => {
+  .catch((error: Error) => {
     log("Error", `DB ERROR: ${JSON.stringify(error.message)}`);
   });

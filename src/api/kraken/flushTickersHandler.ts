@@ -1,5 +1,5 @@
 import { Response, Request } from "express";
-import { Price } from "kraken/db/models/price";
+import { Price } from "db/models/price";
 import { log } from "logger/logger";
 
 type PrepareTickerQuery = {

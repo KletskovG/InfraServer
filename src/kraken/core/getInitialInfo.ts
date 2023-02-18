@@ -1,11 +1,10 @@
 import { log } from "logger/logger";
-import { Balance } from "kraken/db/models/balance";
-import { Deal } from "kraken/db/models/deal";
+import { Balance } from "db/models/balance";
+import { Deal } from "db/models/deal";
 import { getCurrentBalance } from "kraken/marketapi/getCurrentBalance";
 import { getOpenOrders } from "kraken/marketapi/getOpenOrders";
 import { getClosedOrders } from "kraken/marketapi/getClosedOrders";
 import { IBalanceModel } from "types/kraken/IBalanceModel";
-// import { ILastDealModel } from "types/kraken/ILastDealModel";
 import { IOrder } from "types/kraken/IKrakenResponse";
 
 type TInitialInfo = {
@@ -13,7 +12,6 @@ type TInitialInfo = {
   lastDeal: any,
   activeOrder: IOrder,
   lastOrder: IOrder,
-  // prices
 }
 
 export async function getInitialInfo() {

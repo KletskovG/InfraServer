@@ -1,4 +1,4 @@
-import { Price } from "kraken/db/models/price";
+import { Price } from "db/models/price";
 import { getSecondsTimestamp } from "utils/getSecondsTimestamp";
 import { log } from "logger/logger";
 import { getPairInfo } from "kraken/marketapi/getPairInfo";

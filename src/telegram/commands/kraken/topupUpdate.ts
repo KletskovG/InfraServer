@@ -1,6 +1,6 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import TelegrafContext from "telegraf/typings/context";
-import { Balance } from "kraken/db/models/balance";
+import { Balance } from "db/models/balance";
 import {log} from "logger/logger";
 
 export async function topupUpdate(ctx: TelegrafContext) {
