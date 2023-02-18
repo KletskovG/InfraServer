@@ -1,1 +1,1 @@
-export const IPOTickers = ["BLURUSD", "BLUREUR"] as const;
+export const IPOTickers = [] as const;

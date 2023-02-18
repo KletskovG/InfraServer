@@ -5,6 +5,7 @@ import { getPairInfo } from "kraken/marketapi/getPairInfo";
 import { scanHikeTickers } from "kraken/core/scanHikeTickers";
 import { IPriceModel } from "types/kraken/IPriceModel";
 import { IPOTickers } from "types/kraken/IPOTickers";
+import type { Document } from "mongoose";
 import { buildAppUrl } from "lib/kraken/buildAppUrl";
 
 let isScanRequired = true;
@@ -90,15 +91,17 @@ export function startScan() {
   log("Notify", "Hike scan enabled");
 }
 
-async function checkIPOPrice(ticker: IPriceModel) {
-  log("Info", `Check IPO price ${ticker.ticker}`);
-  log("Info", IPOTickers.join(""));
-  log("Info", IPOTickers.find(el => el === ticker.ticker));
+async function checkIPOPrice(ticker: Document<unknown, unknown, IPriceModel> & IPriceModel) {
   if (IPOTickers.find((el) => el === ticker.ticker)) {
-    const lastTickerPrice = ticker.prices[ticker.prices.length - 1];
-    log("Important", `Ticker is available to buy: ${ticker.ticker} ${lastTickerPrice} ${buildAppUrl(ticker.ticker)}`);
-    log("Info", `${Number(lastTickerPrice)}`);
-    return Number(lastTickerPrice) > 0;
+    log("Info", `Check IPO price ${ticker.ticker}`);
+    const lastTickerPrices = await Price.findById(ticker._id, {prices: true});
+    if (lastTickerPrices?.prices.length) {
+      const lastPrice = lastTickerPrices.prices.pop();
+
+      if (Number(lastPrice.price) > 0) {
+        log("Important", `Ticker is available to buy: ${ticker.ticker} ${lastPrice.price} ${buildAppUrl(ticker.ticker)}`);
+      }
+    }
   }
 
   return false;
