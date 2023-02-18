@@ -42,7 +42,7 @@ async function collectTickersInfo() {
 
 async function processTicker(
   ticker: string,
-  value: {price: number},
+  value: { price: number },
   timestamp: number,
 ) {
   const storedTicker = await Price.findOne({ ticker }, { _id: true, ticker: true });
@@ -92,6 +92,8 @@ export function startScan() {
 
 async function checkIPOPrice(ticker: IPriceModel) {
   log("Info", `Check IPO price ${ticker.ticker}`);
+  log("Info", IPOTickers.join(""));
+  log("Info", IPOTickers.find(el => el === ticker.ticker));
   if (IPOTickers.find((el) => el === ticker.ticker)) {
     const lastTickerPrice = ticker.prices[ticker.prices.length - 1];
     log("Important", `Ticker is available to buy: ${ticker.ticker} ${lastTickerPrice} ${buildAppUrl(ticker.ticker)}`);
