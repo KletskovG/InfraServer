@@ -20,10 +20,6 @@ export async function monitorBinanceTickers() {
     return;
   }
 
-  exchangeInfo.data.symbols.push({
-    symbol: "GLEBUSD",
-  });
-
   for (let i = 0; i < exchangeInfo.data.symbols.length; i++) {
     const tickerName = exchangeInfo.data.symbols[i];
     if (await isTickerExsists(tickerName.symbol)) {
@@ -64,7 +60,5 @@ async function collectExchangeInfo(
 
 async function isTickerExsists(tickerName: string): Promise<boolean> {
   const ticker = await BinanceTicker.findOne({ticker: tickerName});
-  console.log("IS TICKER exsists");
-  console.log(ticker);
   return Boolean(ticker);
 }

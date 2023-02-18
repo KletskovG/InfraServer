@@ -1,3 +1,3 @@
 export * from "./EHttpMethod";
-export * from "./ERoute";
+export * from "./TRoute";
 export * from "./IRequest";

@@ -1,9 +1,9 @@
 import { Router, RequestHandler } from "express";
-import { ERoute, EHTTPMethod } from "types";
+import { TRoute, EHTTPMethod } from "types";
 
 export function registerHandler(
   router: Router,
-  route: ERoute,
+  route: TRoute,
   method: EHTTPMethod,
   handler: RequestHandler,
 ) {

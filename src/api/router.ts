@@ -14,6 +14,7 @@ import budgetRouter from "api/budget/budgetRouter";
 import academyRouter from "api/academy/academyRouter";
 import xmrRouter from "api/xmr/xmrRouter";
 import krakenRouter from "api/kraken/krakenRouter";
+import binanceRouter from "api/binance/binanceRouter";
 
 
 export function buildRouter(): Router {
@@ -23,6 +24,7 @@ export function buildRouter(): Router {
   router.use(academyRouter);
   router.use(xmrRouter);
   router.use(krakenRouter);
+  router.use(binanceRouter);
 
   registerHandler(
     router,
