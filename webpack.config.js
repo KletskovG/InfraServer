@@ -31,6 +31,7 @@ module.exports = {
       logger: path.resolve(__dirname, "src/logger/"),
       binance: path.resolve(__dirname, "src/binance/"),
       db: path.resolve(__dirname, "src/db/"),
+      tinkoff: path.resolve(__dirname, "src/tinkoff/"),
     }
   },
   module: {

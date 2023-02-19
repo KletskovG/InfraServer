@@ -27,6 +27,7 @@
         "logger/": ["./src/logger/*"],
         "binance/": ["./src/binance/*"],
         "db/": ["./src/db/*"],
+        "tinkoff/": ["./src/tinkoff/*"],
       },
       "typeRoots": ["node_modules/@types", "./src/typings"],
       "types": [

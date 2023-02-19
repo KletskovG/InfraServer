@@ -4,7 +4,8 @@ export type TRoute =
   | TBudgetRoute
   | TXMRRoute
   | TKrakenRoute
-  | TBinancTRoute
+  | TBinanceRoute
+  | TTinkoffRoute
 
 type TAcademyRoute =
   | "/academy"
@@ -30,8 +31,11 @@ type TKrakenRoute =
   | "/kraken/order/monitor"
   | "/kraken/order/update"
 
-type TBinancTRoute =
+type TBinanceRoute =
   | "/binance/tickers/prepare"
+
+type TTinkoffRoute =
+  | "/tinkoff/tickers/prepare"
 
 
 type TGeneralRoute =

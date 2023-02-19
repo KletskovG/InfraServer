@@ -12,6 +12,7 @@ export async function monitorBinanceTickers() {
 
   if (!amountOfTickers || !binanceClient) {
     log("Error", "Montior binance tickers, not enough data to start");
+    return;
   }
 
   const exchangeInfo = await collectExchangeInfo(binanceClient);
