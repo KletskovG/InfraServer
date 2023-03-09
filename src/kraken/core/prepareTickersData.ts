@@ -95,7 +95,7 @@ async function checkIPOPrice(ticker: Document<unknown, unknown, IPriceModel> & I
   if (IPOTickers.find((el) => el === ticker.ticker)) {
     log("Info", `Check IPO price ${ticker.ticker}`);
     const lastTickerPrices = await Price.findById(ticker._id, {prices: true});
-    if (lastTickerPrices?.prices.length) {
+    if (lastTickerPrices?.prices?.length) {
       const lastPrice = lastTickerPrices.prices.pop();
 
       if (Number(lastPrice.price) > 0) {
