@@ -25,7 +25,7 @@ export async function monitorBinanceTickers() {
     const tickerName = exchangeInfo.data.symbols[i];
     if (await isTickerExsists(tickerName.symbol)) {
       continue;
-    } else {
+    } else if (tickerName.symbol.endsWith("USD") || tickerName.symbol.endsWith("EUR")) {
       log("Important", `BINANCE FOUND NEW CURRENCY ${tickerName.symbol}`);
       const timestamp = getSecondsTimestamp();
       const binanceTicker: IBinanceTickerModel = {
