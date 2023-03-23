@@ -16,24 +16,14 @@ type Course<name extends openedCoursesNames, url extends string>  = {
   },
 } & CourseConfig<name, url>;
 
-const currentJs2: Course<"js2", "https://up.htmlacademy.ru/ecmascript/19"> = {
-  name: "js2",
-  link: "https://up.htmlacademy.ru/ecmascript/19",
+const currentJs1: Course<"js1", "https://up.htmlacademy.ru/javascript/28"> = {
+  name: "js1",
+  link: "https://up.htmlacademy.ru/javascript/28",
   protectActive: true,
   additional: {
-    order: "/order_js2",
-    projects: "https://up.htmlacademy.ru/ecmascript/19/check/projects",
+    order: "/order_js1",
+    projects: "https://up.htmlacademy.ru/javascript/28/check/projects",
   }
 };
 
-const currentNodeApi: Course<"nodeapi", "https://up.htmlacademy.ru/nodejs-api/3"> = {
-  name: "nodeapi",
-  link: "https://up.htmlacademy.ru/nodejs-api/3",
-  protectActive: true,
-  additional: {
-    order: "/order_nodeapi",
-    projects: "https://up.htmlacademy.ru/nodejs-api/3/check/projects"
-  }
-};
-
-export const academyScrapeConfig = [currentJs2, currentNodeApi];
+export const academyScrapeConfig = [currentJs1];

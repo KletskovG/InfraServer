@@ -1,1 +1,1 @@
-export const IPOTickers = ["GMXUSD", "GMXEUR"] as const;
+export const IPOTickers = [] as const;
