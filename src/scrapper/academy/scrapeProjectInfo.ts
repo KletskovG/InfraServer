@@ -3,6 +3,7 @@ import { HOSTNAME } from "const";
 import { IScrapeResult } from "types";
 import { createPuppeteerInstance } from "scrapper/createPuppeteerInstance";
 import { getEnvVariable } from "utils/getEnvVariable";
+import { log } from "logger/logger";
 
 const ACADEMY_EMAIL = getEnvVariable("ACADEMY_EMAIL");
 const ACADEMY_PWD = getEnvVariable("ACADEMY_PWD");
@@ -68,6 +69,7 @@ export async function scrapeProjectInfo(): Promise<string | null> {
     }
 
     const course = academyScrapeConfig[i];
+    log("Notify", `Searching ${course.name}`);
     const courseInfo = await scrapeCourse(course.additional.projects);
     result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;
