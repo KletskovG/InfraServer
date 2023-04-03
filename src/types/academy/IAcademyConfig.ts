@@ -26,4 +26,14 @@ const currentJs1: Course<"js1", "https://up.htmlacademy.ru/javascript/28"> = {
   }
 };
 
-export const academyScrapeConfig = [currentJs1];
+const currentReact: Course<"react", "https://up.htmlacademy.ru/react/12"> = {
+  name: "react",
+  link: "https://up.htmlacademy.ru/react/12",
+  protectActive: true,
+  additional: {
+    order: "/order_react",
+    projects: "https://up.htmlacademy.ru/react/12/check/projects"
+  }
+};
+
+export const academyScrapeConfig = [currentJs1, currentReact];
