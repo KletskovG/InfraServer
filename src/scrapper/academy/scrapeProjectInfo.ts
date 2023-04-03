@@ -69,7 +69,7 @@ export async function scrapeProjectInfo(): Promise<string | null> {
     }
 
     const course = academyScrapeConfig[i];
-    log("Notify", `Searching ${course.name}`);
+    log("Info", `Searching ${course.name}`);
     const courseInfo = await scrapeCourse(course.additional.projects);
     result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;
