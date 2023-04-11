@@ -16,16 +16,6 @@ type Course<name extends openedCoursesNames, url extends string>  = {
   },
 } & CourseConfig<name, url>;
 
-const currentJs1: Course<"js1", "https://up.htmlacademy.ru/javascript/28"> = {
-  name: "js1",
-  link: "https://up.htmlacademy.ru/javascript/28",
-  protectActive: true,
-  additional: {
-    order: "/order_js1",
-    projects: "https://up.htmlacademy.ru/javascript/28/check/projects",
-  }
-};
-
 const currentReact: Course<"react", "https://up.htmlacademy.ru/react/12"> = {
   name: "react",
   link: "https://up.htmlacademy.ru/react/12",
@@ -36,4 +26,4 @@ const currentReact: Course<"react", "https://up.htmlacademy.ru/react/12"> = {
   }
 };
 
-export const academyScrapeConfig = [currentJs1, currentReact];
+export const academyScrapeConfig = [currentReact];
