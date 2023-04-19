@@ -88,8 +88,8 @@ export async function scrapeProjectInfo(): Promise<string | null> {
       Order
       ${orderLink}
 
-      Guides
-      ${course.additional.guides || "In progress"}`;
+      Projects
+      ${course.additional.projects || "No projects link"}`;
 
       result = `!!! ${result}`;
     } else if (courseInfo.protectActiveText.length) {

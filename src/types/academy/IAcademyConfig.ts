@@ -1,5 +1,5 @@
 export type orderBotCommand = "/order";
-export type openedCoursesNames = "react" | "js1" | "js2" | "nodeapi";
+export type openedCoursesNames = "react" | "js1" | "js2" | "nodeapi" | "nest";
 
 type CourseConfig<name extends openedCoursesNames, url extends string> = {
   name: name,
@@ -26,4 +26,14 @@ const currentReact: Course<"react", "https://up.htmlacademy.ru/react/12"> = {
   }
 };
 
-export const academyScrapeConfig = [currentReact];
+const currentNest: Course<"nest", "https://up.htmlacademy.ru/nodejs-2/3"> = {
+  name: "nest",
+  link: "https://up.htmlacademy.ru/nodejs-2/3",
+  protectActive: true,
+  additional: {
+    order: "/order_nest",
+    projects: "https://up.htmlacademy.ru/nodejs-2/3/check/projects"
+  }
+};
+
+export const academyScrapeConfig = [currentReact, currentNest];
