@@ -15,19 +15,24 @@ export function getAcademyConfigHandler(_: unknown, res: Response) {
     });
 }
 
-type SetAcademyConfigRequest = Request<unknown, unknown, ICourseModel[], unknown>;
+type SetAcademyConfigRequest = Request<unknown, unknown, {courses: ICourseModel[], pwd: string}, unknown>;
 
 export function setAcademyConfigHandler(req: SetAcademyConfigRequest, res: Response) {
-  const data = req.body;
-  console.log("SET REQUEST DATA");
-  console.log(data);
+  const {courses, pwd} = req.body;
+  const configPass = getEnvVariable("ACADEMY_CONFIG_PASS");
+  console.log("SET REQUEST courses");
+  console.log(courses);
+
+  if (pwd !== configPass) {
+    res.status(401).send();
+    log("Error", "Wrong creds for bot config update");
+    return;
+  }
 
   res.status(200).send("OK");
 
-  for (const course of data) {
-    // TODO: Check for auto-upsert, or try to find first, and create if empty
+  for (const course of courses) {
     AcademyConfigModel.findOneAndUpdate({name: course.name}, course, { upsert: true })
-      // .exec();
       .then(res => {
         console.log("UPDATE RESULT");
         console.log(res);
@@ -37,19 +42,4 @@ export function setAcademyConfigHandler(req: SetAcademyConfigRequest, res: Respo
         log("Error", `Set academy config error ${JSON.stringify(err)}`);
       });
   }
-}
-
-type PassRequest = Request<unknown, unknown, unknown, {pass?: string}>;
-
-export function academyConfigPassHandler(req: PassRequest, res: Response) {
-  const { pass } = req.query;
-
-  const configPass = getEnvVariable("ACADEMY_CONFIG_PASS");
-
-  if (pass !== configPass) {
-    res.status(401).send();
-    return;
-  }
-
-  res.status(200).send("OK");
 }
