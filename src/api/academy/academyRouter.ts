@@ -4,6 +4,8 @@ import {
   academyHandler,
   homeworksHandler,
   orderProjectHandler,
+  getAcademyConfigHandler,
+  setAcademyConfigHandler,
 } from "api";
 
 const academyRouter = Router();
@@ -26,5 +28,16 @@ registerHandler(
   "get",
   orderProjectHandler
 );
-
+registerHandler(
+  academyRouter,
+  "/academy/config",
+  "get",
+  getAcademyConfigHandler
+);
+registerHandler(
+  academyRouter,
+  "/academy/config",
+  "post",
+  setAcademyConfigHandler
+);
 export default academyRouter;

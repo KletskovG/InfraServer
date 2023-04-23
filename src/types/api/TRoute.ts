@@ -11,6 +11,8 @@ type TAcademyRoute =
   | "/academy"
   | "/academy/order/:course"
   | "/academy/homeworks"
+  | "/academy/config"
+  | "/academy/pass"
 
 type TBudgetRoute =
   | "/budget/dates/:month/:year"

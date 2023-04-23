@@ -1,9 +1,10 @@
-import { academyScrapeConfig } from "types";
+// import { academyScrapeConfig } from "types";
 import { HOSTNAME } from "const";
 import { IScrapeResult } from "types";
 import { createPuppeteerInstance } from "scrapper/createPuppeteerInstance";
 import { getEnvVariable } from "utils/getEnvVariable";
-import { log } from "logger/logger";
+import { AcademyConfigModel  } from "db/models/academyScrape";
+// import { log } from "logger/logger";
 
 const ACADEMY_EMAIL = getEnvVariable("ACADEMY_EMAIL");
 const ACADEMY_PWD = getEnvVariable("ACADEMY_PWD");
@@ -57,19 +58,18 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
 export async function scrapeProjectInfo(): Promise<string | null> {
   let result = "Scrape result \n";
 
+  const academyScrapeConfig = await AcademyConfigModel.find({});
 
-  if (!academyScrapeConfig.some(course => course.protectActive)) {
+  if (!academyScrapeConfig.length && !academyScrapeConfig.some(course => course.protectActive)) {
     return null;
   }
 
   for (let i = 0; i < academyScrapeConfig.length; i++) {
     if (!academyScrapeConfig[i].protectActive) {
-      console.log(academyScrapeConfig[i].name);
       continue;
     }
 
     const course = academyScrapeConfig[i];
-    log("Info", `Searching ${course.name}`);
     const courseInfo = await scrapeCourse(course.additional.projects);
     result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;

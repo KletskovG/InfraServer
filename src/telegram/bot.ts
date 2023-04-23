@@ -2,7 +2,7 @@ import { Telegraf } from "telegraf";
 import { getEnvVariable } from "utils/getEnvVariable";
 import {
   EBotCommands,
-  academyScrapeConfig,
+  // academyScrapeConfig,
 } from "types";
 import TelegrafContext from "telegraf/typings/context";
 import {
@@ -11,7 +11,7 @@ import {
   tag,
   academy,
   homeworks,
-  order,
+  // order,
   status,
   start,
   stop,
@@ -55,9 +55,9 @@ registerCommandHanlder("kraken_topup_set", topupSet, true);
 registerCommandHanlder("kraken_topup_update", topupUpdate, true);
 registerCommandHanlder("kraken_deal", addDeal, true);
 
-academyScrapeConfig.forEach(course => {
-  registerCommandHanlder(course.additional.order, order(course.name));
-});
+// academyScrapeConfig.forEach(course => {
+//   registerCommandHanlder(course.additional.order, order(course.name));
+// });
 
 
 export function sendNotification(message: string, chaitId = CHAT_NUMBER) {
