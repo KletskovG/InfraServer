@@ -3,10 +3,11 @@ import { getSecondsTimestamp } from "utils/getSecondsTimestamp";
 import { log } from "logger/logger";
 import { getPairInfo } from "kraken/marketapi/getPairInfo";
 import { scanHikeTickers } from "kraken/core/scanHikeTickers";
+import { getIPOConfig } from "kraken/core/getIPOConfig";
 import { IPriceModel } from "types/kraken/IPriceModel";
-import { IPOTickers } from "types/kraken/IPOTickers";
 import type { Document } from "mongoose";
 import { buildAppUrl } from "lib/kraken/buildAppUrl";
+import type { IIPOTickerModel } from "types/shared/IPOTickerModel";
 
 let isScanRequired = true;
 
@@ -23,7 +24,10 @@ async function collectTickersInfo() {
   const timestamp = getSecondsTimestamp();
 
   log("Info", "PREPARE TICKER INFO");
+  // TODO: Use promise all here
   const marketTickers = await getPairInfo("");
+
+  const ipoconfig = await getIPOConfig("kraken");
 
   if (!marketTickers) {
     log("Error", "prepareTickersData: Tickers is empty");
@@ -33,7 +37,12 @@ async function collectTickersInfo() {
   const entries = Object.entries(marketTickers);
   try {
     for (const [ticker, value] of entries) {
-      processTicker(ticker, value, timestamp);
+      processTicker(
+        ticker,
+        value,
+        timestamp,
+        ipoconfig
+      );
     }
   } catch (error) {
     log("Error", `prepareTickersData ${JSON.stringify(error)}`);
@@ -45,6 +54,7 @@ async function processTicker(
   ticker: string,
   value: { price: number },
   timestamp: number,
+  ipoconfig: IIPOTickerModel[]
 ) {
   const storedTicker = await Price.findOne({ ticker }, { _id: true, ticker: true });
 
@@ -74,7 +84,7 @@ async function processTicker(
     timestamp,
   })
     .then(() => {
-      checkIPOPrice(storedTicker);
+      checkIPOPrice(storedTicker, ipoconfig);
     })
     .catch(err => {
       console.log(err);
@@ -91,19 +101,24 @@ export function startScan() {
   log("Notify", "Hike scan enabled");
 }
 
-async function checkIPOPrice(ticker: Document<unknown, unknown, IPriceModel> & IPriceModel) {
-  if (IPOTickers.find((el) => el === ticker.ticker)) {
-    log("Info", `Check IPO price ${ticker.ticker}`);
-    const lastTickerPrices = await Price.findById(ticker._id, {prices: true});
-    log("Info", `${ticker.ticker} prices ${JSON.stringify(lastTickerPrices.prices)}`);
-    if (lastTickerPrices?.prices?.length) {
-      const lastPrice = lastTickerPrices.prices.pop();
-
-      if (Number(lastPrice.price) > 0) {
-        log("Important", `Ticker is available to buy: ${ticker.ticker} ${lastPrice.price} ${buildAppUrl(ticker.ticker)}`);
-      }
-    }
+async function checkIPOPrice(
+  ticker: Document<unknown, unknown, IPriceModel> & IPriceModel,
+  ipoconfig: IIPOTickerModel[]
+) {
+  if (!ipoconfig.find((el) => el.ticker === ticker.ticker)) {
+    return false;
   }
 
-  return false;
+  log("Info", `Check IPO price ${ticker.ticker}`);
+  const lastTickerPrices = await Price.findById(ticker._id, {prices: true});
+
+  if (!lastTickerPrices?.prices?.length) {
+    return false;
+  }
+
+  const lastPrice = lastTickerPrices.prices.pop();
+
+  if (Number(lastPrice.price) > 0) {
+    log("Important", `Ticker is available to buy: ${ticker.ticker} ${lastPrice.price} ${buildAppUrl(ticker.ticker)}`);
+  }
 }
