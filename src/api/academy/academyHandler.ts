@@ -13,7 +13,8 @@ export function academyHandler(_: unknown, res: Response) {
           sendNotification(result, academyChatId);
           res.status(200).send(result);
         } else {
-          res.status(200).end();
+          // res.status(200).end();
+          res.status(200).send("No Projects, will be able to turn off");
         }
       })
       .catch(() => {

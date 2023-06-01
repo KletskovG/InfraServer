@@ -74,9 +74,11 @@ export async function scrapeProjectInfo(): Promise<string | null> {
     result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;
 
-    result += amountOfProjects > 0
-      ? `\nAmount of available projects - ${amountOfProjects}`
-      : "\n No projects";
+    if (amountOfProjects > 0) {
+      result += `\nAmount of available projects - ${amountOfProjects}`;
+    } else {
+      return null;
+    }
 
     if (courseInfo.isCheckAvailable) {
       const orderLink = course.additional.order || `${HOSTNAME}/academy/order/${course.name}`;
