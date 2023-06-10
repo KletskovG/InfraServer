@@ -13,9 +13,9 @@ import {
 import budgetRouter from "api/budget/budgetRouter";
 import academyRouter from "api/academy/academyRouter";
 import xmrRouter from "api/xmr/xmrRouter";
-import krakenRouter from "api/kraken/krakenRouter";
-import binanceRouter from "api/binance/binanceRouter";
-import tinkoffRouter from "api/tinkoff/tinkoffRouter";
+// import krakenRouter from "api/kraken/krakenRouter";
+// import binanceRouter from "api/binance/binanceRouter";
+// import tinkoffRouter from "api/tinkoff/tinkoffRouter";
 
 
 export function buildRouter(): Router {
@@ -24,9 +24,9 @@ export function buildRouter(): Router {
   router.use(budgetRouter);
   router.use(academyRouter);
   router.use(xmrRouter);
-  router.use(krakenRouter);
-  router.use(binanceRouter);
-  router.use(tinkoffRouter);
+  // router.use(krakenRouter);
+  // router.use(binanceRouter);
+  // router.use(tinkoffRouter);
 
   registerHandler(
     router,
