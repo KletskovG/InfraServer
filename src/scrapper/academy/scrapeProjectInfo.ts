@@ -57,6 +57,7 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
 
 export async function scrapeProjectInfo(): Promise<string | null> {
   let result = "Scrape result \n";
+  let isAnyProjectsPresent = false;
 
   const academyScrapeConfig = await AcademyConfigModel.find({});
 
@@ -76,8 +77,7 @@ export async function scrapeProjectInfo(): Promise<string | null> {
 
     if (amountOfProjects > 0) {
       result += `\nAmount of available projects - ${amountOfProjects}`;
-    } else {
-      return null;
+      isAnyProjectsPresent = true;
     }
 
     if (courseInfo.isCheckAvailable) {
@@ -97,6 +97,10 @@ export async function scrapeProjectInfo(): Promise<string | null> {
     } else if (courseInfo.protectActiveText.length) {
       result = `??? ${result} ${courseInfo.protectActiveText}`;
     }
+  }
+
+  if (!isAnyProjectsPresent) {
+    return null;
   }
 
   return result;
