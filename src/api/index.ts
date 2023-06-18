@@ -1,13 +1,10 @@
 export { homeHandler } from "./home/homeHandler";
 export { cdHandler } from "./cd/cdHandler";
 export { doneHandler, doneMessageHandler } from "./done/doneHandler";
-export { xmrSyncHandler } from "./xmr/xmrSyncHandler";
 export {failHandler} from "./fail/failHandler";
 
 export { academyHandler } from "./academy/academyHandler";
-export { orderProjectHandler } from "./academy/orderProjectHandler";
 export { getAcademyConfigHandler, setAcademyConfigHandler } from "./academy/academyConfigHandler";
-export { homeworksHandler } from "./academy/homeworksHandler";
 
 export { budgetHandler } from "./budget/budgetHandler";
 export { currencyHandler } from "./budget/currencyHandler";

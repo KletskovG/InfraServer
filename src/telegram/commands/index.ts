@@ -1,12 +1,6 @@
 export { chatid } from "./chatid";
-export { mir } from "./mir";
-export { tag } from "./tag";
 export { academy } from "./academy";
 export { homeworks } from "./homeworks";
-export { order } from "./order";
 export { start } from "./kraken/start";
 export { stop } from "./kraken/stop";
-export { topupSet } from "./kraken/topupSet";
-export { topupUpdate } from "./kraken/topupUpdate";
 export { status } from "./kraken/status";
-export { addDeal } from "./kraken/addDeal";

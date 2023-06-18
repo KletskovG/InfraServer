@@ -2,7 +2,6 @@ export type TRoute =
   | TGeneralRoute
   | TAcademyRoute
   | TBudgetRoute
-  | TXMRRoute
   | TKrakenRoute
   | TBinanceRoute
   | TTinkoffRoute
@@ -19,10 +18,6 @@ type TBudgetRoute =
   | "/budget/currency/:currency/:month/:year"
   | "/budget/mir/currency"
   | "/budget/:category/:column/:start/:end/:course/:ruble"
-
-type TXMRRoute =
-  | "/xmr/sync"
-  | "/xmr/share"
 
 type TKrakenRoute =
   | "/kraken/mainloop"

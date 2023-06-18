@@ -2,8 +2,6 @@ import { Router } from "express";
 import { registerHandler } from "api/registerHandler";
 import {
   academyHandler,
-  homeworksHandler,
-  orderProjectHandler,
   getAcademyConfigHandler,
   setAcademyConfigHandler,
 } from "api";
@@ -15,18 +13,6 @@ registerHandler(
   "/academy",
   "get",
   academyHandler
-);
-registerHandler(
-  academyRouter,
-  "/academy/homeworks",
-  "get",
-  homeworksHandler
-);
-registerHandler(
-  academyRouter,
-  "/academy/order/:course",
-  "get",
-  orderProjectHandler
 );
 registerHandler(
   academyRouter,
