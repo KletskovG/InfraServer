@@ -29,7 +29,7 @@ app.listen(PORT, () => {
 
 connectDB()
   .then(() => {
-    log("Notify", "CRYPTO DB CONNECTED");
+    log("Notify", "Infra server DB Connected");
     // scanTickers();
     // monitorOrders();
   })
