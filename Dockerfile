@@ -25,8 +25,8 @@ COPY ./ /
 RUN npm install
 RUN npm run build:ci
 
-COPY dist/index.js dist/index.js
+# COPY dist/index.js dist/index.js
 
 EXPOSE 3000
 
-CMD ["node", "dist/index.js"];
+CMD ["node", "/usr/src/app/dist/index.js"];
