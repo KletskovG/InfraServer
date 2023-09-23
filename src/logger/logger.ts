@@ -4,7 +4,7 @@ import { createReadStream, existsSync, createWriteStream, mkdirSync } from "fs";
 import { sendNotification } from "telegram";
 
 type TLogLevel = "Error" | "Info" | "Notify" | "Important";
-const LOGFILE_DIR = getEnvVariable("LOGFILE_PATH");
+const LOGFILE_DIR = getEnvVariable("LOGFILE_PATH") || "logs";
 
 export function log (level: TLogLevel, message: string, skipLogFile = false) {
   const currentTime = new Date().toISOString();
