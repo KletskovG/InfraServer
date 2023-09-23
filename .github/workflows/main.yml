@@ -4,49 +4,21 @@ on:
    branches:
     - main
 jobs:
-  build:
-    name: Build
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        node_version: [14]
-    
-    env:
-      LOGIN: ${{secrets.DOCKER_LOGIN}}
-    
-    steps:
-    - uses: actions/checkout@v1
-    - name: Use Node.js ${{matrix.node_version}}
-      uses: actions/setup-node@v1
-      with:
-        version: ${{matrix.node_version}}
-  ### Second Job
   publish:
-    needs: build
-    name: Publish Project
-    runs-on: ubuntu-20.04
-    strategy:
-      matrix:
-        node_version: [16]
-    env:
-      LOGIN: ${{secrets.DOCKER_LOGIN}}
+    name: Push InfraServer to Docker Hub
+    runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v2
-    - name: Use Node.js ${{matrix.node_version}}
-      uses: actions/setup-node@v1
-      with:
-        version: ${{matrix.node_version}}
-    - name: Build project
-      run: |
-        npm i 
-        npm run build:ci
-    - name: Publish project to Registry
-      uses: elgohr/Publish-Docker-Github-Action@master
-      with:
-        name: ${{secrets.SERVICE_IMAGE}}
-        username: ${{secrets.DOCKER_LOGIN}}
-        password: ${{secrets.DOCKER_PASSWORD}}
-        context: ./
-    - name: Send success message
-      run: |
-        ${{secrets.SUCCESS_NOTIFICATION}}
+      - name: Check out the repo
+        uses: actions/checkout@v4
+      - name: Login to Docker Hub
+        uses: docker/login-action@f4ef78c080cd8ba55a85445d5b36e214a81df20a
+        with:
+          username: ${{ secrets.DOCKER_LOGIN }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Build and push Docker image
+        uses: docker/build-push-action@3b5e8027fcad23fda98b2e3ac259d8d67585f671
+        with:
+          context: .
+          file: ./Dockerfile
+          tags: kletskovg/contest:latest
+          push: true
