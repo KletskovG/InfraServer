@@ -21,6 +21,12 @@ RUN  apt-get update \
 # Create app dir
 WORKDIR /usr/src/app
 
+COPY package*.json /
+RUN npm install
+COPY ./ /
+ARG configuration=production
+RUN npm run build
+
 COPY dist/index.js dist/index.js
 
 COPY node_modules/ ./node_modules
