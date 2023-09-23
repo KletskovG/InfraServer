@@ -4,7 +4,7 @@ import { scrapeProjectInfo } from "scrapper/academy";
 export function academy() {
   return async (ctx: TelegrafContext) => {
     try {
-      scrapeProjectInfo()
+      scrapeProjectInfo(true)
         .then(result => {
           if (!result) {
             ctx.reply("No projects for now");

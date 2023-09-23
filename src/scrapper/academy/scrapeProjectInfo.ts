@@ -53,22 +53,26 @@ async function scrapeCourse(link: string): Promise<IScrapeResult> {
   }
 }
 
-export async function scrapeProjectInfo(): Promise<string | null> {
+export async function scrapeProjectInfo(checkOptionalCourses = false): Promise<string | null> {
   let result = "Scrape result \n";
   let isAnyProjectsPresent = false;
 
-  const academyScrapeConfig = await AcademyConfigModel.find({});
+  const courses = await AcademyConfigModel.find({});
 
-  if (!academyScrapeConfig.length && !academyScrapeConfig.some(course => course.protectActive)) {
+  if (!courses.length && !courses.some(course => course.protectActive)) {
     return null;
   }
 
-  for (let i = 0; i < academyScrapeConfig.length; i++) {
-    if (!academyScrapeConfig[i].protectActive) {
+  for (let i = 0; i < courses.length; i++) {
+    if (!courses[i].protectActive) {
       continue;
     }
 
-    const course = academyScrapeConfig[i];
+    if (!checkOptionalCourses && courses[i].optional) {
+      continue;
+    }
+
+    const course = courses[i];
     const courseInfo = await scrapeCourse(course.additional.projects);
     result += `\n ${course.name}`;
     const { amountOfProjects } = courseInfo;

@@ -1,13 +1,16 @@
 import { scrapeProjectInfo } from "scrapper/academy";
-import { Response } from "express";
+import { Response, Request } from "express";
 import { sendNotification } from "telegram/bot";
 import {getImgSrc} from "utils/getImgSrc";
 import { getEnvVariable } from "utils/getEnvVariable";
 
-export function academyHandler(_: unknown, res: Response) {
+type AcademyHandlerRequest = Request<unknown, unknown, unknown, {checkOptional?: string}>;
+
+export function academyHandler(req: AcademyHandlerRequest, res: Response) {
   const academyChatId = getEnvVariable("ACADEMY_CHAT");
+  const { query } = req;
   try {
-    scrapeProjectInfo()
+    scrapeProjectInfo(Boolean(query.checkOptional))
       .then(result => {
         if (result) {
           sendNotification(result, academyChatId);

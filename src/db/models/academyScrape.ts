@@ -5,6 +5,7 @@ const schema = new Schema<ICourseModel>({
   name: String,
   link: String,
   protectActive: Boolean,
+  optional: Boolean,
   additional: {
     order: String,
     projects: String,
