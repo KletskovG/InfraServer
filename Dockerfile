@@ -19,14 +19,14 @@ RUN  apt-get update \
 # # RUN chmod -R o+rwx node_modules/puppeteer/.local-chromium
 
 # Create app dir
-WORKDIR /usr/src/app
+WORKDIR /
 
-COPY ./ /
+COPY package*.json /
 RUN npm install
+COPY ./ /
 RUN npm run build:ci
 
-# COPY dist/index.js dist/index.js
 
 EXPOSE 3000
 
-CMD ["node", "/usr/src/app/dist/index.js"];
+CMD ["node", "/dist/index.js"];
